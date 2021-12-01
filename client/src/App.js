@@ -11,22 +11,28 @@ import MeetListPage from './pages/meetlist';
 import ShareListPage from './pages/sharelist';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
       <Router>
         <Routes>
           <Route
             path="/"
-            element={isLoggedIn ? <Home /> : <LoginPage />}
+            element={
+              isLoggedIn ? (
+                <Home />
+              ) : (
+                <LoginPage setIsLoggedIn={setIsLoggedIn} />
+              )
+            }
             exact
           />
           <Route path="/signup" element={<SignUpPage />} exact />
-          <Route path="/sharelist" element={<ShareListPage />} />
-          <Route path="/beautylist" element={<BeautyListPage />} />
-          <Route path="/hospitallist" element={<HospitalListPage />} />
-          <Route path="/foodlist" element={<FoodListPage />} />
-          <Route path="/meetlist" element={<MeetListPage />} />
+          <Route path="/sharelist" element={<ShareListPage />} exact />
+          <Route path="/beautylist" element={<BeautyListPage />} exact />
+          <Route path="/hospitallist" element={<HospitalListPage />} exact />
+          <Route path="/foodlist" element={<FoodListPage />} exact />
+          <Route path="/meetlist" element={<MeetListPage />} exact />
         </Routes>
       </Router>
     </>

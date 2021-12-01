@@ -18,26 +18,32 @@ const LoginForm = () => {
     setPassword(e.target.value);
   }, []);
 
+  const onSubmitForm = useCallback(() => {
+    console.log(id, password);
+  }, [id, password]);
+
   return (
     <>
       환영합니다!
       <LoginFormWrap>
-        <label htmlFor="user-id">아이디</label>
-        <input type="text" name="user-id" value={id} onChange={onChangeId} />
-        <label htmlFor="user-password">비밀번호</label>
-        <input
-          type="text"
-          name="user-password"
-          value={password}
-          onChange={onChangePassword}
-        />
+        <form onSubmit={onSubmitForm}>
+          <label htmlFor="user-id">아이디</label>
+          <input type="text" name="user-id" value={id} onChange={onChangeId} />
+          <label htmlFor="user-password">비밀번호</label>
+          <input
+            type="text"
+            name="user-password"
+            value={password}
+            onChange={onChangePassword}
+          />{' '}
+          <ButtonWrap>
+            <button type="submit">로그인</button>
+            <Link to="/signup">
+              <button>회원가입 하기</button>
+            </Link>
+          </ButtonWrap>
+        </form>
       </LoginFormWrap>
-      <ButtonWrap>
-        <button type="submit">로그인</button>
-        <Link to="/signup">
-          <button>회원가입 하기</button>
-        </Link>
-      </ButtonWrap>
     </>
   );
 };
