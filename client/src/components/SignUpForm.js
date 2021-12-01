@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
@@ -32,11 +32,14 @@ const SignUpForm = () => {
     [password]
   );
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useEffect(() => {
     if (password !== passwordCheck) {
-      return setPasswordError(true);
+      setPasswordError(true);
+    } else if (password === passwordCheck) {
+      setPasswordError(false);
     }
-  }, []);
+  }, [password, passwordCheck]);
+
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -64,7 +67,7 @@ const SignUpForm = () => {
           />
         </SignUpFormWrap>
         <SignupButtonWrap>
-          <button type="submit">회원가입 하기</button>
+          <button type="submit">회원가입</button>
         </SignupButtonWrap>
       </form>
     </>
