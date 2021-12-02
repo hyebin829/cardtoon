@@ -10,21 +10,19 @@ import HospitalListPage from './pages/hospitallist';
 import MeetListPage from './pages/meetlist';
 import ShareListPage from './pages/sharelist';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const dispatch = useDispatch();
+
   return (
     <>
       <Router>
         <Routes>
           <Route
             path="/"
-            element={
-              isLoggedIn ? (
-                <Home />
-              ) : (
-                <LoginPage setIsLoggedIn={setIsLoggedIn} />
-              )
-            }
+            element={isLoggedIn ? <Home /> : <LoginPage />}
             exact
           />
           <Route path="/signup" element={<SignUpPage />} exact />

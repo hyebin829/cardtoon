@@ -2,5 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+import logger from 'redux-logger';
+import rootReducer from './reducers';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+//배포 단계에서는 logger 사용하지 않음
+const enhancer =
+  process.env.NODE_ENV === 'production'
+    ? compose(applyMiddleware())
+    : composeWithDevTools(applyMiddleware(logger));
+
+const store = createStore(rootReducer, enhancer);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.querySelector('#root')
+);

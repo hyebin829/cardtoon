@@ -2,11 +2,14 @@ import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 import { Link, Router } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../reducers/user';
 
 const LoginFormWrap = styled.div``;
 const ButtonWrap = styled.div``;
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,6 +22,7 @@ const LoginForm = () => {
   }, []);
 
   const onSubmitForm = useCallback(() => {
+    dispatch(loginAction({ id, password }));
     console.log(id, password);
   }, [id, password]);
 
