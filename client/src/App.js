@@ -13,18 +13,14 @@ import ShareListPage from './pages/sharelist';
 import { useDispatch, useSelector } from 'react-redux';
 
 const App = () => {
-  const isLoggedIn = useSelector(state => state.user.isLoggedIn);
+  const { logInDone, user } = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   return (
     <>
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={isLoggedIn ? <Home /> : <LoginPage />}
-            exact
-          />
+          <Route path="/" element={user ? <Home /> : <LoginPage />} exact />
           <Route path="/signup" element={<SignUpPage />} exact />
           <Route path="/sharelist" element={<ShareListPage />} exact />
           <Route path="/beautylist" element={<BeautyListPage />} exact />

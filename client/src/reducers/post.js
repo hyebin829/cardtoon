@@ -1,5 +1,5 @@
 export const initialState = {
-  homePost: [],
+  homePosts: [],
 };
 
 const reducer = (state = initialState, action) => {

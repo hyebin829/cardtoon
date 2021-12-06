@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import React from 'react';
 import { Link, Router } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../reducers/user';
+import { LOG_IN_REQUEST } from '../reducers/user';
 
 const LoginFormWrap = styled.div``;
 const ButtonWrap = styled.div``;
@@ -22,8 +22,12 @@ const LoginForm = () => {
   }, []);
 
   const onSubmitForm = useCallback(() => {
-    dispatch(loginAction({ id, password }));
+    dispatch({
+      type: LOG_IN_REQUEST,
+      data: { id, password },
+    });
     console.log(id, password);
+    console.log('로그인버튼클릭');
   }, [id, password]);
 
   return (

@@ -4,13 +4,15 @@ import LoginPage from './login';
 import Menu from '../components/Menu';
 import { useDispatch } from 'react-redux';
 
-import { logoutAction } from '../reducers/user';
+import { LOG_OUT_REQUEST } from '../reducers/user';
 
 const Home = () => {
   const dispatch = useDispatch();
 
   const onLogout = useCallback(() => {
-    dispatch(logoutAction());
+    dispatch({
+      type: LOG_OUT_REQUEST,
+    });
   });
 
   return (
