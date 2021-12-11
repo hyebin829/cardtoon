@@ -9,6 +9,7 @@ import BeautyListPage from './pages/beautylist';
 import HospitalListPage from './pages/hospitallist';
 import MeetListPage from './pages/meetlist';
 import ShareListPage from './pages/sharelist';
+import ProfilePage from './pages/profile';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/hospitallist" element={<HospitalListPage />} exact />
           <Route path="/foodlist" element={<FoodListPage />} exact />
           <Route path="/meetlist" element={<MeetListPage />} exact />
+          <Route path="/profile" element={<ProfilePage />} exact />
         </Routes>
       </Router>
     </>

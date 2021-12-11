@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from '../components/ProfileForm';
+import ProfileForm from '../components/ProfileForm';
+import { useDispatch } from 'react-redux';
+import { useCallback } from 'react';
 
 const ProfilePage = () => {
-  return;
-  <>
-    <Profile />
-    <button>로그아웃</button>
-  </>;
+  return (
+    <>
+      <ProfileForm />
+    </>
+  );
 };
 
 export default ProfilePage;
