@@ -10,11 +10,11 @@ const ButtonWrap = styled.div``;
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onChangeId = useCallback(e => {
-    setId(e.target.value);
+  const onChangeEmail = useCallback(e => {
+    setEmail(e.target.value);
   }, []);
 
   const onChangePassword = useCallback(e => {
@@ -24,19 +24,24 @@ const LoginForm = () => {
   const onSubmitForm = useCallback(() => {
     dispatch({
       type: LOG_IN_REQUEST,
-      data: { id, password },
+      data: { email, password },
     });
-    console.log(id, password);
+    console.log(email, password);
     console.log('로그인버튼클릭');
-  }, [id, password]);
+  }, [email, password]);
 
   return (
     <>
       환영합니다!
       <LoginFormWrap>
         <form onSubmit={onSubmitForm}>
-          <label htmlFor="user-id">아이디</label>
-          <input type="text" name="user-id" value={id} onChange={onChangeId} />
+          <label htmlFor="user-email">이메일</label>
+          <input
+            type="text"
+            name="user-email"
+            value={email}
+            onChange={onChangeEmail}
+          />
           <label htmlFor="user-password">비밀번호</label>
           <input
             type="text"
