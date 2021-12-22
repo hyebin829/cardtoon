@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { SIGN_UP_REQUEST } from '../reducers/user';
@@ -14,15 +15,11 @@ const SignUpForm = () => {
     state => state.user
   );
 
-  useEffect(() => {
-    if (user && user.id) {
-      history.push('/');
-    }
-  }, [user && user.id]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (signUpDone) {
-      history.push('/');
+      alert('signupdonetrue');
+      navigate('/');
     }
   }, [signUpDone]);
 
@@ -53,17 +50,22 @@ const SignUpForm = () => {
     [password]
   );
 
-  const onSubmit = useEffect(() => {
-    if (password !== passwordCheck) {
-      setPasswordError(true);
-    } else if (password === passwordCheck) {
-      setPasswordError(false);
-    }
-    dispatch({
-      type: SIGN_UP_REQUEST,
-      data: { email, password },
-    });
-  }, [password, passwordCheck]);
+  const onSubmit = useCallback(
+    e => {
+      e.preventDefault();
+      if (password !== passwordCheck) {
+        setPasswordError(true);
+      } else if (password === passwordCheck) {
+        setPasswordError(false);
+      }
+      dispatch({
+        type: SIGN_UP_REQUEST,
+        data: { email, password },
+      });
+      console.log('요청 실행');
+    },
+    [email, password, passwordCheck]
+  );
 
   return (
     <>

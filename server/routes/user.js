@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const { User } = require('../models');
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   try {
     const exUser = await User.findOne({
       where: {

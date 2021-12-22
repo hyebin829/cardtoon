@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('./models');
 const userRouter = require('./routes/user');
+const cors = require('cors');
 
 const app = express();
 db.sequelize
@@ -10,11 +11,19 @@ db.sequelize
   })
   .catch(console.error);
 
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/user', userRouter);
 app.get('/', (req, res) => {
   res.send('hello');
 });
-
-app.use('/user', userRouter);
 
 app.listen(3065, () => {
   console.log('hello');

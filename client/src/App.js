@@ -21,14 +21,14 @@ const App = () => {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={user ? <Home /> : <LoginPage />} exact />
-          <Route path="/signup" element={<SignUpPage />} exact />
-          <Route path="/sharelist" element={<ShareListPage />} exact />
-          <Route path="/beautylist" element={<BeautyListPage />} exact />
-          <Route path="/hospitallist" element={<HospitalListPage />} exact />
-          <Route path="/foodlist" element={<FoodListPage />} exact />
-          <Route path="/meetlist" element={<MeetListPage />} exact />
-          <Route path="/profile" element={<ProfilePage />} exact />
+          <Route path="/" element={user ? <Home /> : <LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/sharelist" element={<ShareListPage />} />
+          <Route path="/beautylist" element={<BeautyListPage />} />
+          <Route path="/hospitallist" element={<HospitalListPage />} />
+          <Route path="/foodlist" element={<FoodListPage />} />
+          <Route path="/meetlist" element={<MeetListPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
     </>

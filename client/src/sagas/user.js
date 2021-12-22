@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   all,
   delay,
@@ -7,7 +8,6 @@ import {
   call,
   putResolve,
 } from 'redux-saga/effects';
-import axios from 'axios';
 
 import {
   LOG_IN_REQUEST,
@@ -60,6 +60,7 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
+  console.log(data);
   return axios.post('http://localhost:3065/user', data);
 }
 
@@ -67,6 +68,7 @@ function* signUp(action) {
   try {
     const result = yield call(signUpAPI, action.data);
     console.log(result);
+    alert('saga signup실행');
     yield put({
       type: SIGN_UP_SUCCESS,
     });
