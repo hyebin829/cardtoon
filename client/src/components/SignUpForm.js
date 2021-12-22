@@ -18,14 +18,12 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (signUpDone) {
-      alert('signupdonetrue');
       navigate('/');
     }
   }, [signUpDone]);
 
   useEffect(() => {
     if (signUpError) {
-      alert(signUpError);
     }
   }, [signUpError]);
 
@@ -62,7 +60,6 @@ const SignUpForm = () => {
         type: SIGN_UP_REQUEST,
         data: { email, password },
       });
-      console.log('요청 실행');
     },
     [email, password, passwordCheck]
   );

@@ -83,7 +83,6 @@ const reducer = (state = initialState, action) => {
         logOutError: action.error,
       };
     case SIGN_UP_REQUEST:
-      console.log('reducer request');
       return {
         ...state,
         signUpLoading: true,
@@ -91,7 +90,6 @@ const reducer = (state = initialState, action) => {
         signUpError: null,
       };
     case SIGN_UP_SUCCESS:
-      alert('signupsuccess');
       return {
         ...state,
         signUpLoading: false,

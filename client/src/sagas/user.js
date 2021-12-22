@@ -68,7 +68,6 @@ function* signUp(action) {
   try {
     const result = yield call(signUpAPI, action.data);
     console.log(result);
-    alert('saga signup실행');
     yield put({
       type: SIGN_UP_SUCCESS,
     });
