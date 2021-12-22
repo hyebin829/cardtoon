@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('./models');
+const userRouter = require('./routes/user');
 
 const app = express();
 db.sequelize
@@ -12,6 +13,8 @@ db.sequelize
 app.get('/', (req, res) => {
   res.send('hello');
 });
+
+app.use('/user', userRouter);
 
 app.listen(3065, () => {
   console.log('hello');
