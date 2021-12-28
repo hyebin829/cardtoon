@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
-import { Link, Router } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link, Navigate, Router } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
 
 const LoginFormWrap = styled.div``;
@@ -13,6 +13,14 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { user, logInDone } = useSelector(state => state.user);
+
+  useEffect(() => {
+    if (logInDone) {
+      Navigate('/');
+    }
+  }, [logInDone]);
+
   const onChangeEmail = useCallback(e => {
     setEmail(e.target.value);
   }, []);
@@ -21,14 +29,18 @@ const LoginForm = () => {
     setPassword(e.target.value);
   }, []);
 
-  const onSubmitForm = useCallback(() => {
-    dispatch({
-      type: LOG_IN_REQUEST,
-      data: { email, password },
-    });
-    console.log(email, password);
-    console.log('로그인버튼클릭');
-  }, [email, password]);
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch({
+        type: LOG_IN_REQUEST,
+        data: { email, password },
+      });
+      console.log(email, password);
+      console.log('로그인버튼클릭');
+    },
+    [email, password]
+  );
 
   return (
     <>

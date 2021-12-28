@@ -32,12 +32,6 @@ export const logoutRequestAction = () => ({
   type: LOG_OUT_REQUEST,
 });
 
-const dummyUser = data => ({
-  ...data,
-  nickname: '뽀또',
-  id: 1,
-});
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST:
@@ -53,7 +47,7 @@ const reducer = (state = initialState, action) => {
         logInLoading: false,
         logInError: null,
         logInDone: true,
-        user: dummyUser(action.data),
+        user: action.data,
       };
     case LOG_IN_FAILURE:
       return {

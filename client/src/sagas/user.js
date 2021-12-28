@@ -22,14 +22,15 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-  return axios.post('/api/login', data);
+  return axios.post('http://localhost:3065/user/login', data);
 }
 
 function* logIn(action) {
   try {
+    const result = yield call(logInAPI, action.data);
     yield put({
       type: LOG_IN_SUCCESS,
-      data: action.data,
+      data: result.data,
     });
   } catch (error) {
     console.error(error);
@@ -41,11 +42,12 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post('/api/logout');
+  return axios.post('http://localhost:3065/user/logout');
 }
 
 function* logOut() {
   try {
+    yield call(logOutAPI);
     yield put({
       type: LOG_OUT_SUCCESS,
     });
