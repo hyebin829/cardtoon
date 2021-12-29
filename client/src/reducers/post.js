@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 export const initialState = {
   homePosts: [],
 };
@@ -11,11 +13,12 @@ export const addHomePost = data => ({
   data,
 });
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+const reducer = (state = initialState, action) =>
+  produce(state, draft => {
+    switch (action.type) {
+      default:
+        break;
+    }
+  });
 
 export default reducer;
