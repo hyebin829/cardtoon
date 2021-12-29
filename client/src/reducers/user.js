@@ -68,6 +68,7 @@ const reducer = (state = initialState, action) => {
         logOutLoading: false,
         logOutDone: true,
         logOutError: null,
+        logInDone: false,
         user: null,
       };
     case LOG_OUT_FAILURE:

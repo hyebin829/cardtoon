@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress"
+    "start": "webpack-dev-server --progress",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
+    "eslint-config-airbnb": "^19.0.4",
     "html-webpack-plugin": "^5.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,17 +29,24 @@
     "webpack-dev-server": "^4.5.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/eslint-parser": "^7.16.5",
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@babel/runtime": "^7.16.3",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.5.1",
-    "eslint": "^8.2.0",
+    "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-functional": "^4.0.2",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "file-loader": "^6.2.0",
     "html-loader": "^3.0.1",
     "prettier": "^2.4.1",
