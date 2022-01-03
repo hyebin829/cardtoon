@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
-const { User } = require('../models');
+const { User, Post } = require('../models');
 
 router.post('/login', (req, res, next) => {
   //(서버에러,성공객체,정보)
@@ -22,7 +22,20 @@ router.post('/login', (req, res, next) => {
       if (loginErr) {
         return next(loginErr);
       }
-      return res.status(200).json(user);
+      const userInfoWithoutPassword = await User.findOne({
+        where: { id: user.id },
+        attributes: {
+          exclude: ['password'],
+        },
+        include: [
+          {
+            model: Post,
+          },
+          { model: User, as: 'Followings' },
+          { model: User, as: 'Followers' },
+        ],
+      });
+      return res.status(200).json(userInfoWithoutPassword);
     });
   })(req, res, next);
 });

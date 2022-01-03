@@ -13,13 +13,19 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, logInDone } = useSelector(state => state.user);
+  const { user, logInDone, logInError } = useSelector(state => state.user);
 
   useEffect(() => {
     if (logInDone) {
       Navigate('/');
     }
   }, [logInDone]);
+
+  useEffect(() => {
+    if (logInError) {
+      alert(logInError);
+    }
+  }, [logInError]);
 
   const onChangeEmail = useCallback(e => {
     setEmail(e.target.value);
