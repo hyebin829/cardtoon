@@ -11,6 +11,9 @@ export const initialState = {
   signUpDone: false,
   signUpError: null,
   user: null,
+  loadUserLoading: false,
+  loadUserDone: false,
+  loadUserError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -24,6 +27,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+
+export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_INFO_REQUEST';
+export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
+export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
 
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
@@ -80,6 +87,20 @@ const reducer = (state = initialState, action) =>
       case SIGN_UP_FAILURE:
         draft.signUpLoading = false;
         draft.signUpError = action.error;
+        break;
+      case LOAD_USER_INFO_REQUEST:
+        draft.loadUserLoading = true;
+        draft.loadUserDone = false;
+        draft.loadUserError = null;
+        break;
+      case LOAD_USER_INFO_SUCCESS:
+        draft.loadUserLoading = false;
+        draft.loadUserDone = true;
+        draft.user = action.data;
+        break;
+      case LOAD_USER_INFO_FAILURE:
+        draft.loadUserLoading = false;
+        draft.loadUserError = action.error;
         break;
       default:
         break;

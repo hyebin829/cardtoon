@@ -6,6 +6,22 @@ const passport = require('passport');
 const { User, Post } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
+router.get('/', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const user = await User.findOne({
+        where: { id: req.user.id },
+      });
+      res.status(200).json(user);
+    } else {
+      res.status(200).json(null);
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   //(서버에러,성공객체,정보)
   passport.authenticate('local', (err, user, info) => {

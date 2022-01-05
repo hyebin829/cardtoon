@@ -12,10 +12,18 @@ import ShareListPage from './pages/sharelist';
 import ProfilePage from './pages/profile';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
 const App = () => {
   const { logInDone, user } = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_USER_INFO_REQUEST,
+    });
+  }, []);
 
   return (
     <>
