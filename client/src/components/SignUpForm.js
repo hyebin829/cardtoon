@@ -69,18 +69,29 @@ const SignUpForm = () => {
       <form onSubmit={onSubmit}>
         <SignUpFormWrap>
           <label htmlFor="user-email">이메일</label>
-          <input name="user-email" value={email} onChange={onChangeEmail} />
+          <input
+            name="user-email"
+            value={email}
+            onChange={onChangeEmail}
+            required
+          />
           <label htmlFor="user-password">비밀번호</label>
           <input
             name="user-password"
             value={password}
             onChange={onChangePassword}
+            minLength={6}
+            maxLength={15}
+            required
           />
           <label htmlFor="check-user-password">비밀번호 확인</label>
           <input
             name="check-user-password"
             value={passwordCheck}
             onChange={onChangePasswordCheck}
+            minLength={6}
+            maxLength={15}
+            required
           />
           {passwordError && <div>비밀번호가 일치하지 않습니다</div>}
         </SignUpFormWrap>
