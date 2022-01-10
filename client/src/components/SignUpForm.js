@@ -84,6 +84,7 @@ const SignUpForm = () => {
             onChange={onChangeEmail}
             required
             onInvalid={inputErrorMessage}
+            type="email"
           />
           <label htmlFor="user-password">비밀번호</label>
           <input

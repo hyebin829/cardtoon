@@ -53,6 +53,7 @@ const reducer = (state = initialState, action) =>
         draft.logInLoading = false;
         draft.logInError = null;
         draft.logInDone = true;
+        draft.logOutDone = false;
         draft.user = action.data;
         break;
       case LOG_IN_FAILURE:
@@ -63,6 +64,7 @@ const reducer = (state = initialState, action) =>
         draft.logOutLoading = true;
         draft.logOutDone = false;
         draft.logOutError = null;
+        draft.loadUserDone = false;
         break;
       case LOG_OUT_SUCCESS:
         draft.logOutLoading = false;
