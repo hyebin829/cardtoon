@@ -1,9 +1,18 @@
 import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addHomePost } from '../reducers/post';
 
 const HomePostForm = () => {
   const [text, setText] = useState('');
+  const dispatch = useDispatch();
 
-  const onSubmitForm = () => {};
+  const onSubmitForm = useCallback(
+    e => {
+      e.preventDefault();
+      dispatch(addHomePost(text));
+    },
+    [text]
+  );
 
   const onChangeText = useCallback(e => {
     setText(e.target.value);
