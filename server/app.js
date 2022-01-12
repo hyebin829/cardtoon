@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./models');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
+const postsRouter = require('./routes/posts');
 const cors = require('cors');
 const passportConfig = require('./passport');
 const session = require('express-session');
@@ -40,6 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/user', userRouter);
 app.use('/post', postRouter);
+app.use('/posts', postsRouter);
 app.get('/', (req, res) => {
   res.send('hello');
 });

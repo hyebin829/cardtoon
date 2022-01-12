@@ -10,6 +10,7 @@ const HomePostForm = () => {
     e => {
       e.preventDefault();
       dispatch(addHomePost(text));
+      setText('');
     },
     [text]
   );

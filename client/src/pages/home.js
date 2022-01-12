@@ -5,19 +5,28 @@ import Menu from '../components/Menu';
 import { useDispatch } from 'react-redux';
 
 import HomePostForm from '../components/HomePostForm';
+import HomePostContent from '../components/HomePostContent';
 
 import { LOG_OUT_REQUEST } from '../reducers/user';
+import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
   const dispatch = useDispatch();
   const { user, logOutDone } = useSelector(state => state.user);
+  const { homePosts, loadHomePostsLoading } = useSelector(state => state.post);
 
   useEffect(() => {
     if (logOutDone) {
       Navigate('/');
     }
   }, [logOutDone]);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_HOMEPOSTS_REQUEST,
+    });
+  }, []);
 
   const onLogout = useCallback(() => {
     try {
@@ -28,6 +37,7 @@ const Home = () => {
       console.error(error);
     }
   });
+  console.log(homePosts);
 
   return (
     <>
@@ -36,6 +46,10 @@ const Home = () => {
 
       <button onClick={onLogout}>로그아웃</button>
       <HomePostForm></HomePostForm>
+      {homePosts.map(post => (
+        <HomePostContent post={post} />
+      ))}
+
       <Menu />
     </>
   );

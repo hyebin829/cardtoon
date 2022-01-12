@@ -4,7 +4,7 @@ const router = express.Router();
 const { Post } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
-router.post('/', isLoggedIn, async (req, res) => {
+router.post('/homepost', isLoggedIn, async (req, res) => {
   try {
     const post = await Post.create({
       content: req.body.content,

@@ -5,11 +5,18 @@ export const initialState = {
   addHomePostLoading: false,
   addHomePostDone: false,
   addHomePostError: null,
+  loadHomePostsLoading: false,
+  loadHomePostsDone: false,
+  loadHomePostsError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
 export const ADD_HOMEPOST_SUCCESS = 'ADD_HOMEPOST_SUCCESS';
 export const ADD_HOMEPOST_FAILURE = 'ADD_HOMEPOST_FAILURE';
+
+export const LOAD_HOMEPOSTS_REQUEST = 'LOAD_HOMEPOSTS_REQUEST';
+export const LOAD_HOMEPOSTS_SUCCESS = 'LOAD_HOMEPOSTS_SUCCESS';
+export const LOAD_HOMEPOSTS_FAILURE = 'LOAD_HOMEPOSTS_FAILURE';
 
 export const addHomePost = data => ({
   type: ADD_HOMEPOST_REQUEST,
@@ -32,6 +39,20 @@ const reducer = (state = initialState, action) =>
       case ADD_HOMEPOST_FAILURE:
         draft.addHomePostLoading = false;
         draft.addHomePostError = action.error;
+        break;
+      case LOAD_HOMEPOSTS_REQUEST:
+        draft.loadHomePostsLoading = true;
+        draft.loadHomePostsDone = false;
+        draft.loadHomePostsError = null;
+        break;
+      case LOAD_HOMEPOSTS_SUCCESS:
+        draft.loadHomePostsDone = true;
+        draft.loadHomePostsError = null;
+        draft.homePosts = draft.homePosts.concat(action.data);
+        break;
+      case LOAD_HOMEPOSTS_FAILURE:
+        draft.loadHomePostsDone = false;
+        draft.loadHomePostsError = action.error;
         break;
       default:
         break;
