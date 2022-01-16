@@ -11,6 +11,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 
+import styled from 'styled-components';
+import GlobalStyle from './styles/GlobalStyle.js';
+
 const sagaMiddleware = createSagaMiddleware();
 
 //배포 단계에서는 logger 사용하지 않음
@@ -24,6 +27,7 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyle />
     <App />
   </Provider>,
   document.querySelector('#root')

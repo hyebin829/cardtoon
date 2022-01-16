@@ -5,6 +5,7 @@ export const initialState = {
   addHomePostLoading: false,
   addHomePostDone: false,
   addHomePostError: null,
+  hasMorePost: true,
   loadHomePostsLoading: false,
   loadHomePostsDone: false,
   loadHomePostsError: null,
@@ -49,6 +50,7 @@ const reducer = (state = initialState, action) =>
         draft.loadHomePostsDone = true;
         draft.loadHomePostsError = null;
         draft.homePosts = draft.homePosts.concat(action.data);
+        draft.hasMorePost = draft.homePosts.length < 50;
         break;
       case LOAD_HOMEPOSTS_FAILURE:
         draft.loadHomePostsDone = false;

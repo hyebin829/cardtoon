@@ -14,7 +14,9 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const dispatch = useDispatch();
   const { user, logOutDone } = useSelector(state => state.user);
-  const { homePosts, loadHomePostsLoading } = useSelector(state => state.post);
+  const { homePosts, loadHomePostsLoading, hasMorePost } = useSelector(
+    state => state.post
+  );
 
   useEffect(() => {
     if (logOutDone) {
@@ -27,6 +29,8 @@ const Home = () => {
       type: LOAD_HOMEPOSTS_REQUEST,
     });
   }, []);
+
+  useEffect(() => {}, [hasMorePost, loadHomePostsLoading]);
 
   const onLogout = useCallback(() => {
     try {
@@ -47,7 +51,7 @@ const Home = () => {
       <button onClick={onLogout}>로그아웃</button>
       <HomePostForm></HomePostForm>
       {homePosts.map(post => (
-        <HomePostContent post={post} />
+        <HomePostContent post={post} key={post.id} />
       ))}
 
       <Menu />

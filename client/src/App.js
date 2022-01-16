@@ -15,6 +15,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
+import styled from 'styled-components';
+import GlobalStyle from './styles/GlobalStyle';
+
 const App = () => {
   const { logInDone, user } = useSelector(state => state.user);
   const dispatch = useDispatch();
