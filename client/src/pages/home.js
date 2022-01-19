@@ -45,7 +45,6 @@ const Home = () => {
 
   return (
     <>
-      <div>Home입니다</div>
       <Link to="/profile">프로필</Link>
 
       <button onClick={onLogout}>로그아웃</button>
