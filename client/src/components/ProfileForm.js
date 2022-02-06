@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Profile = () => {
+const ProfileForm = () => {
   return (
     <>
       <div>프로필이미지</div>
@@ -14,4 +14,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileForm;

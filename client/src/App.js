@@ -4,12 +4,8 @@ import LoginPage from './pages/login';
 import Home from './pages/home';
 import SignUpPage from './pages/signup';
 import React from 'react';
-import FoodListPage from './pages/foodlist';
-import BeautyListPage from './pages/beautylist';
-import HospitalListPage from './pages/hospitallist';
-import MeetListPage from './pages/meetlist';
-import ShareListPage from './pages/sharelist';
-import ProfilePage from './pages/profile';
+import LatestWebtoonPage from './pages/latestwebtoon';
+import PopularWebtoonPage from './pages/popularwebtoon';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -34,12 +30,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={user ? <Home /> : <LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/sharelist" element={<ShareListPage />} />
-          <Route path="/beautylist" element={<BeautyListPage />} />
-          <Route path="/hospitallist" element={<HospitalListPage />} />
-          <Route path="/foodlist" element={<FoodListPage />} />
-          <Route path="/meetlist" element={<MeetListPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/latestwebtoon" element={<LatestWebtoonPage />} />
+          <Route path="/popularwebtoon" element={<PopularWebtoonPage />} />
         </Routes>
       </Router>
     </>

@@ -5,6 +5,10 @@ import { Link, Navigate, Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
 
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+
 const LoginFormWrap = styled.div`
   height: 100vh;
   display: flex;
@@ -18,53 +22,53 @@ const Welcome = styled.div`
   display: block;
 `;
 
-const ButtonWrap = styled.div``;
+// const ButtonWrap = styled.div``;
 
-const LoginButton = styled.button`
-  width: 230px;
-  height: 40px;
-  background: #ff8464;
-  border: none;
-  border-radius: 20px;
-  font-size: 18px;
-  color: white;
-  font-weight: 300;
-  margin: 23px 0 10px 0;
-`;
+// const LoginButton = styled.button`
+//   width: 230px;
+//   height: 40px;
+//   background: #ff8464;
+//   border: none;
+//   border-radius: 20px;
+//   font-size: 18px;
+//   color: white;
+//   font-weight: 300;
+//   margin: 23px 0 10px 0;
+// `;
 
-const SignUpButton = styled.button`
-  width: 230px;
-  height: 40px;
-  background: white;
-  border: 1px solid #ff8464;
-  border-radius: 20px;
-  color: #ff8464;
-  font-size: 18px;
-  font-weight: 300;
-`;
+// const SignUpButton = styled.button`
+//   width: 230px;
+//   height: 40px;
+//   background: white;
+//   border: 1px solid #ff8464;
+//   border-radius: 20px;
+//   color: #ff8464;
+//   font-size: 18px;
+//   font-weight: 300;
+// `;
 
 const Form = styled.form``;
 
-const FormWrap = styled.div``;
+// const FormWrap = styled.div``;
 
-const FormLabel = styled.label`
-  font-size: 18px;
-  font-weight: 300;
-  float: left;
-`;
+// const FormLabel = styled.label`
+//   font-size: 18px;
+//   font-weight: 300;
+//   float: left;
+// `;
 
-const Input = styled.input`
-  display: inline-block;
-  width: 150px;
-`;
+// const Input = styled.input`
+//   display: inline-block;
+//   width: 150px;
+// `;
 
-const FormLabelWrap = styled.div`
-  width: 230px;
-  margin: 0 auto;
-  &:first-child {
-    margin-bottom: 10px;
-  }
-`;
+// const FormLabelWrap = styled.div`
+//   width: 230px;
+//   margin: 0 auto;
+//   &:first-child {
+//     margin-bottom: 10px;
+//   }
+// `;
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -107,41 +111,49 @@ const LoginForm = () => {
   );
 
   return (
-    <>
+    <Box component="form" onSubmit={onSubmitForm}>
       <LoginFormWrap>
         <Welcome>환영합니다!</Welcome>
-        <Form onSubmit={onSubmitForm}>
-          <FormWrap>
-            <FormLabelWrap>
-              <FormLabel htmlFor="user-email">이메일</FormLabel>
-              <Input
-                type="text"
-                name="user-email"
-                value={email}
-                onChange={onChangeEmail}
-                required
-              />
-            </FormLabelWrap>
-            <FormLabelWrap>
-              <FormLabel htmlFor="user-password">비밀번호</FormLabel>
-              <Input
-                type="text"
-                name="user-password"
-                value={password}
-                onChange={onChangePassword}
-                required
-              />
-            </FormLabelWrap>
-          </FormWrap>
-          <ButtonWrap>
-            <LoginButton type="submit">로그인</LoginButton>
-            <Link to="/signup">
-              <SignUpButton>회원가입 하기</SignUpButton>
-            </Link>
-          </ButtonWrap>
-        </Form>
+        {/* <Form  name="basic"> */}
+        {/* <FormWrap> */}
+        {/* <FormLabelWrap> */}
+        {/* <FormLabel htmlFor="user-email">이메일</FormLabel> */}
+        <TextField
+          label="email"
+          type="text"
+          name="user-email"
+          value={email}
+          onChange={onChangeEmail}
+          required
+        />
+
+        {/* </FormLabelWrap> */}
+        {/* <FormLabelWrap> */}
+        {/* <FormLabel htmlFor="user-password">비밀번호</FormLabel> */}
+        <TextField
+          label="password"
+          type="password"
+          name="user-password"
+          value={password}
+          onChange={onChangePassword}
+          required
+        />
+
+        {/* </FormLabelWrap> */}
+        {/* </FormWrap> */}
+        {/* <ButtonWrap> */}
+
+        <Button type="submit" variant="contained">
+          로그인
+        </Button>
+        <Link to="/signup">
+          <Button variant="contained">회원가입 하기</Button>
+        </Link>
+
+        {/* </ButtonWrap> */}
+        {/* </Form> */}
       </LoginFormWrap>
-    </>
+    </Box>
   );
 };
 

@@ -7,19 +7,10 @@ const Menu = () => {
     <>
       <ul>
         <li>
-          <Link to="/sharelist">거래/나눔</Link>
+          <Link to="/latestwebtoon">최신 웹툰</Link>
         </li>
         <li>
-          <Link to="/beautylist">미용</Link>
-        </li>
-        <li>
-          <Link to="/hospitallist">병원</Link>
-        </li>
-        <li>
-          <Link to="/foodlist">식당/카페</Link>
-        </li>
-        <li>
-          <Link to="/meetlist">모임</Link>
+          <Link to="/popularwebtoon">인기 웹툰</Link>
         </li>
       </ul>
     </>

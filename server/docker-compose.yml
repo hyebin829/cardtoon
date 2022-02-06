@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: mysql:8.0.20
-    container_name: mysql_container
+    container_name: mysql_container_twitch
     restart: always
     ports:
       - 3308:3306
