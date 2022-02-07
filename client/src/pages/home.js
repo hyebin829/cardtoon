@@ -1,15 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Route, Link, Navigate } from 'react-router-dom';
 import LoginPage from './login';
-import Menu from '../components/Menu';
-import { useDispatch } from 'react-redux';
+import MenuBar from '../components/MenuBar';
+import { useDispatch, useSelector } from 'react-redux';
 
 import HomePostForm from '../components/HomePostForm';
 import HomePostContent from '../components/HomePostContent';
 
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
-import { useSelector } from 'react-redux';
+
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import PostImage from '../components/HomePostImage';
+import Avatar from '@mui/material/Avatar';
+import { red } from '@mui/material/colors';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -46,14 +54,25 @@ const Home = () => {
   return (
     <>
       <Link to="/profile">프로필</Link>
-
       <button onClick={onLogout}>로그아웃</button>
-      <HomePostForm></HomePostForm>
-      {homePosts.map(post => (
-        <HomePostContent post={post} key={post.id} />
-      ))}
 
-      <Menu />
+      <MenuBar />
+      {homePosts.map(post => (
+        <Card sx={{ height: '100%' }}>
+          <CardHeader
+            title="아이디"
+            avatar={
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                R
+              </Avatar>
+            }
+          />
+          <PostImage />
+          <CardContent>
+            <HomePostContent post={post} key={post.id} />
+          </CardContent>
+        </Card>
+      ))}
     </>
   );
 };

@@ -4,8 +4,10 @@ import LoginPage from './pages/login';
 import Home from './pages/home';
 import SignUpPage from './pages/signup';
 import React from 'react';
-import LatestWebtoonPage from './pages/latestwebtoon';
-import PopularWebtoonPage from './pages/popularwebtoon';
+import LatestCardtoonPage from './pages/latestcardtoon';
+import PopularCardtoonPage from './pages/popularcardtoon';
+import ProfilePage from './pages/profile';
+import UploadPost from './pages/uploadpost';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -30,8 +32,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={user ? <Home /> : <LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/latestwebtoon" element={<LatestWebtoonPage />} />
-          <Route path="/popularwebtoon" element={<PopularWebtoonPage />} />
+          <Route path="/latestcardtoon" element={<LatestCardtoonPage />} />
+          <Route path="/popularcardtoon" element={<PopularCardtoonPage />} />
+          <Route path="/uploadpost" element={<UploadPost />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </Router>
     </>
