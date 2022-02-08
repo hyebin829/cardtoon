@@ -18,13 +18,13 @@ import {
   LOAD_HOMEPOSTS_SUCCESS,
 } from '../reducers/post';
 
-function loadHomePostsAPI(data) {
-  return axios.get('/posts/homeposts', data);
+function loadHomePostsAPI(lastId) {
+  return axios.get(`/posts/homeposts?lastId=${lastId || 0}`);
 }
 
 function* loadHomePosts(action) {
   try {
-    const result = yield call(loadHomePostsAPI, action.data);
+    const result = yield call(loadHomePostsAPI, action.lastId);
     yield put({
       type: LOAD_HOMEPOSTS_SUCCESS,
       data: result.data,
@@ -48,7 +48,6 @@ function* addHomePost(action) {
       type: ADD_HOMEPOST_SUCCESS,
       data: result.data,
     });
-    console.log('homepostsuccess');
   } catch (error) {
     console.error(error);
     yield put({

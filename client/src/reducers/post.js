@@ -49,8 +49,9 @@ const reducer = (state = initialState, action) =>
       case LOAD_HOMEPOSTS_SUCCESS:
         draft.loadHomePostsDone = true;
         draft.loadHomePostsError = null;
+        draft.loadHomePostsLoading = false;
         draft.homePosts = draft.homePosts.concat(action.data);
-        draft.hasMorePost = draft.homePosts.length < 50;
+        draft.hasMorePost = action.data.length === 5;
         break;
       case LOAD_HOMEPOSTS_FAILURE:
         draft.loadHomePostsDone = false;
