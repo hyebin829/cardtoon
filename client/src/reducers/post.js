@@ -2,6 +2,7 @@ import produce from 'immer';
 
 export const initialState = {
   homePosts: [],
+  imagePaths: [],
   addHomePostLoading: false,
   addHomePostDone: false,
   addHomePostError: null,
@@ -9,11 +10,18 @@ export const initialState = {
   loadHomePostsLoading: false,
   loadHomePostsDone: false,
   loadHomePostsError: null,
+  uploadImagesLoading: false,
+  uploadImagesDone: false,
+  uploadImagesError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
 export const ADD_HOMEPOST_SUCCESS = 'ADD_HOMEPOST_SUCCESS';
 export const ADD_HOMEPOST_FAILURE = 'ADD_HOMEPOST_FAILURE';
+
+export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
+export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
+export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 
 export const LOAD_HOMEPOSTS_REQUEST = 'LOAD_HOMEPOSTS_REQUEST';
 export const LOAD_HOMEPOSTS_SUCCESS = 'LOAD_HOMEPOSTS_SUCCESS';
@@ -27,6 +35,22 @@ export const addHomePost = data => ({
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case UPLOAD_IMAGES_REQUEST:
+        draft.uploadImagesLoading = true;
+        draft.uploadImagesDone = false;
+        draft.uploadImagesError = null;
+        break;
+      case UPLOAD_IMAGES_SUCCESS:
+        draft.imagePaths = action.data;
+
+        draft.uploadImagesLoading = false;
+        draft.uploadImagesDone = true;
+
+        break;
+      case UPLOAD_IMAGES_FAILURE:
+        draft.uploadImagesLoading = false;
+        draft.uploadImagesError = action.error;
+        break;
       case ADD_HOMEPOST_REQUEST:
         draft.addHomePostLoading = true;
         draft.addHomePostDone = false;

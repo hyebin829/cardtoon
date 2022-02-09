@@ -16,6 +16,9 @@ import {
   LOAD_HOMEPOSTS_FAILURE,
   LOAD_HOMEPOSTS_REQUEST,
   LOAD_HOMEPOSTS_SUCCESS,
+  UPLOAD_IMAGES_FAILURE,
+  UPLOAD_IMAGES_REQUEST,
+  UPLOAD_IMAGES_SUCCESS,
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
@@ -57,6 +60,26 @@ function* addHomePost(action) {
   }
 }
 
+function UploadImagesAPI(data) {
+  return axios.post('/post/images', data);
+}
+
+function* UploadImages(action) {
+  try {
+    const result = yield call(UploadImagesAPI, action.data);
+    yield put({
+      type: UPLOAD_IMAGES_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: UPLOAD_IMAGES_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchAddHomePost() {
   yield takeLatest(ADD_HOMEPOST_REQUEST, addHomePost);
 }
@@ -65,6 +88,14 @@ function* watchLoadHomePosts() {
   yield takeLatest(LOAD_HOMEPOSTS_REQUEST, loadHomePosts);
 }
 
+function* watchUploadImages() {
+  yield takeLatest(UPLOAD_IMAGES_REQUEST, UploadImages);
+}
+
 export default function* postSaga() {
-  yield all([fork(watchAddHomePost), fork(watchLoadHomePosts)]);
+  yield all([
+    fork(watchAddHomePost),
+    fork(watchLoadHomePosts),
+    fork(watchUploadImages),
+  ]);
 }
