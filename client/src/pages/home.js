@@ -83,7 +83,7 @@ const Home = () => {
             <CardHeader
               title="아이디"
               avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                <Avatar sx={{ bgcolor: red[500] }} aria-label="profilepic">
                   R
                 </Avatar>
               }

@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
+      nickname: {
+        type: DataTypes.STRING(20),
+        allowNull: true,
+        unique: true,
+      },
     },
     {
       charset: 'utf8',
@@ -32,7 +37,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'Followings',
       foreignKey: 'FollowerId',
     });
-    db.User.hasOne(db.Userprofile);
   };
   return User;
 };
