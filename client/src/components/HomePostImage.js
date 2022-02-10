@@ -1,9 +1,9 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
+import { useSelector } from 'react-redux';
 
-const dummyimages = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg'];
-
-const PostImage = () => {
+const PostImage = ({ images }) => {
+  console.log(images);
   return (
     <Carousel
       autoPlay={false}
@@ -12,8 +12,12 @@ const PostImage = () => {
       cycleNavigation={false}
       animation="slide"
     >
-      {dummyimages.map(v => (
-        <img src={v} height="360px" width="100%" />
+      {images.map((v, i) => (
+        <img
+          src={`http://localhost:3065/${images[i].src}`}
+          height="360px"
+          width="100%"
+        />
       ))}
     </Carousel>
   );

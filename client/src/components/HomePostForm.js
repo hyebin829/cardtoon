@@ -1,13 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addHomePost } from '../reducers/post';
+import {
+  addHomePost,
+  ADD_HOMEPOST_REQUEST,
+  UPLOAD_IMAGES_REQUEST,
+  REMOVE_IMAGE,
+} from '../reducers/post';
 
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-
-import { UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post';
 
 const Input = styled.input`
   display: none;
@@ -20,11 +23,23 @@ const HomePostForm = () => {
 
   const onSubmitForm = useCallback(
     e => {
+      if (!text || !text.trim()) {
+        e.preventDefault();
+        return alert('게시글을 작성해주세요');
+      }
       e.preventDefault();
-      dispatch(addHomePost(text));
+      const formData = new FormData();
+      imagePaths.forEach(p => {
+        formData.append('image', p);
+      });
+      formData.append('content', text);
+      dispatch({
+        type: ADD_HOMEPOST_REQUEST,
+        data: formData,
+      });
       setText('');
     },
-    [text]
+    [text, imagePaths]
   );
 
   const onChangeText = useCallback(e => {
@@ -37,7 +52,7 @@ const HomePostForm = () => {
     [].forEach.call(e.target.files, f => {
       imageFormData.append('image', f);
     });
-    dispatch({
+    return dispatch({
       type: UPLOAD_IMAGES_REQUEST,
       data: imageFormData,
     });

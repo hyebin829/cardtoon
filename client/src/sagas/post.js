@@ -41,7 +41,7 @@ function* loadHomePosts(action) {
 }
 
 function addHomePostAPI(data) {
-  return axios.post('/post/homepost', { content: data });
+  return axios.post('/post/homepost', data);
 }
 
 function* addHomePost(action) {

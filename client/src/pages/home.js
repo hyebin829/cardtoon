@@ -88,7 +88,6 @@ const Home = () => {
                 </Avatar>
               }
             />
-            <PostImage />
             <CardContent>
               <HomePostContent post={post} key={post.id} />
             </CardContent>

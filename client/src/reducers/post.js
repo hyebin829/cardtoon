@@ -47,10 +47,8 @@ const reducer = (state = initialState, action) =>
         break;
       case UPLOAD_IMAGES_SUCCESS:
         draft.imagePaths = action.data;
-
         draft.uploadImagesLoading = false;
         draft.uploadImagesDone = true;
-
         break;
       case UPLOAD_IMAGES_FAILURE:
         draft.uploadImagesLoading = false;
@@ -65,6 +63,7 @@ const reducer = (state = initialState, action) =>
         draft.addHomePostLoading = false;
         draft.addHomePostDone = true;
         draft.homePosts.unshift(action.data);
+        draft.imagePaths = [];
         break;
       case ADD_HOMEPOST_FAILURE:
         draft.addHomePostLoading = false;

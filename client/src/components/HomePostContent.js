@@ -4,7 +4,12 @@ import PostImage from './HomePostImage';
 
 const HomePostContent = ({ post }) => {
   const dispatch = useDispatch();
-  return <div> {post.content}</div>;
+  return (
+    <div>
+      <PostImage images={post.Images} />
+      {post.content}
+    </div>
+  );
 };
 
 export default HomePostContent;
