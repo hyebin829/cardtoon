@@ -27,6 +27,8 @@ export const LOAD_HOMEPOSTS_REQUEST = 'LOAD_HOMEPOSTS_REQUEST';
 export const LOAD_HOMEPOSTS_SUCCESS = 'LOAD_HOMEPOSTS_SUCCESS';
 export const LOAD_HOMEPOSTS_FAILURE = 'LOAD_HOMEPOSTS_FAILURE';
 
+export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+
 export const addHomePost = data => ({
   type: ADD_HOMEPOST_REQUEST,
   data,
@@ -35,6 +37,9 @@ export const addHomePost = data => ({
 const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
+      case REMOVE_IMAGE:
+        draft.imagePaths = draft.imagePaths.filter((v, i) => i !== action.data);
+        break;
       case UPLOAD_IMAGES_REQUEST:
         draft.uploadImagesLoading = true;
         draft.uploadImagesDone = false;

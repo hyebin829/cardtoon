@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
-import { UPLOAD_IMAGES_REQUEST } from '../reducers/post';
+import { UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post';
 
 const Input = styled.input`
   display: none;
@@ -42,7 +42,14 @@ const HomePostForm = () => {
       data: imageFormData,
     });
   }, []);
-  console.log(imagePaths);
+
+  const onRemoveImage = useCallback(index => () => {
+    dispatch({
+      type: REMOVE_IMAGE,
+      data: index,
+    });
+  });
+
   return (
     <>
       <form onSubmit={onSubmitForm} encType="multipart/form-data">
@@ -66,11 +73,11 @@ const HomePostForm = () => {
           </Button>
         </label>
         <Button type="submit">확인</Button>
-        {imagePaths.map(v => (
+        {imagePaths.map((v, i) => (
           <div key={v}>
             <img src={`http://localhost:3065/${v}`} alt={v} />
             <div>
-              <Button>제거</Button>
+              <Button onClick={onRemoveImage(i)}>제거</Button>
             </div>
           </div>
         ))}
