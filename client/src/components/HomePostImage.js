@@ -3,7 +3,6 @@ import Carousel from 'react-material-ui-carousel';
 import { useSelector } from 'react-redux';
 
 const PostImage = ({ images }) => {
-  console.log(images);
   return (
     <Carousel
       autoPlay={false}

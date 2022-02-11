@@ -74,12 +74,12 @@ const Home = () => {
 
   return (
     <>
-      <Box>
+      <Box sx={{ marginBottom: '65px' }}>
         <Link to="/profile">프로필</Link>
         <button onClick={onLogout}>로그아웃</button>
         <MenuBar />
         {homePosts.map(post => (
-          <Card sx={{ height: '100%' }}>
+          <Card sx={{ height: '100%', margin: '40px 5px' }}>
             <CardHeader
               title="아이디"
               avatar={
