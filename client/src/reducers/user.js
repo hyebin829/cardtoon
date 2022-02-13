@@ -14,6 +14,9 @@ export const initialState = {
   loadUserLoading: false,
   loadUserDone: false,
   loadUserError: null,
+  changeNicknameLoading: false,
+  changeNicknameDone: false,
+  changeNicknameError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -32,6 +35,10 @@ export const LOAD_USER_INFO_REQUEST = 'LOAD_USER_INFO_REQUEST';
 export const LOAD_USER_INFO_SUCCESS = 'LOAD_USER_INFO_SUCCESS';
 export const LOAD_USER_INFO_FAILURE = 'LOAD_USER_INFO_FAILURE';
 
+export const CHANGE_NICKNAME_REQUEST = 'CHANGE_NICKNAME_REQUEST';
+export const CHANGE_NICKNAME_SUCCESS = 'CHANGE_NICKNAME_SUCCESS';
+export const CHANGE_NICKNAME_FAILURE = 'CHANGE_NICKNAME_FAILURE';
+
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
   data,
@@ -45,16 +52,20 @@ const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOG_IN_REQUEST:
+        console.log('loginreducerreq');
         draft.logInLoading = true;
         draft.logInError = null;
         draft.logInDone = false;
+
         break;
       case LOG_IN_SUCCESS:
+        console.log('loginreducersuccess');
         draft.logInLoading = false;
         draft.logInError = null;
         draft.logInDone = true;
         draft.logOutDone = false;
         draft.user = action.data;
+
         break;
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
@@ -103,6 +114,20 @@ const reducer = (state = initialState, action) =>
       case LOAD_USER_INFO_FAILURE:
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
+        break;
+      case CHANGE_NICKNAME_REQUEST:
+        draft.changeNicknameLoading = true;
+        draft.changeNicknameError = null;
+        draft.changeNicknameDone = false;
+        break;
+      case CHANGE_NICKNAME_SUCCESS:
+        draft.user.nickname = action.data.nickname;
+        draft.changeNicknameLoading = false;
+        draft.changeNicknameDone = true;
+        break;
+      case CHANGE_NICKNAME_FAILURE:
+        draft.changeNicknameError = action.error;
+        draft.changeNicknameLoading = false;
         break;
       default:
         break;

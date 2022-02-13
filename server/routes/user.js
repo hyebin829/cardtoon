@@ -96,4 +96,29 @@ router.post('/logout', isLoggedIn, (req, res) => {
   res.send('logoutDone');
 });
 
+router.patch('/nickname', isLoggedIn, async (req, res, next) => {
+  try {
+    const exNickname = await User.findOne({
+      where: {
+        nickname: req.body.nickname,
+      },
+    });
+    if (exNickname) {
+      return res.status(403).send('이미 사용중인 닉네임입니다.');
+    }
+    await User.update(
+      {
+        nickname: req.body.nickname,
+      },
+      {
+        where: { id: req.user.id },
+      }
+    );
+    res.status(200).json({ nickname: req.body.nickname });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;

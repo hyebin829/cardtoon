@@ -8,6 +8,7 @@ import LatestCardtoonPage from './pages/latestcardtoon';
 import PopularCardtoonPage from './pages/popularcardtoon';
 import ProfilePage from './pages/profile';
 import UploadPost from './pages/uploadpost';
+import EditProfilePage from './pages/editprofile';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/popularcardtoon" element={<PopularCardtoonPage />} />
           <Route path="/uploadpost" element={<UploadPost />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/editprofile" element={<EditProfilePage />} />
         </Routes>
       </Router>
     </>
