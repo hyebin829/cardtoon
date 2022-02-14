@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { CHANGE_NICKNAME_REQUEST } from '../reducers/user';
 
 const EditProfilePage = () => {
-  const { user } = useSelector(state => state.user);
+  const { user, changeNicknameError } = useSelector(state => state.user);
   const [nickname, setNickname] = useState(user?.nickname || '');
   const dispatch = useDispatch();
   const onChangeNickname = useCallback(e => {
@@ -15,6 +15,10 @@ const EditProfilePage = () => {
 
   const onSubmitForm = useCallback(
     e => {
+      if (!nickname || !nickname.trim()) {
+        e.preventDefault();
+        return alert('닉네임을 입력해주세요');
+      }
       e.preventDefault();
       dispatch({
         type: CHANGE_NICKNAME_REQUEST,
@@ -28,6 +32,7 @@ const EditProfilePage = () => {
     <div>
       <Box component="form" onSubmit={onSubmitForm}>
         <Input defaultValue={nickname} onChange={onChangeNickname} />
+        {changeNicknameError && <div>이미 사용중인 닉네임입니다.</div>}
         <Button type="submit">확인</Button>
       </Box>
     </div>
