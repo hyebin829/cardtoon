@@ -6,15 +6,22 @@ import EditProfilePage from '../pages/editprofile';
 import { Avatar, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 const ProfileForm = () => {
   const { user } = useSelector(state => state.user);
 
   return (
     <>
-      <Avatar
-        src={`http://localhost:3065/${user?.profileimagesrc}`}
-        sx={{ width: 120, height: 120 }}
-      />
+      {user?.profileimagesrc === null ? (
+        <AccountCircleIcon sx={{ width: 120, height: 120 }} />
+      ) : (
+        <Avatar
+          src={`http://localhost:3065/${user?.profileimagesrc}`}
+          sx={{ width: 120, height: 120 }}
+        />
+      )}
       <Button>
         <Link to="/editprofile">수정</Link>
       </Button>

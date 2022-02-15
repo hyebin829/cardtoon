@@ -18,6 +18,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import PostImage from '../components/HomePostImage';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import { red } from '@mui/material/colors';
 
@@ -98,10 +99,14 @@ const Home = () => {
         <Toolbar>
           <Box sx={{ position: 'absolute', right: 10 }}>
             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-              <Avatar
-                alt="my profile image"
-                src={`http://localhost:3065/${user?.profileimagesrc}`}
-              />
+              {user?.profileimagesrc === null ? (
+                <AccountCircleIcon sx={{ width: 40, height: 40 }} />
+              ) : (
+                <Avatar
+                  src={`http://localhost:3065/${user?.profileimagesrc}`}
+                  sx={{ width: 40, height: 40 }}
+                />
+              )}
             </IconButton>
             <Menu
               sx={{ mt: '45px' }}

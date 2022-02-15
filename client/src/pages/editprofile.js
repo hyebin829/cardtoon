@@ -9,6 +9,8 @@ import {
   UPLOAD_PROFILE_IMAGE_REQUEST,
 } from '../reducers/user';
 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 const ImageInput = styled.input`
   display: none;
 `;
@@ -52,10 +54,14 @@ const EditProfilePage = () => {
 
   return (
     <>
-      <Avatar
-        src={`http://localhost:3065/${user?.profileimagesrc}`}
-        sx={{ width: 120, height: 120 }}
-      />
+      {user?.profileimagesrc === null ? (
+        <AccountCircleIcon sx={{ width: 120, height: 120 }} />
+      ) : (
+        <Avatar
+          src={`http://localhost:3065/${user?.profileimagesrc}`}
+          sx={{ width: 120, height: 120 }}
+        />
+      )}
       <label>
         <ImageInput
           accept="image/*"
