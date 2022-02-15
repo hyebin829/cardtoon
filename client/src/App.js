@@ -18,14 +18,16 @@ import styled from 'styled-components';
 import GlobalStyle from './styles/GlobalStyle';
 
 const App = () => {
-  const { logInDone, user } = useSelector(state => state.user);
+  const { logInDone, user, profileImagePath } = useSelector(
+    state => state.user
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, []);
+  }, [profileImagePath]);
 
   return (
     <>

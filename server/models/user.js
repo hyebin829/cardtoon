@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         unique: true,
       },
+      profileimagesrc: {
+        type: DataTypes.STRING(200),
+        allowNull: true,
+      },
     },
     {
       charset: 'utf8',

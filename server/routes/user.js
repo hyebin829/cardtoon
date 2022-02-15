@@ -3,8 +3,45 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
+const multer = require('multer');
+const path = require('path');
+
 const { User, Post } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'uploads');
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname);
+      const basename = path.basename(file.originalname, ext);
+      done(null, basename + new Date().getTime() + ext);
+    },
+  }),
+  limits: { fileSize: 20 * 1024 * 1024 },
+});
+
+router.patch(
+  '/profileimage',
+  isLoggedIn,
+  upload.single('image'),
+  async (req, res) => {
+    console.log(req.file.filename);
+    try {
+      await User.update(
+        {
+          profileimagesrc: req.file.filename,
+        },
+        { where: { id: req.user.id } }
+      );
+      res.status(200).json({ profileimagesrc: req.file.filename });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 router.get('/', async (req, res, next) => {
   try {

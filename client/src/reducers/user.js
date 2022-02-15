@@ -1,6 +1,7 @@
 import produce from 'immer';
 
 export const initialState = {
+  profileImagePath: [],
   logInLoading: false,
   logInDone: false,
   logInError: null,
@@ -17,6 +18,9 @@ export const initialState = {
   changeNicknameLoading: false,
   changeNicknameDone: false,
   changeNicknameError: null,
+  uploadProfileImageLoading: false,
+  uploadProfileImageDone: false,
+  uploadProfileImageError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -39,6 +43,10 @@ export const CHANGE_NICKNAME_REQUEST = 'CHANGE_NICKNAME_REQUEST';
 export const CHANGE_NICKNAME_SUCCESS = 'CHANGE_NICKNAME_SUCCESS';
 export const CHANGE_NICKNAME_FAILURE = 'CHANGE_NICKNAME_FAILURE';
 
+export const UPLOAD_PROFILE_IMAGE_REQUEST = 'UPLOAD_PROFILE_IMAGE_REQUEST';
+export const UPLOAD_PROFILE_IMAGE_SUCCESS = 'UPLOAD_PROFILE_IMAGE_SUCCESS';
+export const UPLOAD_PROFILE_IMAGE_FAILURE = 'UPLOAD_PROFILE_IMAGE_FAILURE';
+
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
   data,
@@ -56,7 +64,6 @@ const reducer = (state = initialState, action) =>
         draft.logInLoading = true;
         draft.logInError = null;
         draft.logInDone = false;
-
         break;
       case LOG_IN_SUCCESS:
         console.log('loginreducersuccess');
@@ -128,6 +135,21 @@ const reducer = (state = initialState, action) =>
       case CHANGE_NICKNAME_FAILURE:
         draft.changeNicknameError = action.error;
         draft.changeNicknameLoading = false;
+        break;
+      case UPLOAD_PROFILE_IMAGE_REQUEST:
+        draft.uploadProfileImageLoading = true;
+        draft.uploadProfileImageDone = false;
+        draft.uploadProfileImageError = null;
+        break;
+      case UPLOAD_PROFILE_IMAGE_SUCCESS:
+        draft.profileImagePath = action.data;
+        draft.uploadProfileImageLoading = false;
+        draft.uploadProfileImageDone = true;
+        draft.profileImagePath = [];
+        break;
+      case UPLOAD_PROFILE_IMAGE_FAILURE:
+        draft.uploadProfileImageLoading = false;
+        draft.uploadProfileImageError = action.error;
         break;
       default:
         break;

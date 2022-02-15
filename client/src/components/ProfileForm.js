@@ -11,7 +11,10 @@ const ProfileForm = () => {
 
   return (
     <>
-      <Avatar src="/img/1.jpg" sx={{ width: 120, height: 120 }} />
+      <Avatar
+        src={`http://localhost:3065/${user?.profileimagesrc}`}
+        sx={{ width: 120, height: 120 }}
+      />
       <Button>
         <Link to="/editprofile">수정</Link>
       </Button>

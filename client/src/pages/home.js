@@ -39,7 +39,7 @@ const Home = () => {
     state => state.post
   );
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const profileMenu = ['프로필', '로그아웃'];
+
 
   useEffect(() => {
     if (logOutDone) {
