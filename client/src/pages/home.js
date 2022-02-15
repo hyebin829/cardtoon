@@ -40,7 +40,6 @@ const Home = () => {
   );
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-
   useEffect(() => {
     if (logOutDone) {
       Navigate('/');
@@ -99,7 +98,10 @@ const Home = () => {
         <Toolbar>
           <Box sx={{ position: 'absolute', right: 10 }}>
             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-              <Avatar alt="my profile image" src="/img/1.jpg" />
+              <Avatar
+                alt="my profile image"
+                src={`http://localhost:3065/${user?.profileimagesrc}`}
+              />
             </IconButton>
             <Menu
               sx={{ mt: '45px' }}
