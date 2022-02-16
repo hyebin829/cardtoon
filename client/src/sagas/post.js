@@ -19,6 +19,9 @@ import {
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_SUCCESS,
+  ADD_COMMENT_FAILURE,
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
@@ -60,13 +63,13 @@ function* addHomePost(action) {
   }
 }
 
-function UploadImagesAPI(data) {
+function uploadImagesAPI(data) {
   return axios.post('/post/images', data);
 }
 
-function* UploadImages(action) {
+function* uploadImages(action) {
   try {
-    const result = yield call(UploadImagesAPI, action.data);
+    const result = yield call(uploadImagesAPI, action.data);
     yield put({
       type: UPLOAD_IMAGES_SUCCESS,
       data: result.data,
@@ -75,6 +78,26 @@ function* UploadImages(action) {
     console.error(error);
     yield put({
       type: UPLOAD_IMAGES_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
+function addCommentAPI(data) {
+  return axios.post(`/post/${data.postId}/comment`, data);
+}
+
+function* addComment(action) {
+  try {
+    const result = yield call(addCommentAPI, action.data);
+    yield put({
+      type: ADD_COMMENT_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: ADD_COMMENT_FAILURE,
       error: error.response.data,
     });
   }
@@ -89,7 +112,11 @@ function* watchLoadHomePosts() {
 }
 
 function* watchUploadImages() {
-  yield takeLatest(UPLOAD_IMAGES_REQUEST, UploadImages);
+  yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
+}
+
+function* watchAddComment() {
+  yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 
 export default function* postSaga() {
@@ -97,5 +124,6 @@ export default function* postSaga() {
     fork(watchAddHomePost),
     fork(watchLoadHomePosts),
     fork(watchUploadImages),
+    fork(watchAddComment),
   ]);
 }

@@ -6,7 +6,7 @@ import EditProfilePage from '../pages/editprofile';
 import { Avatar, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const ProfileForm = () => {

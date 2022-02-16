@@ -13,6 +13,9 @@ export const initialState = {
   uploadImagesLoading: false,
   uploadImagesDone: false,
   uploadImagesError: null,
+  addCommentLoading: false,
+  addCommentDone: false,
+  addCommentError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
@@ -26,6 +29,10 @@ export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 export const LOAD_HOMEPOSTS_REQUEST = 'LOAD_HOMEPOSTS_REQUEST';
 export const LOAD_HOMEPOSTS_SUCCESS = 'LOAD_HOMEPOSTS_SUCCESS';
 export const LOAD_HOMEPOSTS_FAILURE = 'LOAD_HOMEPOSTS_FAILURE';
+
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
@@ -63,6 +70,7 @@ const reducer = (state = initialState, action) =>
         draft.addHomePostLoading = false;
         draft.addHomePostDone = true;
         draft.homePosts.unshift(action.data);
+        console.log(action.data);
         draft.imagePaths = [];
         break;
       case ADD_HOMEPOST_FAILURE:
@@ -85,6 +93,19 @@ const reducer = (state = initialState, action) =>
         draft.loadHomePostsDone = false;
         draft.loadHomePostsError = action.error;
         break;
+      case ADD_COMMENT_REQUEST:
+        draft.addCommentLoading = true;
+        draft.addCommentDone = false;
+        draft.addCommentError = null;
+        break;
+      case ADD_COMMENT_SUCCESS: {
+        const post = draft.homePosts.find(v => v.id === action.data.PostId);
+        post.Comments.push(action.data);
+        draft.addCommentLoading = false;
+        draft.addCommentDone = true;
+        console.log(action.data);
+        break;
+      }
       default:
         break;
     }

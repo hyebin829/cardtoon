@@ -1,23 +1,13 @@
+import { List, ListItem, ListItemText } from '@mui/material';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import PostImage from './HomePostImage';
 import { useState } from 'react';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/system';
-import { Menu, MenuItem, Stack } from '@mui/material';
-
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import CommentForm from './CommentForm';
+import { Box } from '@mui/system';
+import { Menu, MenuItem, Divider, Stack, Typography } from '@mui/material';
 
-const HomePostContent = ({ post }) => {
+const CommentList = ({ post }) => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const dispatch = useDispatch();
-
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget);
   };
@@ -26,19 +16,15 @@ const HomePostContent = ({ post }) => {
     setAnchorElUser(null);
   };
 
+  //   const list = post.Comments.map(v => v.content);
+
+  //   console.log(list);
+  console.log(post.Comments[1]);
   return (
-    <div>
-      <PostImage images={post.Images} />
-      {post.content}
-      {/* <CommentForm post={post} />
-      <List>
+    <List>
+      {post.Comments.map(v => (
         <ListItem alignItems="flex-start">
-      {post.Comment.map(()=>{
-        <>
-        <ListItemText
-            primary="작성자"
-            secondary={<React.Fragment>{'댓글 내용'}</React.Fragment>}
-          />
+          <ListItemText primary={v.User.nickname} secondary={v.content} />
           <Box>
             <MoreVertIcon onClick={handleOpenUserMenu} />
             <Menu
@@ -65,13 +51,10 @@ const HomePostContent = ({ post }) => {
               </MenuItem>
             </Menu>
           </Box>
-          </>
-      })}
         </ListItem>
-        <Divider variant="middle" component="li" />
-      </List> */}
-    </div>
+      ))}
+      <Divider variant="middle" component="li" />
+    </List>
   );
 };
-
-export default HomePostContent;
+export default CommentList;

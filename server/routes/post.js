@@ -4,7 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-const { Post, Image, User } = require('../models');
+const { Post, Image, User, Comment } = require('../models');
 const { isLoggedIn } = require('./middlewares');
 
 try {
@@ -52,6 +52,15 @@ router.post('/homepost', isLoggedIn, upload.none(), async (req, res) => {
           model: Image,
         },
         {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'nickname'],
+            },
+          ],
+        },
+        {
           model: User,
           attributes: ['id'],
         },
@@ -66,6 +75,36 @@ router.post('/homepost', isLoggedIn, upload.none(), async (req, res) => {
 router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
   console.log(req.files);
   res.json(req.files.map(v => v.filename));
+});
+
+router.post('/:postId/comment', isLoggedIn, async (req, res, next) => {
+  try {
+    const expost = await Post.findOne({
+      where: { id: req.params.postId },
+    });
+    if (!expost) {
+      return res.status(403).send('존재하지 않는 게시글입니다.');
+    }
+    const comment = await Comment.create({
+      content: req.body.content,
+      PostId: parseInt(req.params.postId, 10),
+      UserId: req.user.id,
+    });
+    const commentInfo = await Comment.findOne({
+      where: { id: comment.id },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'nickname'],
+        },
+        { model: Post, attributes: ['id'] },
+      ],
+    });
+    res.status(201).json(commentInfo);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
 });
 
 module.exports = router;

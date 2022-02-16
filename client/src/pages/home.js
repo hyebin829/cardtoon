@@ -7,18 +7,24 @@ import { useInView } from 'react-intersection-observer';
 
 import HomePostForm from '../components/HomePostForm';
 import HomePostContent from '../components/HomePostContent';
+import PostImage from '../components/HomePostImage';
+import CommentForm from '../components/CommentForm';
+import CommentList from '../components/CommentList';
 
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import { Box } from '@mui/system';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import PostImage from '../components/HomePostImage';
+import {
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+} from '@mui/material';
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { red } from '@mui/material/colors';
 
@@ -31,6 +37,10 @@ import {
   MenuItem,
   Typography,
   Stack,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
 } from '@mui/material';
 
 const Home = () => {
@@ -140,20 +150,24 @@ const Home = () => {
       </AppBar>
       <Box sx={{ marginBottom: '65px' }}>
         <MenuBar />
-        {homePosts.map(post => (
-          <Card sx={{ height: '100%', margin: '40px 5px' }}>
-            <CardHeader
-              title="아이디"
-              avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="profilepic">
-                  R
-                </Avatar>
-              }
-            />
-            <CardContent>
-              <HomePostContent post={post} key={post.id} />
-            </CardContent>
-          </Card>
+        {homePosts.map((post, i) => (
+          <>
+            <Card sx={{ height: '100%', margin: '40px 5px' }}>
+              <CardHeader
+                title="아이디"
+                avatar={
+                  <Avatar sx={{ bgcolor: red[500] }} aria-label="profilepic">
+                    R
+                  </Avatar>
+                }
+              />
+              <CardContent>
+                <HomePostContent post={post} key={post.id} />
+              </CardContent>
+            </Card>
+            <CommentForm post={post} />
+            <CommentList post={post} />
+          </>
         ))}
         <div ref={hasMorePost && !loadHomePostsLoading ? loader : undefined} />
       </Box>
