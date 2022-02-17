@@ -16,6 +16,9 @@ export const initialState = {
   addCommentLoading: false,
   addCommentDone: false,
   addCommentError: null,
+  removePostLoading: false,
+  removePostDone: false,
+  removePostError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
@@ -35,6 +38,10 @@ export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
 export const addHomePost = data => ({
   type: ADD_HOMEPOST_REQUEST,
@@ -98,14 +105,30 @@ const reducer = (state = initialState, action) =>
         draft.addCommentDone = false;
         draft.addCommentError = null;
         break;
-      case ADD_COMMENT_SUCCESS: {
+      case ADD_COMMENT_SUCCESS:
         const post = draft.homePosts.find(v => v.id === action.data.PostId);
         post.Comments.push(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         console.log(action.data);
         break;
-      }
+      case REMOVE_POST_REQUEST:
+        draft.removePostLoading = true;
+        draft.removePostDone = false;
+        draft.removePostError = null;
+        break;
+      case REMOVE_POST_SUCCESS:
+        draft.removePostLoading = false;
+        draft.removePostDone = true;
+        draft.homePosts = draft.homePosts.filter(
+          v => v.id !== action.data.PostId
+        );
+        break;
+      case REMOVE_POST_FAILURE:
+        draft.removePostLoading = false;
+        draft.removePostError = action.error;
+        break;
+
       default:
         break;
     }

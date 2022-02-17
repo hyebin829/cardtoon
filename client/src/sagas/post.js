@@ -22,6 +22,9 @@ import {
   ADD_COMMENT_REQUEST,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_FAILURE,
+  REMOVE_POST_SUCCESS,
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
@@ -103,6 +106,26 @@ function* addComment(action) {
   }
 }
 
+function removePostAPI(data) {
+  return axios.delete(`/post/${data}`);
+}
+
+function* removePost(action) {
+  try {
+    const result = yield call(removePostAPI, action.data);
+    yield put({
+      type: REMOVE_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: REMOVE_POST_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchAddHomePost() {
   yield takeLatest(ADD_HOMEPOST_REQUEST, addHomePost);
 }
@@ -119,11 +142,16 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment);
 }
 
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchAddHomePost),
     fork(watchLoadHomePosts),
     fork(watchUploadImages),
     fork(watchAddComment),
+    fork(watchRemovePost),
   ]);
 }
