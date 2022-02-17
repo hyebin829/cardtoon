@@ -16,7 +16,7 @@ router.get('/homeposts', async (req, res, next) => {
       limit: 5,
       order: [
         ['createdAt', 'DESC'],
-        [Comment, 'createdAt', 'DESC'],
+        [Comment, 'createdAt', 'ASC'],
       ],
 
       include: [

@@ -50,7 +50,12 @@ const Home = () => {
     state => state.post
   );
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElMyPost, setAnchorElMyPost] = useState(null);
+  const [anchorElPost, setAnchorElPost] = useState(null);
 
+  const id = useSelector(state => state.user.user?.id);
+
+  console.log(id);
   useEffect(() => {
     if (logOutDone) {
       Navigate('/');
@@ -103,6 +108,22 @@ const Home = () => {
     setAnchorElUser(null);
   };
 
+  const handleOpenPost = event => {
+    setAnchorElPost(event.currentTarget);
+  };
+
+  const handleClosePost = () => {
+    setAnchorElPost(null);
+  };
+
+  const handleOpenMyPost = event => {
+    setAnchorElMyPost(event.currentTarget);
+  };
+
+  const handleCloseMyPost = () => {
+    setAnchorElMyPost(null);
+  };
+
   return (
     <>
       <AppBar position="static">
@@ -150,6 +171,7 @@ const Home = () => {
       </AppBar>
       <Box sx={{ marginBottom: '65px' }}>
         <MenuBar />
+        {/* 포스트 */}
         {homePosts.map((post, i) => (
           <>
             <Card sx={{ height: '100%', margin: '40px 5px' }}>
@@ -164,6 +186,59 @@ const Home = () => {
               <CardContent>
                 <HomePostContent post={post} key={post.id} />
               </CardContent>
+
+              {post.User.id === id ? (
+                <Box>
+                  <MoreVertIcon onClick={handleOpenMyPost} />
+                  <Menu
+                    sx={{ mt: '25px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElMyPost}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElMyPost)}
+                    onClose={handleCloseMyPost}
+                  >
+                    <MenuItem onClick={handleCloseMyPost}>
+                      <Stack>
+                        <Typography textAlign="left">수정</Typography>
+                        <Typography textAlign="left">삭제</Typography>
+                      </Stack>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              ) : (
+                <Box>
+                  <MoreVertIcon onClick={handleOpenPost} />
+                  <Menu
+                    sx={{ mt: '25px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElPost}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElPost)}
+                    onClose={handleClosePost}
+                  >
+                    <MenuItem onClick={handleClosePost}>
+                      <Typography>신고</Typography>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              )}
             </Card>
             <CommentForm post={post} />
             <CommentList post={post} />
