@@ -3,7 +3,6 @@ import { Route, Link, Navigate } from 'react-router-dom';
 import LoginPage from './login';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { useInView } from 'react-intersection-observer';
 
 import HomePostForm from '../components/HomePostForm';
 import HomePostContent from '../components/HomePostContent';
@@ -46,12 +45,9 @@ import {
 const Home = () => {
   const dispatch = useDispatch();
   const { user, logOutDone } = useSelector(state => state.user);
-  const { homePosts, loadHomePostsLoading, hasMorePost } = useSelector(
-    state => state.post
-  );
+  const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
+    useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElMyPost, setAnchorElMyPost] = useState(null);
-  const [anchorElPost, setAnchorElPost] = useState(null);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -88,7 +84,13 @@ const Home = () => {
       observer.observe(loader.current);
     }
     return () => observer && observer.disconnect();
-  }, [hasMorePost, loadHomePostsLoading, homePosts, loader]);
+  }, [
+    hasMorePost,
+    loadHomePostsLoading,
+    homePosts,
+    loader,
+    removeCommentLoading,
+  ]);
 
   const onLogout = useCallback(() => {
     try {
@@ -107,32 +109,6 @@ const Home = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  const handleOpenPost = event => {
-    setAnchorElPost(event.currentTarget);
-  };
-
-  const handleClosePost = () => {
-    setAnchorElPost(null);
-  };
-
-  const handleOpenMyPost = event => {
-    setAnchorElMyPost(event.currentTarget);
-  };
-
-  const handleCloseMyPost = () => {
-    setAnchorElMyPost(null);
-  };
-
-  // const onRemovePost = useCallback(()=>{
-  //   if(!id){
-  //     return "로그인이 필요합니다."
-  //   }
-  //   dispatch({
-  //     type: REMOVE_POST_REQUEST,
-  //     data:
-  //   })
-  // },[])
 
   console.log(homePosts.id);
   return (
@@ -187,11 +163,13 @@ const Home = () => {
           <>
             <Card sx={{ height: '100%', margin: '40px 5px' }}>
               <CardHeader
-                title="아이디"
+                title={post.User.nickname}
                 avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="profilepic">
-                    R
-                  </Avatar>
+                  <Avatar
+                    sx={{ bgcolor: red[500] }}
+                    aria-label="profilepic"
+                    src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                  />
                 }
               />
               <CardContent>

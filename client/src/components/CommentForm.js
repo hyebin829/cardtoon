@@ -23,6 +23,10 @@ const CommentForm = ({ post }) => {
 
   const onSubmitForm = useCallback(
     e => {
+      if (!commentText || !commentText.trim()) {
+        e.preventDefault();
+        return alert('내용을 입력해주세요');
+      }
       e.preventDefault();
       dispatch({
         type: ADD_COMMENT_REQUEST,

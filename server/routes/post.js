@@ -56,13 +56,13 @@ router.post('/homepost', isLoggedIn, upload.none(), async (req, res) => {
           include: [
             {
               model: User,
-              attributes: ['id', 'nickname'],
+              attributes: ['id'],
             },
           ],
         },
         {
           model: User,
-          attributes: ['id'],
+          attributes: ['id', 'nickname', 'profileimagesrc'],
         },
       ],
     });
@@ -121,5 +121,23 @@ router.delete('/:postId', isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
+
+// router.delete('/comment/:commentId', isLoggedIn, async (req, res, next) => {
+//   try {
+//     await Comment.destroy({
+//       where: {
+//         id: req.params.commentId,
+//         UserId: req.user.id,
+//       },
+//     });
+
+//     res.status(200).json({
+//       CommentId: parseInt(req.params.commentId, 10),
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     next(error);
+//   }
+// });
 
 module.exports = router;

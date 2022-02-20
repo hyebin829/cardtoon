@@ -19,6 +19,9 @@ export const initialState = {
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
+  // removeCommentLoading: false,
+  // removeCommentDone: false,
+  // removeCommentError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
@@ -42,6 +45,10 @@ export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
+
+export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST';
+export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS';
+export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE';
 
 export const addHomePost = data => ({
   type: ADD_HOMEPOST_REQUEST,
@@ -121,14 +128,41 @@ const reducer = (state = initialState, action) =>
         draft.removePostLoading = false;
         draft.removePostDone = true;
         draft.homePosts = draft.homePosts.filter(
-          v => v.id !== action.data.PostId
+          v => v.id !== action.data.PostId,
+          console.log(action.data)
         );
         break;
       case REMOVE_POST_FAILURE:
         draft.removePostLoading = false;
         draft.removePostError = action.error;
         break;
-
+      // case REMOVE_COMMENT_REQUEST:
+      //   draft.removeCommentLoading = true;
+      //   draft.removeCommentDone = false;
+      //   draft.removeCommentError = null;
+      //   break;
+      // case REMOVE_COMMENT_SUCCESS:
+      //   draft.removeCommentLoading = false;
+      //   draft.removeCommentDone = true;
+      //   const CommentIdList = draft.homePosts.map(v =>
+      //     v.Comments.map(x => x.id)
+      //   );
+      //   console.log(CommentIdList);
+      //   for (let i of CommentIdList) {
+      //     console.log(i[1]);
+      //   }
+      // draft.homePosts = draft.homePosts.filter(
+      //   v => v.Comments.map(x => x.id) !== action.data.CommentId,
+      //   console.log(action.data)
+      // );
+      //   draft.homePosts = draft.homePosts.filter(v =>
+      //     v.Comments.map(x => x.id !== action.data.CommentId)
+      //   );
+      //   break;
+      // case REMOVE_COMMENT_FAILURE:
+      //   draft.removeCommentLoading = false;
+      //   draft.removeCommentError = action.error;
+      //   break;
       default:
         break;
     }
