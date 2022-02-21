@@ -22,7 +22,7 @@ router.get('/homeposts', async (req, res, next) => {
       include: [
         {
           model: User,
-          attributes: ['id', 'email'],
+          attributes: ['id', 'nickname', 'profileimagesrc'],
         },
         { model: Image },
         {
