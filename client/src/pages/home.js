@@ -9,6 +9,7 @@ import HomePostContent from '../components/HomePostContent';
 import PostImage from '../components/HomePostImage';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
+import FollowButton from '../components/FollowButton';
 
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
@@ -171,6 +172,7 @@ const Home = () => {
                     src={`http://localhost:3065/${post.User.profileimagesrc}`}
                   />
                 }
+                action={<FollowButton post={post} />}
               />
               <CardContent>
                 <HomePostContent post={post} key={post.id} />

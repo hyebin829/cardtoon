@@ -21,6 +21,9 @@ export const initialState = {
   uploadProfileImageLoading: false,
   uploadProfileImageDone: false,
   uploadProfileImageError: null,
+  followLoading: false,
+  followDone: false,
+  followError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -46,6 +49,10 @@ export const CHANGE_NICKNAME_FAILURE = 'CHANGE_NICKNAME_FAILURE';
 export const UPLOAD_PROFILE_IMAGE_REQUEST = 'UPLOAD_PROFILE_IMAGE_REQUEST';
 export const UPLOAD_PROFILE_IMAGE_SUCCESS = 'UPLOAD_PROFILE_IMAGE_SUCCESS';
 export const UPLOAD_PROFILE_IMAGE_FAILURE = 'UPLOAD_PROFILE_IMAGE_FAILURE';
+
+export const FOLLOW_REQUEST = 'FOLLOW_REQUEST';
+export const FOLLOW_SUCCESS = 'FOLLOW_SUCCESS';
+export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
 
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
@@ -151,6 +158,18 @@ const reducer = (state = initialState, action) =>
         draft.uploadProfileImageLoading = false;
         draft.uploadProfileImageError = action.error;
         break;
+      case FOLLOW_REQUEST:
+        draft.followLoading = true;
+        draft.followError = null;
+        draft.followDone = false;
+        break;
+      case FOLLOW_SUCCESS:
+        draft.followLoading = false;
+        draft.followDone = true;
+        draft.user.Followings.push({ id: action.data.UserId });
+      case FOLLOW_FAILURE:
+        draft.followLoading = false;
+        draft.followError = action.error;
       default:
         break;
     }

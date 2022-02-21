@@ -29,6 +29,9 @@ import {
   UPLOAD_PROFILE_IMAGE_REQUEST,
   UPLOAD_PROFILE_IMAGE_FAILURE,
   UPLOAD_PROFILE_IMAGE_SUCCESS,
+  FOLLOW_REQUEST,
+  FOLLOW_SUCCESS,
+  FOLLOW_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -151,6 +154,26 @@ function* uploadProfileImage(action) {
   }
 }
 
+function followAPI(data) {
+  return axios.patch(`/user/${data}/follow`, data);
+}
+
+function* follow(action) {
+  try {
+    const result = yield call(followAPI, action.data);
+    yield put({
+      type: FOLLOW_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: FOLLOW_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -175,6 +198,10 @@ function* watchUploadProfileImage() {
   yield takeLatest(UPLOAD_PROFILE_IMAGE_REQUEST, uploadProfileImage);
 }
 
+function* watchFollow() {
+  yield takeLatest(FOLLOW_REQUEST, follow);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -183,5 +210,6 @@ export default function* userSaga() {
     fork(watchLoadUser),
     fork(watchChangeNickname),
     fork(watchUploadProfileImage),
+    fork(watchFollow),
   ]);
 }
