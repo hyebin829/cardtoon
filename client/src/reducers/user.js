@@ -24,6 +24,9 @@ export const initialState = {
   followLoading: false,
   followDone: false,
   followError: null,
+  unFollowLoading: false,
+  unFollowDone: false,
+  unFollowError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -54,6 +57,10 @@ export const FOLLOW_REQUEST = 'FOLLOW_REQUEST';
 export const FOLLOW_SUCCESS = 'FOLLOW_SUCCESS';
 export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
 
+export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
+export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
+export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
+
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
   data,
@@ -79,7 +86,6 @@ const reducer = (state = initialState, action) =>
         draft.logInDone = true;
         draft.logOutDone = false;
         draft.user = action.data;
-
         break;
       case LOG_IN_FAILURE:
         draft.logInLoading = false;
@@ -167,9 +173,27 @@ const reducer = (state = initialState, action) =>
         draft.followLoading = false;
         draft.followDone = true;
         draft.user.Followings.push({ id: action.data.UserId });
+        break;
       case FOLLOW_FAILURE:
         draft.followLoading = false;
         draft.followError = action.error;
+        break;
+      case UNFOLLOW_REQUEST:
+        draft.unFollowLoading = true;
+        draft.unFollowError = null;
+        draft.unFollowDone = false;
+        break;
+      case UNFOLLOW_SUCCESS:
+        draft.unFollowLoading = false;
+        draft.unFollowDone = true;
+        draft.user.Followings = draft.user.Followings.filter(
+          v => v.id !== action.data.UserId
+        );
+        break;
+      case UNFOLLOW_FAILURE:
+        draft.unFollowLoading = false;
+        draft.unFollowError = action.error;
+        break;
       default:
         break;
     }

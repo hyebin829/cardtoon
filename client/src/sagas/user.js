@@ -32,6 +32,9 @@ import {
   FOLLOW_REQUEST,
   FOLLOW_SUCCESS,
   FOLLOW_FAILURE,
+  UNFOLLOW_REQUEST,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -174,6 +177,26 @@ function* follow(action) {
   }
 }
 
+function unFollowAPI(data) {
+  return axios.delete(`/user/${data}/follow`, data);
+}
+
+function* unFollow(action) {
+  try {
+    const result = yield call(unFollowAPI, action.data);
+    yield put({
+      type: UNFOLLOW_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: UNFOLLOW_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -202,6 +225,10 @@ function* watchFollow() {
   yield takeLatest(FOLLOW_REQUEST, follow);
 }
 
+function* watchUnFollow() {
+  yield takeLatest(UNFOLLOW_REQUEST, unFollow);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -211,5 +238,6 @@ export default function* userSaga() {
     fork(watchChangeNickname),
     fork(watchUploadProfileImage),
     fork(watchFollow),
+    fork(watchUnFollow),
   ]);
 }
