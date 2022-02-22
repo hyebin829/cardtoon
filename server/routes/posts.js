@@ -34,6 +34,7 @@ router.get('/homeposts', async (req, res, next) => {
             },
           ],
         },
+        { model: User, as: 'Likers', attributes: ['id'] },
       ],
     });
     console.log(req.query.lastId);
