@@ -129,25 +129,25 @@ function* removePost(action) {
   }
 }
 
-// function removeCommentAPI(data) {
-//   return axios.delete(`/post/comment/${data}`);
-// }
+function removeCommentAPI(data) {
+  return axios.delete(`/post/${data.postId}/comment/${data.commentId}`);
+}
 
-// function* removeComment(action) {
-//   try {
-//     const result = yield call(removeCommentAPI, action.data);
-//     yield put({
-//       type: REMOVE_COMMENT_SUCCESS,
-//       data: result.data,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     yield put({
-//       type: REMOVE_COMMENT_FAILURE,
-//       error: error.response.data,
-//     });
-//   }
-// }
+function* removeComment(action) {
+  try {
+    const result = yield call(removeCommentAPI, action.data);
+    yield put({
+      type: REMOVE_COMMENT_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: REMOVE_COMMENT_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
 
 function* watchAddHomePost() {
   yield takeLatest(ADD_HOMEPOST_REQUEST, addHomePost);
@@ -169,9 +169,9 @@ function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
 
-// function* watchRemoveComment() {
-//   yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
-// }
+function* watchRemoveComment() {
+  yield takeLatest(REMOVE_COMMENT_REQUEST, removeComment);
+}
 
 export default function* postSaga() {
   yield all([
@@ -180,6 +180,6 @@ export default function* postSaga() {
     fork(watchUploadImages),
     fork(watchAddComment),
     fork(watchRemovePost),
-    // fork(watchRemoveComment),
+    fork(watchRemoveComment),
   ]);
 }

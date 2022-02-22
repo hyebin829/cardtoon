@@ -34,13 +34,13 @@ const CommentMoreButton = ({ comment }) => {
   };
 
   const onRemoveComment = useCallback(() => {
-    // if (!id) {
-    //   return '로그인이 필요합니다.';
-    // }
-    // dispatch({
-    //   type: REMOVE_COMMENT_REQUEST,
-    //   data: comment.id,
-    // });
+    if (!id) {
+      return '로그인이 필요합니다.';
+    }
+    dispatch({
+      type: REMOVE_COMMENT_REQUEST,
+      data: { commentId: comment.id, postId: comment.Post.id },
+    });
   }, []);
 
   return (

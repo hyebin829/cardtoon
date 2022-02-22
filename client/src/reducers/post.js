@@ -136,33 +136,25 @@ const reducer = (state = initialState, action) =>
         draft.removePostLoading = false;
         draft.removePostError = action.error;
         break;
-      // case REMOVE_COMMENT_REQUEST:
-      //   draft.removeCommentLoading = true;
-      //   draft.removeCommentDone = false;
-      //   draft.removeCommentError = null;
-      //   break;
-      // case REMOVE_COMMENT_SUCCESS:
-      //   draft.removeCommentLoading = false;
-      //   draft.removeCommentDone = true;
-      //   const CommentIdList = draft.homePosts.map(v =>
-      //     v.Comments.map(x => x.id)
-      //   );
-      //   console.log(CommentIdList);
-      //   for (let i of CommentIdList) {
-      //     console.log(i[1]);
-      //   }
-      // draft.homePosts = draft.homePosts.filter(
-      //   v => v.Comments.map(x => x.id) !== action.data.CommentId,
-      //   console.log(action.data)
-      // );
-      //   draft.homePosts = draft.homePosts.filter(v =>
-      //     v.Comments.map(x => x.id !== action.data.CommentId)
-      //   );
-      //   break;
-      // case REMOVE_COMMENT_FAILURE:
-      //   draft.removeCommentLoading = false;
-      //   draft.removeCommentError = action.error;
-      //   break;
+      case REMOVE_COMMENT_REQUEST:
+        draft.removeCommentLoading = true;
+        draft.removeCommentDone = false;
+        draft.removeCommentError = null;
+        break;
+      case REMOVE_COMMENT_SUCCESS:
+        draft.removeCommentLoading = false;
+        draft.removeCommentDone = true;
+        const CommentIdList = draft.homePosts.find(
+          v => v.id === action.data.PostId
+        );
+        CommentIdList.Comments = CommentIdList.Comments.filter(
+          v => v.id !== action.data.CommentId
+        );
+        break;
+      case REMOVE_COMMENT_FAILURE:
+        draft.removeCommentLoading = false;
+        draft.removeCommentError = action.error;
+        break;
       default:
         break;
     }
