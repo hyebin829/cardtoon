@@ -19,9 +19,9 @@ export const initialState = {
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,
-  // removeCommentLoading: false,
-  // removeCommentDone: false,
-  // removeCommentError: null,
+  removeCommentLoading: false,
+  removeCommentDone: false,
+  removeCommentError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';

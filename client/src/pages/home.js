@@ -42,6 +42,7 @@ import {
   Divider,
   ListItemText,
 } from '@mui/material';
+import LikeButton from '../components/LikeButton';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -177,6 +178,7 @@ const Home = () => {
               <CardContent>
                 <HomePostContent post={post} key={post.id} />
               </CardContent>
+              <LikeButton post={post} />
             </Card>
             <CommentForm post={post} />
             <CommentList post={post} />
