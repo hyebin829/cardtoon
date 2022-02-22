@@ -1,5 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import {
   addHomePost,
   ADD_HOMEPOST_REQUEST,
@@ -19,7 +20,8 @@ const Input = styled.input`
 const HomePostForm = () => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
-  const { imagePaths } = useSelector(state => state.post);
+  const { imagePaths, addHomePostDone } = useSelector(state => state.post);
+  const navigate = useNavigate();
 
   const onSubmitForm = useCallback(
     e => {
@@ -38,6 +40,8 @@ const HomePostForm = () => {
         data: formData,
       });
       setText('');
+      alert('작성되었습니다.');
+      navigate('/');
     },
     [text, imagePaths]
   );
