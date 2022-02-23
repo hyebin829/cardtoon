@@ -10,6 +10,7 @@ module.exports = {
     host: '127.0.0.1',
     port: '3308',
     dialect: 'mysql',
+    timezone: '+09:00',
   },
   test: {
     username: 'root',
@@ -17,6 +18,7 @@ module.exports = {
     database: 'petcommunity',
     host: '127.0.0.1',
     dialect: 'mysql',
+    timezone: '+09:00',
   },
   production: {
     username: 'root',
@@ -24,5 +26,6 @@ module.exports = {
     database: 'petcommunity',
     host: '127.0.0.1',
     dialect: 'mysql',
+    timezone: '+09:00',
   },
 };
