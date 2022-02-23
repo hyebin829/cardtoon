@@ -43,10 +43,16 @@ const HomePostContent = ({ post }) => {
     if (!id) {
       return '로그인이 필요합니다.';
     }
-    dispatch({
-      type: REMOVE_POST_REQUEST,
-      data: post.id,
-    });
+    if (window.confirm('삭제하시겠습니까?')) {
+      dispatch({
+        type: REMOVE_POST_REQUEST,
+        data: post.id,
+      });
+      alert('삭제되었습니다.');
+      window.location.replace('/');
+    } else {
+      return;
+    }
   }, []);
 
   return (
