@@ -42,6 +42,7 @@ const HomePostForm = () => {
       setText('');
       alert('작성되었습니다.');
       navigate('/');
+      location.reload();
     },
     [text, imagePaths]
   );
