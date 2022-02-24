@@ -41,6 +41,7 @@ router.get('/homeposts', async (req, res, next) => {
     res.status(200).json(homeposts);
   } catch (error) {
     console.error(error);
+    console.log('error...!');
     next(error);
   }
 });

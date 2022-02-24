@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { Route, Link, Navigate } from 'react-router-dom';
+import { Route, Link, Navigate, useParams } from 'react-router-dom';
 import LoginPage from './login';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,6 +52,9 @@ const Home = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const id = useSelector(state => state.user.user?.id);
+
+  const params = useParams();
+  console.log(params);
 
   console.log(id);
   useEffect(() => {
@@ -165,7 +168,7 @@ const Home = () => {
           <>
             <Card sx={{ height: '100%', margin: '40px 5px' }}>
               <CardHeader
-                title={post.User.nickname}
+                title={`${post.User.nickname}+${post.id}`}
                 avatar={
                   <Avatar
                     sx={{ bgcolor: red[500] }}

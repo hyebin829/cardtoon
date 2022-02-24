@@ -49,7 +49,6 @@ const HomePostContent = ({ post }) => {
         data: post.id,
       });
       alert('삭제되었습니다.');
-      window.location.replace('/');
     } else {
       return;
     }

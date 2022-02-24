@@ -21,6 +21,7 @@ const App = () => {
   const { logInDone, user, profileImagePath } = useSelector(
     state => state.user
   );
+  const { addHomePostDone } = useSelector(state => state.post);
 
   const dispatch = useDispatch();
 

@@ -95,11 +95,11 @@ const reducer = (state = initialState, action) =>
         draft.addHomePostError = null;
         break;
       case ADD_HOMEPOST_SUCCESS:
-        draft.addHomePostLoading = false;
-        draft.addHomePostDone = true;
-        draft.homePosts.unshift(action.data);
         console.log(action.data);
         draft.imagePaths = [];
+        draft.homePosts.unshift(action.data);
+        draft.addHomePostLoading = false;
+        draft.addHomePostDone = true;
         break;
       case ADD_HOMEPOST_FAILURE:
         draft.addHomePostLoading = false;
@@ -111,11 +111,11 @@ const reducer = (state = initialState, action) =>
         draft.loadHomePostsError = null;
         break;
       case LOAD_HOMEPOSTS_SUCCESS:
+        draft.homePosts = draft.homePosts.concat(action.data);
+        draft.hasMorePost = action.data.length === 5;
         draft.loadHomePostsDone = true;
         draft.loadHomePostsError = null;
         draft.loadHomePostsLoading = false;
-        draft.homePosts = draft.homePosts.concat(action.data);
-        draft.hasMorePost = action.data.length === 5;
         break;
       case LOAD_HOMEPOSTS_FAILURE:
         draft.loadHomePostsDone = false;
