@@ -1,6 +1,8 @@
 import produce from 'immer';
 
 export const initialState = {
+  user: null,
+  userProfile: null,
   profileImagePath: [],
   logInLoading: false,
   logInDone: false,
@@ -11,7 +13,7 @@ export const initialState = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
-  user: null,
+
   loadUserLoading: false,
   loadUserDone: false,
   loadUserError: null,
@@ -27,6 +29,9 @@ export const initialState = {
   unFollowLoading: false,
   unFollowDone: false,
   unFollowError: null,
+  loadUserProfileLoading: false,
+  loadUserProfileDone: false,
+  loadUserProfileError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -60,6 +65,10 @@ export const FOLLOW_FAILURE = 'FOLLOW_FAILURE';
 export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
+
+export const LOAD_USER_PROFILE_REQUEST = 'LOAD_USER_PROFILE_REQUEST';
+export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS';
+export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE';
 
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
@@ -134,6 +143,22 @@ const reducer = (state = initialState, action) =>
       case LOAD_USER_INFO_FAILURE:
         draft.loadUserLoading = false;
         draft.loadUserError = action.error;
+        break;
+      case LOAD_USER_PROFILE_REQUEST:
+        draft.loadUserProfileLoading = true;
+        draft.loadUserProfileDone = false;
+        draft.loadUserProfileError = null;
+        console.log('loaduserprofilereducer');
+        break;
+      case LOAD_USER_PROFILE_SUCCESS:
+        draft.loadUserProfileLoading = false;
+        draft.loadUserProfileDone = true;
+        draft.userProfile = action.data;
+        console.log(action.data);
+        break;
+      case LOAD_USER_PROFILE_FAILURE:
+        draft.loadUserProfileLoading = false;
+        draft.loadUserProfileError = action.error;
         break;
       case CHANGE_NICKNAME_REQUEST:
         draft.changeNicknameLoading = true;

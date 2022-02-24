@@ -35,6 +35,9 @@ import {
   UNFOLLOW_REQUEST,
   UNFOLLOW_SUCCESS,
   UNFOLLOW_FAILURE,
+  LOAD_USER_PROFILE_REQUEST,
+  LOAD_USER_PROFILE_SUCCESS,
+  LOAD_USER_PROFILE_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -112,6 +115,25 @@ function* loadUser(action) {
   } catch (error) {
     yield put({
       type: LOAD_USER_INFO_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
+function loadUserProfileAPI(data) {
+  return axios.get(`/user/${data}`);
+}
+
+function* loadUserProfile(action) {
+  try {
+    const result = yield call(loadUserProfileAPI, action.data);
+    yield put({
+      type: LOAD_USER_PROFILE_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_USER_PROFILE_FAILURE,
       error: error.response.data,
     });
   }
@@ -213,6 +235,10 @@ function* watchLoadUser() {
   yield takeLatest(LOAD_USER_INFO_REQUEST, loadUser);
 }
 
+function* watchLoadUserProfile() {
+  yield takeLatest(LOAD_USER_PROFILE_REQUEST, loadUserProfile);
+}
+
 function* watchChangeNickname() {
   yield takeLatest(CHANGE_NICKNAME_REQUEST, changeNickname);
 }
@@ -239,5 +265,6 @@ export default function* userSaga() {
     fork(watchUploadProfileImage),
     fork(watchFollow),
     fork(watchUnFollow),
+    fork(watchLoadUserProfile),
   ]);
 }

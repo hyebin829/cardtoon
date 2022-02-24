@@ -53,9 +53,6 @@ const Home = () => {
 
   const id = useSelector(state => state.user.user?.id);
 
-  const params = useParams();
-  console.log(params);
-
   console.log(id);
   useEffect(() => {
     if (logOutDone) {
@@ -115,7 +112,6 @@ const Home = () => {
     setAnchorElUser(null);
   };
 
-  console.log(homePosts.id);
   return (
     <>
       <AppBar position="static">
@@ -170,11 +166,14 @@ const Home = () => {
               <CardHeader
                 title={post.User.nickname}
                 avatar={
-                  <Avatar
-                    sx={{ bgcolor: red[500] }}
-                    aria-label="profilepic"
-                    src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                  />
+                  <Link to={`/userprofile/${post.User.id}`}>
+                    {' '}
+                    <Avatar
+                      sx={{ bgcolor: red[500] }}
+                      aria-label="profilepic"
+                      src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                    />
+                  </Link>
                 }
                 action={<FollowButton post={post} />}
               />

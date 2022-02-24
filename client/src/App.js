@@ -9,6 +9,7 @@ import PopularCardtoonPage from './pages/popularcardtoon';
 import ProfilePage from './pages/profile';
 import UploadPost from './pages/uploadpost';
 import EditProfilePage from './pages/editprofile';
+import UserprofilePage from './pages/userprofile';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/uploadpost" element={<UploadPost />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/editprofile" element={<EditProfilePage />} />
+          <Route exact path="/userprofile/:id" element={<UserprofilePage />} />
         </Routes>
       </Router>
     </>

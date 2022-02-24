@@ -41,9 +41,18 @@ router.get('/homeposts', async (req, res, next) => {
     res.status(200).json(homeposts);
   } catch (error) {
     console.error(error);
-    console.log('error...!');
     next(error);
   }
 });
+
+// router.get('/hotcardtoon', async(req,res,next)=>{
+//   try{
+// //like 테이블에서 일주일간의 postid 가져오기
+//   }
+//   catch(error){
+//     console.error(error);
+//     next(error);
+//   }
+// })
 
 module.exports = router;
