@@ -28,7 +28,7 @@ const MainMenu = () => {
           label="최신카드툰"
           icon={<UpdateIcon />}
           component={Link}
-          to="/latestcardtoon"
+          to="/"
         />
         <BottomNavigationAction
           label="인기카드툰"

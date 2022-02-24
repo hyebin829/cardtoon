@@ -168,7 +168,7 @@ const Home = () => {
           <>
             <Card sx={{ height: '100%', margin: '40px 5px' }}>
               <CardHeader
-                title={`${post.User.nickname}+${post.id}`}
+                title={post.User.nickname}
                 avatar={
                   <Avatar
                     sx={{ bgcolor: red[500] }}
