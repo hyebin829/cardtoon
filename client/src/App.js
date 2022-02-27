@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/uploadpost" element={<UploadPost />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/editprofile" element={<EditProfilePage />} />
-          <Route exact path="/userprofile/:id" element={<UserprofilePage />} />
+          <Route path="/userprofile/:id" element={<UserprofilePage />} />
         </Routes>
       </Router>
     </>
