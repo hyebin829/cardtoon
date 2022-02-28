@@ -151,10 +151,19 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
     if (exUser) {
       return res.status(403).send('이미 사용중인 아이디입니다.');
     }
+    const exNickname = await User.findOne({
+      where: {
+        nickname: req.body.nickname,
+      },
+    });
+    if (exNickname) {
+      return res.status(403).send('이미 사용중인 닉네임입니다.');
+    }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     await User.create({
       email: req.body.email,
       password: hashedPassword,
+      nickname: req.body.nickname,
     });
     res.status(201).send('ok');
   } catch (error) {

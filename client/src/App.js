@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
 const App = () => {
-  const { logInDone, user, profileImagePath } = useSelector(
+  const { logInDone, user, profileImagePath, signUpDone } = useSelector(
     state => state.user
   );
 
@@ -26,7 +26,7 @@ const App = () => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, [profileImagePath]);
+  }, [profileImagePath, signUpDone]);
 
   return (
     <>

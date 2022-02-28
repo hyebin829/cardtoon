@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import Button from '@mui/material/Button';
+
 import { SIGN_UP_REQUEST } from '../reducers/user';
 
 const SignUpFormWrap = styled.div``;
@@ -16,11 +18,6 @@ const SignUpForm = () => {
   );
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (signUpDone) {
-      navigate('/');
-    }
-  }, [signUpDone]);
 
   useEffect(() => {
     if (signUpError) {
@@ -28,6 +25,7 @@ const SignUpForm = () => {
   }, [signUpError]);
 
   const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
@@ -44,9 +42,17 @@ const SignUpForm = () => {
     setEmail(e.target.value);
   }, []);
 
-  const onChangePassword = useCallback(e => {
-    setPassword(e.target.value);
+  const onChangeNickname = useCallback(e => {
+    setNickname(e.target.value);
   }, []);
+
+  const onChangePassword = useCallback(
+    e => {
+      setPassword(e.target.value);
+      setPasswordError(e.target.value !== passwordCheck);
+    },
+    [passwordCheck]
+  );
 
   const onChangePasswordCheck = useCallback(
     e => {
@@ -67,12 +73,17 @@ const SignUpForm = () => {
       }
       dispatch({
         type: SIGN_UP_REQUEST,
-        data: { email, password },
+        data: { email, password, nickname },
       });
     },
-    [email, password, passwordCheck]
+    [email, password, nickname, passwordCheck]
   );
-
+  useEffect(() => {
+    if (signUpDone) {
+      alert('가입되었습니다.');
+      navigate('/');
+    }
+  }, [signUpDone]);
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -85,6 +96,15 @@ const SignUpForm = () => {
             required
             onInvalid={inputErrorMessage}
             type="email"
+          />
+          <label htmlFor="user-nickname">닉네임</label>
+          <input
+            name="user-nickname"
+            value={nickname}
+            onChange={onChangeNickname}
+            required
+            onInvalid={inputErrorMessage}
+            maxLength={20}
           />
           <label htmlFor="user-password">비밀번호</label>
           <input
@@ -107,9 +127,16 @@ const SignUpForm = () => {
             required
           />
           {passwordError && <div>비밀번호가 일치하지 않습니다</div>}
+          {signUpError && <div>{signUpError}</div>}
         </SignUpFormWrap>
         <SignupButtonWrap>
-          <button type="submit">회원가입</button>
+          {passwordError ? (
+            <Button disabled>회원가입</Button>
+          ) : (
+            <Button type="submit" variant="contained">
+              회원가입
+            </Button>
+          )}
         </SignupButtonWrap>
       </form>
     </>
