@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { Route, Link, Navigate, useParams } from 'react-router-dom';
-import LoginPage from './login';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import HomePostForm from '../components/HomePostForm';
 import HomePostContent from '../components/HomePostContent';
-import PostImage from '../components/HomePostImage';
 import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
@@ -24,7 +22,6 @@ import {
 } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { red } from '@mui/material/colors';
 
@@ -43,6 +40,13 @@ import {
   ListItemText,
 } from '@mui/material';
 import LikeButton from '../components/LikeButton';
+
+const LogoutButton = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 15px;
+`;
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -114,9 +118,10 @@ const Home = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" elevation="0">
         <Toolbar>
-          <Box sx={{ position: 'absolute', right: 10 }}>
+          <Typography variant="h6">CARDTOON</Typography>
+          <Box sx={{ position: 'absolute', right: 15 }}>
             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
               {user?.profileimagesrc === null ? (
                 <AccountCircleIcon sx={{ width: 40, height: 40 }} />
@@ -128,7 +133,7 @@ const Home = () => {
               )}
             </IconButton>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '40px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -146,10 +151,19 @@ const Home = () => {
               <MenuItem onClick={handleCloseUserMenu}>
                 <Stack>
                   <Typography textAlign="left">
-                    <Link to="/profile">프로필</Link>
+                    <Link
+                      to="/profile"
+                      style={{
+                        textDecoration: 'none',
+                        color: 'black',
+                        fontSize: 15,
+                      }}
+                    >
+                      프로필
+                    </Link>
                   </Typography>
                   <Typography textAlign="left">
-                    <button onClick={onLogout}>로그아웃</button>
+                    <LogoutButton onClick={onLogout}>로그아웃</LogoutButton>
                   </Typography>
                 </Stack>{' '}
               </MenuItem>

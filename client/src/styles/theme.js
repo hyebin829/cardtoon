@@ -44,9 +44,9 @@ const CustomMuiTheme = createTheme({
     secondary: {
       main: '#F26B83',
     },
-    // blue: '#30A8F2',
-    // bluegreen: '#32BAD9',
-    // green: '#48D9CA',
+  },
+  typography: {
+    fontSize: 15,
   },
 });
 export default CustomMuiTheme;

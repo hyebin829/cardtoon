@@ -10,7 +10,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import { ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import CustomMuiTheme from './styles/theme';
 
 import styled from 'styled-components';
@@ -30,6 +30,7 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={CustomMuiTheme}>
+      <CssBaseline />
       <App />
     </ThemeProvider>
   </Provider>,
