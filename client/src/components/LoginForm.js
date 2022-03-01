@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
+import { color } from '../styles/theme';
+
 const LoginFormWrap = styled.div`
   height: 100vh;
   display: flex;
@@ -18,23 +20,22 @@ const LoginFormWrap = styled.div`
   text-align: center;
 `;
 
-const Welcome = styled.div`
+const Title = styled.div`
   display: block;
+  font-size: 30px;
+  color: #f23054;
+  font-weight: 600;
 `;
 
 // const ButtonWrap = styled.div``;
 
-// const LoginButton = styled.button`
-//   width: 230px;
-//   height: 40px;
-//   background: #ff8464;
-//   border: none;
-//   border-radius: 20px;
-//   font-size: 18px;
-//   color: white;
-//   font-weight: 300;
-//   margin: 23px 0 10px 0;
-// `;
+const LoginFormButton = styled(Button)({
+  background: '#F29BAB',
+});
+
+const InputText = styled(TextField)({
+  color: '#F2F2F2',
+});
 
 // const SignUpButton = styled.button`
 //   width: 230px;
@@ -46,8 +47,6 @@ const Welcome = styled.div`
 //   font-size: 18px;
 //   font-weight: 300;
 // `;
-
-const Form = styled.form``;
 
 // const FormWrap = styled.div``;
 
@@ -113,24 +112,17 @@ const LoginForm = () => {
   return (
     <Box component="form" onSubmit={onSubmitForm}>
       <LoginFormWrap>
-        <Welcome>환영합니다!</Welcome>
-        {/* <Form  name="basic"> */}
-        {/* <FormWrap> */}
-        {/* <FormLabelWrap> */}
-        {/* <FormLabel htmlFor="user-email">이메일</FormLabel> */}
-        <TextField
+        <Title>CARDTOON</Title>
+        <InputText
           label="email"
           type="text"
           name="user-email"
           value={email}
           onChange={onChangeEmail}
           required
+          sx={{ margin: 1 }}
         />
-
-        {/* </FormLabelWrap> */}
-        {/* <FormLabelWrap> */}
-        {/* <FormLabel htmlFor="user-password">비밀번호</FormLabel> */}
-        <TextField
+        <InputText
           label="password"
           type="password"
           name="user-password"
@@ -138,20 +130,14 @@ const LoginForm = () => {
           onChange={onChangePassword}
           required
         />
-
-        {/* </FormLabelWrap> */}
-        {/* </FormWrap> */}
-        {/* <ButtonWrap> */}
-
-        <Button type="submit" variant="contained">
+        <LoginFormButton type="submit" variant="contained" sx={{ mt: 1 }}>
           로그인
-        </Button>
-        <Link to="/signup">
-          <Button variant="contained">회원가입 하기</Button>
+        </LoginFormButton>
+        <Link to="/signup" style={{ textDecoration: 'none' }}>
+          <LoginFormButton variant="contained" sx={{ mt: 0.2 }}>
+            회원가입하기
+          </LoginFormButton>
         </Link>
-
-        {/* </ButtonWrap> */}
-        {/* </Form> */}
       </LoginFormWrap>
     </Box>
   );

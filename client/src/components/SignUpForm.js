@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Button from '@mui/material/Button';
+import { Button, Box, TextField } from '@mui/material';
 
 import { SIGN_UP_REQUEST } from '../reducers/user';
 
@@ -63,6 +63,10 @@ const SignUpForm = () => {
     [password]
   );
 
+  const onClickCancle = useCallback(() => {
+    navigate('/');
+  }, []);
+
   const onSubmit = useCallback(
     e => {
       e.preventDefault();
@@ -86,45 +90,49 @@ const SignUpForm = () => {
   }, [signUpDone]);
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <Box component="form" onSubmit={onSubmit} sx={{ alignContent: 'center' }}>
         <SignUpFormWrap>
-          <label htmlFor="user-email">이메일</label>
-          <input
+          <TextField
+            label="이메일"
             name="user-email"
             value={email}
             onChange={onChangeEmail}
             required
             onInvalid={inputErrorMessage}
             type="email"
+            variant="outlined"
           />
-          <label htmlFor="user-nickname">닉네임</label>
-          <input
+          <TextField
             name="user-nickname"
+            label="닉네임"
             value={nickname}
             onChange={onChangeNickname}
             required
             onInvalid={inputErrorMessage}
             maxLength={20}
+            variant="outlined"
           />
-          <label htmlFor="user-password">비밀번호</label>
-          <input
+          <TextField
             name="user-password"
+            label="비밀번호"
             value={password}
             onChange={onChangePassword}
             minLength={6}
             maxLength={15}
             required
             onInvalid={inputErrorMessage}
+            variant="outlined"
           />
-          <label htmlFor="check-user-password">비밀번호 확인</label>
-          <input
+          <TextField
             name="check-user-password"
+            label="비밀번호 확인"
             value={passwordCheck}
             onChange={onChangePasswordCheck}
             minLength={6}
             maxLength={15}
             onInvalid={inputErrorMessage}
             required
+            variant="outlined"
           />
           {passwordError && <div>비밀번호가 일치하지 않습니다</div>}
           {signUpError && <div>{signUpError}</div>}
@@ -136,9 +144,10 @@ const SignUpForm = () => {
             <Button type="submit" variant="contained">
               회원가입
             </Button>
-          )}
+          )}{' '}
+          <Button onClick={onClickCancle}>취소</Button>
         </SignupButtonWrap>
-      </form>
+      </Box>
     </>
   );
 };
