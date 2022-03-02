@@ -5,8 +5,19 @@ import { useParams } from 'react-router-dom';
 import MainMenu from '../components/MenuBar';
 import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
 
-import { Avatar, Button } from '@mui/material';
+import styled from 'styled-components';
+import { Avatar, Box, Stack, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
+const List = styled.li`
+  list-style: none;
+`;
+
+const Nickname = styled.div`
+  margin-top: 10px;
+  font-size: 25px;
+  font-weight: 400;
+`;
 
 const UserprofilePage = () => {
   const params = useParams();
@@ -25,29 +36,56 @@ const UserprofilePage = () => {
   }, [id]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        marginTop: '50px',
+      }}
+    >
       {userProfile?.profileimagesrc === null ? (
-        <AccountCircleIcon sx={{ width: 120, height: 120 }} />
+        <AccountCircleIcon sx={{ width: 130, height: 130 }} />
       ) : (
         <Avatar
           src={`http://localhost:3065/${userProfile?.profileimagesrc}`}
-          sx={{ width: 120, height: 120 }}
+          sx={{ width: 130, height: 130 }}
         />
       )}
 
-      <ul>
-        <div>
-          닉네임 :{' '}
-          {userProfile?.nickname === null
-            ? '닉네임을 설정해주세요'
-            : userProfile?.nickname}
-        </div>
-        <li>게시글 {userProfile?.Posts.length}개</li>
-        <li>팔로워 {userProfile?.Followers.length} 명</li>
-        <li>팔로잉 {userProfile?.Followings.length} 명</li>
-      </ul>
+      <Nickname>
+        {userProfile?.nickname === null
+          ? '닉네임을 설정해주세요'
+          : userProfile?.nickname}
+      </Nickname>
+
+      <Stack
+        direction="row"
+        spacing={2}
+        divider={<Divider orientation="vertical" flexItem />}
+        marginTop="20px"
+      >
+        <List>
+          <Stack>
+            <div>{userProfile?.Posts.length}</div>
+            <div>게시글</div>
+          </Stack>
+        </List>
+        <List>
+          <Stack>
+            <div>{userProfile?.Followers.length} </div>
+            <div>나를 즐겨찾는</div>
+          </Stack>
+        </List>
+        <List>
+          <Stack>
+            <div>{userProfile?.Followings.length} </div>
+            <div>즐겨찾기</div>
+          </Stack>
+        </List>
+      </Stack>
       <MainMenu />
-    </>
+    </Box>
   );
 };
 
