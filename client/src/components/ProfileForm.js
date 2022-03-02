@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import EditProfilePage from '../pages/editprofile';
 
-import { Avatar, Button, Box, Stack, Divider } from '@mui/material';
+import { Avatar, Box, Stack, Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';

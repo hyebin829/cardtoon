@@ -1,15 +1,16 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
-  addHomePost,
   ADD_HOMEPOST_REQUEST,
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from '../reducers/post';
 
+import MainMenu from '../components/MenuBar';
+
 import styled from 'styled-components';
-import Box from '@mui/material/Box';
+
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 
@@ -20,7 +21,7 @@ const Input = styled.input`
 const HomePostForm = () => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
-  const { imagePaths, addHomePostDone } = useSelector(state => state.post);
+  const { imagePaths } = useSelector(state => state.post);
   const navigate = useNavigate();
 
   const onSubmitForm = useCallback(
@@ -42,7 +43,6 @@ const HomePostForm = () => {
       setText('');
       alert('작성되었습니다.');
       navigate('/');
-      // location.reload();
     },
     [text, imagePaths]
   );
@@ -102,6 +102,7 @@ const HomePostForm = () => {
           </div>
         ))}
       </form>
+      <MainMenu />
     </>
   );
 };

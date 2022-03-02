@@ -16,17 +16,17 @@ import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
 const App = () => {
-  const { logInDone, user, profileImagePath, signUpDone } = useSelector(
+  const { user, profileImagePath, signUpDone } = useSelector(
     state => state.user
   );
-
+  const { addHomePostDone, removePostDone } = useSelector(state => state.post);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, [profileImagePath, signUpDone]);
+  }, [profileImagePath, signUpDone, addHomePostDone, removePostDone]);
 
   return (
     <>
