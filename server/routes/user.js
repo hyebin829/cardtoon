@@ -6,7 +6,7 @@ const passport = require('passport');
 const multer = require('multer');
 const path = require('path');
 
-const { User, Post } = require('../models');
+const { User, Post, Image } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const upload = multer({
@@ -54,7 +54,7 @@ router.get('/', async (req, res, next) => {
         include: [
           {
             model: Post,
-            attributes: ['id'],
+            attributes: ['id', 'UserId'],
           },
           { model: User, as: 'Followings', attributes: ['id'] },
           { model: User, as: 'Followers', attributes: ['id'] },

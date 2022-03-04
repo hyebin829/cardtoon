@@ -11,11 +11,30 @@ import { SIGN_UP_REQUEST } from '../reducers/user';
 const SignUpFormWrap = styled.div``;
 const SignupButtonWrap = styled.div``;
 
+const SignUpWrap = styled(Box)`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
+const SignUpTitle = styled.h2`
+  text-align: left;
+  color: #40101d;
+  font-size: 1.5em;
+  font-weight: 300;
+  margin: 10px 0;
+`;
+
+const ErrorMessage = styled.div`
+  color: #f23054;
+`;
+
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  const { signUpLoading, signUpDone, signUpError, user } = useSelector(
-    state => state.user
-  );
+  const { signUpDone, signUpError } = useSelector(state => state.user);
 
   const navigate = useNavigate();
 
@@ -91,62 +110,71 @@ const SignUpForm = () => {
   return (
     <>
       <Box component="form" onSubmit={onSubmit} sx={{ alignContent: 'center' }}>
-        <SignUpFormWrap>
-          <TextField
-            label="이메일"
-            name="user-email"
-            value={email}
-            onChange={onChangeEmail}
-            required
-            onInvalid={inputErrorMessage}
-            type="email"
-            variant="outlined"
-          />
-          <TextField
-            name="user-nickname"
-            label="닉네임"
-            value={nickname}
-            onChange={onChangeNickname}
-            required
-            onInvalid={inputErrorMessage}
-            maxLength={20}
-            variant="outlined"
-          />
-          <TextField
-            name="user-password"
-            label="비밀번호"
-            value={password}
-            onChange={onChangePassword}
-            minLength={6}
-            maxLength={15}
-            required
-            onInvalid={inputErrorMessage}
-            variant="outlined"
-          />
-          <TextField
-            name="check-user-password"
-            label="비밀번호 확인"
-            value={passwordCheck}
-            onChange={onChangePasswordCheck}
-            minLength={6}
-            maxLength={15}
-            onInvalid={inputErrorMessage}
-            required
-            variant="outlined"
-          />
-          {passwordError && <div>비밀번호가 일치하지 않습니다</div>}
-          {signUpError && <div>{signUpError}</div>}
-        </SignUpFormWrap>
-        <SignupButtonWrap>
-          {passwordError ? (
-            <Button disabled>회원가입</Button>
-          ) : (
-            <Button type="submit" variant="contained">
-              회원가입
-            </Button>
-          )}{' '}
-          <Button onClick={onClickCancle}>취소</Button>
-        </SignupButtonWrap>
+        <SignUpWrap>
+          <SignUpTitle>회원가입</SignUpTitle>
+          <SignUpFormWrap>
+            <TextField
+              label="이메일"
+              name="user-email"
+              value={email}
+              onChange={onChangeEmail}
+              required
+              onInvalid={inputErrorMessage}
+              type="email"
+              variant="outlined"
+              sx={{ mb: 1.5 }}
+            />
+            <TextField
+              name="user-nickname"
+              label="닉네임"
+              value={nickname}
+              onChange={onChangeNickname}
+              required
+              onInvalid={inputErrorMessage}
+              maxLength={20}
+              variant="outlined"
+              sx={{ mb: 1.5 }}
+            />
+            <TextField
+              name="user-password"
+              label="비밀번호"
+              value={password}
+              onChange={onChangePassword}
+              minLength={6}
+              maxLength={15}
+              required
+              onInvalid={inputErrorMessage}
+              variant="outlined"
+              sx={{ mb: 1.5 }}
+            />
+            <TextField
+              name="check-user-password"
+              label="비밀번호 확인"
+              value={passwordCheck}
+              onChange={onChangePasswordCheck}
+              minLength={6}
+              maxLength={15}
+              onInvalid={inputErrorMessage}
+              required
+              variant="outlined"
+              sx={{ mb: 1 }}
+            />
+            {passwordError && (
+              <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
+            )}
+            {signUpError && <ErrorMessage>{signUpError}</ErrorMessage>}
+          </SignUpFormWrap>
+          <SignupButtonWrap sx={{ mt: 1 }}>
+            {passwordError ? (
+              <Button disabled>회원가입</Button>
+            ) : (
+              <Button type="submit" variant="contained">
+                회원가입
+              </Button>
+            )}
+            <Button onClick={onClickCancle}>취소</Button>
+          </SignupButtonWrap>
+        </SignUpWrap>
       </Box>
     </>
   );
