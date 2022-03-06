@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import MainMenu from '../components/MenuBar';
 import styled from 'styled-components';
 import { Input, Box, Button, Avatar } from '@mui/material';
 import { useState } from 'react';
@@ -15,11 +16,16 @@ const ImageInput = styled.input`
   display: none;
 `;
 
+const ChangeErrorMessage = styled.div`
+  color: #f23054;
+  margin-top: 2px;
+`;
+
 const EditProfilePage = () => {
   const { user, changeNicknameError, profileImagePath } = useSelector(
     state => state.user
   );
-  const [nickname, setNickname] = useState(user?.nickname || '');
+  const [nickname, setNickname] = useState(user?.nickname);
   const dispatch = useDispatch();
   const onChangeNickname = useCallback(e => {
     setNickname(e.target.value);
@@ -54,33 +60,55 @@ const EditProfilePage = () => {
 
   return (
     <>
-      {user?.profileimagesrc === null ? (
-        <AccountCircleIcon sx={{ width: 120, height: 120 }} />
-      ) : (
-        <Avatar
-          src={`http://localhost:3065/${user?.profileimagesrc}`}
-          sx={{ width: 120, height: 120 }}
-        />
-      )}
-      <label>
-        <ImageInput
-          accept="image/*"
-          id="contained-button-file"
-          multiple
-          type="file"
-          name="image"
-          onChange={onChangeImages}
-          formEncType="multipart/form-data"
-        />
-        <Button variant="contained" component="span">
-          변경
-        </Button>
-      </label>
-      <Box component="form" onSubmit={onSubmitForm}>
-        <Input defaultValue={nickname} onChange={onChangeNickname} />
-        {changeNicknameError && <div>이미 사용중인 닉네임입니다.</div>}
-        <Button type="submit">확인</Button>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          marginTop: '200px',
+        }}
+      >
+        {user?.profileimagesrc === null ? (
+          <AccountCircleIcon sx={{ width: 130, height: 130 }} />
+        ) : (
+          <Avatar
+            src={`http://localhost:3065/${user?.profileimagesrc}`}
+            sx={{ width: 130, height: 130 }}
+          />
+        )}
+        <label>
+          <ImageInput
+            accept="image/*"
+            id="contained-button-file"
+            multiple
+            type="file"
+            name="image"
+            onChange={onChangeImages}
+            formEncType="multipart/form-data"
+          />
+          <Button
+            variant="outlined"
+            component="span"
+            sx={{ marginTop: '10px' }}
+          >
+            프로필 사진 변경
+          </Button>
+        </label>
+        <Box
+          component="form"
+          onSubmit={onSubmitForm}
+          sx={{ marginTop: '10px' }}
+        >
+          <Input defaultValue={nickname} onChange={onChangeNickname} />
+          {changeNicknameError && (
+            <ChangeErrorMessage>이미 사용중인 닉네임입니다.</ChangeErrorMessage>
+          )}
+          <Button type="submit" variant="contained" sx={{ marginLeft: '5px' }}>
+            확인
+          </Button>
+        </Box>
       </Box>
+      <MainMenu />
     </>
   );
 };
