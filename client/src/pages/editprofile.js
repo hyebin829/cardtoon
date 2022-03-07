@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MainMenu from '../components/MenuBar';
@@ -25,7 +25,9 @@ const EditProfilePage = () => {
   const { user, changeNicknameError, profileImagePath } = useSelector(
     state => state.user
   );
+
   const [nickname, setNickname] = useState(user?.nickname);
+
   const dispatch = useDispatch();
   const onChangeNickname = useCallback(e => {
     setNickname(e.target.value);
@@ -99,13 +101,18 @@ const EditProfilePage = () => {
           onSubmit={onSubmitForm}
           sx={{ marginTop: '10px' }}
         >
-          <Input defaultValue={nickname} onChange={onChangeNickname} />
-          {changeNicknameError && (
-            <ChangeErrorMessage>이미 사용중인 닉네임입니다.</ChangeErrorMessage>
-          )}
+          <Input
+            defaultValue={nickname}
+            onChange={onChangeNickname}
+            // value={nickname ? window.localStorage.getItem('nickname') : ''}
+          />
+
           <Button type="submit" variant="contained" sx={{ marginLeft: '5px' }}>
             확인
           </Button>
+          {changeNicknameError && (
+            <ChangeErrorMessage>이미 사용중인 닉네임입니다.</ChangeErrorMessage>
+          )}
         </Box>
       </Box>
       <MainMenu />

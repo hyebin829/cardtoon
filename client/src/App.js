@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/login';
 import Home from './pages/home';
@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
 const App = () => {
-  const { user, profileImagePath, signUpDone } = useSelector(
+  const { user, profileImagePath, signUpDone, nickname } = useSelector(
     state => state.user
   );
   const { addHomePostDone, removePostDone } = useSelector(state => state.post);
@@ -26,7 +26,7 @@ const App = () => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, [profileImagePath, signUpDone, addHomePostDone, removePostDone]);
+  }, [profileImagePath, signUpDone, addHomePostDone, removePostDone, nickname]);
 
   return (
     <>
