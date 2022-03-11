@@ -48,6 +48,13 @@ const LogoutButton = styled.button`
   font-size: 15px;
 `;
 
+const EmptyPost = styled.div`
+  font-size: 25px;
+  margin: 80% 0;
+  text-align: center;
+  color: #40101d;
+`;
+
 const Home = () => {
   const dispatch = useDispatch();
   const { user, logOutDone } = useSelector(state => state.user);
@@ -57,6 +64,7 @@ const Home = () => {
 
   const id = useSelector(state => state.user.user?.id);
 
+  console.log(homePosts);
   console.log(id);
   useEffect(() => {
     if (logOutDone) {
@@ -174,32 +182,36 @@ const Home = () => {
       <Box sx={{ marginBottom: '65px' }}>
         <MenuBar />
         {/* 포스트 */}
-        {homePosts.map((post, i) => (
-          <>
-            <Card sx={{ height: '100%', margin: '40px 5px' }}>
-              <CardHeader
-                title={post.User.nickname}
-                avatar={
-                  <Link to={`/userprofile/${post.User.id}`}>
-                    {' '}
-                    <Avatar
-                      sx={{ bgcolor: red[500] }}
-                      aria-label="profilepic"
-                      src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                    />
-                  </Link>
-                }
-                action={<FollowButton post={post} />}
-              />
-              <CardContent>
-                <HomePostContent post={post} key={post.id} />
-              </CardContent>
-              <LikeButton post={post} />
-            </Card>
-            <CommentForm post={post} />
-            <CommentList post={post} />
-          </>
-        ))}
+        {homePosts.length !== 0 ? (
+          homePosts.map((post, i) => (
+            <>
+              <Card sx={{ height: '100%', margin: '40px 5px' }}>
+                <CardHeader
+                  title={post.User.nickname}
+                  avatar={
+                    <Link to={`/userprofile/${post.User.id}`}>
+                      {' '}
+                      <Avatar
+                        sx={{ bgcolor: red[500] }}
+                        aria-label="profilepic"
+                        src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                      />
+                    </Link>
+                  }
+                  action={<FollowButton post={post} />}
+                />
+                <CardContent>
+                  <HomePostContent post={post} key={post.id} />
+                </CardContent>
+                <LikeButton post={post} />
+              </Card>
+              <CommentForm post={post} />
+              <CommentList post={post} />
+            </>
+          ))
+        ) : (
+          <EmptyPost>작성된 게시글이 없습니다.</EmptyPost>
+        )}
         <div ref={hasMorePost && !loadHomePostsLoading ? loader : undefined} />
       </Box>
     </>
