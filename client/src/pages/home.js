@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,15 +13,10 @@ import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import { Box } from '@mui/system';
-import {
-  Card,
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-} from '@mui/material';
+import { Card, CardHeader, CardContent, Button } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
 
 import { red } from '@mui/material/colors';
 
@@ -34,10 +29,6 @@ import {
   MenuItem,
   Typography,
   Stack,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
 } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 
@@ -61,6 +52,7 @@ const Home = () => {
   const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
     useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [commentFormOpened, setCommentFormOpened] = useState(false);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -123,6 +115,10 @@ const Home = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const onToggleComment = useCallback(() => {
+    setCommentFormOpened(prev => !prev);
+  }, []);
 
   return (
     <>
@@ -204,9 +200,18 @@ const Home = () => {
                   <HomePostContent post={post} key={post.id} />
                 </CardContent>
                 <LikeButton post={post} />
+                <Button onClick={onToggleComment}>
+                  <InsertCommentOutlinedIcon />
+                </Button>
               </Card>
-              <CommentForm post={post} />
-              <CommentList post={post} />
+              {commentFormOpened ? (
+                <>
+                  <CommentForm post={post} />
+                  <CommentList post={post} />
+                </>
+              ) : (
+                ''
+              )}
             </>
           ))
         ) : (
