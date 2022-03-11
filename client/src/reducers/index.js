@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session';
 import user from './user';
 import post from './post';
 
 const persistConfig = {
   key: 'root',
-  storage,
-  whiltelist: ['auth'],
+  storage: storageSession,
+  whiltelist: ['user'],
 };
 
 const rootReducer = combineReducers({
