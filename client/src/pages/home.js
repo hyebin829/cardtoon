@@ -52,7 +52,7 @@ const Home = () => {
   const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
     useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [commentFormOpened, setCommentFormOpened] = useState(false);
+  // const [commentFormOpened, setCommentFormOpened] = useState(false);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -116,9 +116,9 @@ const Home = () => {
     setAnchorElUser(null);
   };
 
-  const onToggleComment = useCallback(() => {
-    setCommentFormOpened(prev => !prev);
-  }, []);
+  // const onToggleComment = useCallback(() => {
+  //   setCommentFormOpened(prev => !prev);
+  // }, []);
 
   return (
     <>
@@ -200,18 +200,19 @@ const Home = () => {
                   <HomePostContent post={post} key={post.id} />
                 </CardContent>
                 <LikeButton post={post} />
-                <Button onClick={onToggleComment}>
+                {/* <Button onClick={onToggleComment}>
+                  {post.Comments.length}
                   <InsertCommentOutlinedIcon />
-                </Button>
+                </Button> */}
               </Card>
-              {commentFormOpened ? (
-                <>
-                  <CommentForm post={post} />
-                  <CommentList post={post} />
-                </>
-              ) : (
-                ''
-              )}
+              {/* {commentFormOpened ? ( */}
+              <>
+                <CommentForm post={post} />
+                <CommentList post={post} />
+              </>
+              {/* ) : (
+                '' */}
+              {/* )} */}
             </>
           ))
         ) : (
