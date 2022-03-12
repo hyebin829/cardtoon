@@ -2,19 +2,19 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostImage from './HomePostImage';
 import { useState, useCallback } from 'react';
+import styled from 'styled-components';
 
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
 import { Menu, MenuItem, Stack } from '@mui/material';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import CommentForm from './CommentForm';
 
 import { REMOVE_POST_REQUEST } from '../reducers/post';
+
+const ContentWrap = styled.div`
+  word-break: break-word;
+`;
 
 const HomePostContent = ({ post }) => {
   const dispatch = useDispatch();
@@ -111,7 +111,7 @@ const HomePostContent = ({ post }) => {
           </Menu>
         </Box>
       )}
-      {post.content}
+      <ContentWrap> {post.content}</ContentWrap>
     </div>
   );
 };

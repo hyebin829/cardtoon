@@ -52,7 +52,6 @@ const Home = () => {
   const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
     useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  // const [commentFormOpened, setCommentFormOpened] = useState(false);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -115,10 +114,6 @@ const Home = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  // const onToggleComment = useCallback(() => {
-  //   setCommentFormOpened(prev => !prev);
-  // }, []);
 
   return (
     <>
@@ -197,22 +192,16 @@ const Home = () => {
                   action={<FollowButton post={post} />}
                 />
                 <CardContent>
-                  <HomePostContent post={post} key={post.id} />
+                  <HomePostContent
+                    sx={{ whiteSpace: 'normal' }}
+                    post={post}
+                    key={post.id}
+                  />
                 </CardContent>
                 <LikeButton post={post} />
-                {/* <Button onClick={onToggleComment}>
-                  {post.Comments.length}
-                  <InsertCommentOutlinedIcon />
-                </Button> */}
               </Card>
-              {/* {commentFormOpened ? ( */}
-              <>
-                <CommentForm post={post} />
-                <CommentList post={post} />
-              </>
-              {/* ) : (
-                '' */}
-              {/* )} */}
+              <CommentForm post={post} />
+              <CommentList post={post} />
             </>
           ))
         ) : (
