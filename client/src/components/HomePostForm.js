@@ -48,6 +48,10 @@ const HomePostForm = () => {
         e.preventDefault();
         return alert('게시글을 작성해주세요');
       }
+      if (imagePaths.length === 0) {
+        e.preventDefault();
+        return alert('사진을 첨부해주세요.');
+      }
       e.preventDefault();
       const formData = new FormData();
       imagePaths.forEach(p => {

@@ -6,6 +6,8 @@ import { Avatar, Box, Stack, Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const List = styled.li`
   list-style: none;
@@ -19,6 +21,13 @@ const Nickname = styled.div`
 
 const ProfileForm = () => {
   const { user } = useSelector(state => state.user);
+  const { homePosts } = useSelector(state => state.post);
+
+  console.log(user.id);
+  console.log(homePosts);
+
+  const myPosts = homePosts.filter(x => x.UserId === user.id);
+  console.log(myPosts);
 
   return (
     <Box
@@ -68,8 +77,18 @@ const ProfileForm = () => {
           </Stack>
         </List>
       </Stack>
-
-      
+      <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
+        {myPosts.map(x => (
+          <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
+            <img
+              src={`http://localhost:3065/${x.Images[0].src}`}
+              // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={x.content}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
     </Box>
   );
 };

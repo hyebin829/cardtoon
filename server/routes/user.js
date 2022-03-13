@@ -58,6 +58,7 @@ router.get('/', async (req, res, next) => {
           },
           { model: User, as: 'Followings', attributes: ['id'] },
           { model: User, as: 'Followers', attributes: ['id'] },
+          { model: Image, attributes: ['src', 'id', 'UserId', 'PostId'] },
         ],
       });
       res.status(200).json(userWithoutPassword);
