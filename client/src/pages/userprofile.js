@@ -8,6 +8,8 @@ import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
 import styled from 'styled-components';
 import { Avatar, Box, Stack, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const List = styled.li`
   list-style: none;
@@ -23,16 +25,19 @@ const UserprofilePage = () => {
   const params = useParams();
   console.log(params);
   const id = params.id;
+
   const { userProfile } = useSelector(state => state.user);
+  const { homePosts } = useSelector(state => state.post);
+
+  const userPosts = homePosts.filter(x => x.UserId === +id);
 
   const dispatch = useDispatch();
-  console.log(userProfile);
+
   useEffect(() => {
     dispatch({
       type: LOAD_USER_PROFILE_REQUEST,
       data: params.id,
     });
-    console.log('useeffect실행');
   }, [id]);
 
   return (
@@ -84,6 +89,18 @@ const UserprofilePage = () => {
           </Stack>
         </List>
       </Stack>
+      <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
+        {userPosts.map(x => (
+          <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
+            <img
+              src={`http://localhost:3065/${x.Images[0].src}`}
+              // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+              alt={x.content}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
       <MainMenu />
     </Box>
   );
