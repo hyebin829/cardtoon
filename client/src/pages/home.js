@@ -16,7 +16,6 @@ import { Box } from '@mui/system';
 import { Card, CardHeader, CardContent, Button } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
 
 import { red } from '@mui/material/colors';
 

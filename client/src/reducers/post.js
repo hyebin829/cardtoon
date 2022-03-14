@@ -2,6 +2,7 @@ import produce from 'immer';
 
 export const initialState = {
   homePosts: [],
+  hotPosts: [],
   imagePaths: [],
   addHomePostLoading: false,
   addHomePostDone: false,
@@ -28,6 +29,9 @@ export const initialState = {
   unLikePostLoading: false,
   unLikePostDone: false,
   unLikePostError: null,
+  loadHotPostsLoading: false,
+  loadHotPostsDone: false,
+  loadHotPostsError: null,
 };
 
 export const ADD_HOMEPOST_REQUEST = 'ADD_HOMEPOST_REQUEST';
@@ -41,6 +45,10 @@ export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
 export const LOAD_HOMEPOSTS_REQUEST = 'LOAD_HOMEPOSTS_REQUEST';
 export const LOAD_HOMEPOSTS_SUCCESS = 'LOAD_HOMEPOSTS_SUCCESS';
 export const LOAD_HOMEPOSTS_FAILURE = 'LOAD_HOMEPOSTS_FAILURE';
+
+export const LOAD_HOTPOSTS_REQUEST = 'LOAD_HOTPOSTS_REQUEST';
+export const LOAD_HOTPOSTS_SUCCESS = 'LOAD_HOTPOSTS_SUCCESS';
+export const LOAD_HOTPOSTS_FAILURE = 'LOAD_HOTPOSTS_FAILURE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
@@ -120,6 +128,21 @@ const reducer = (state = initialState, action) =>
       case LOAD_HOMEPOSTS_FAILURE:
         draft.loadHomePostsDone = false;
         draft.loadHomePostsError = action.error;
+        break;
+      case LOAD_HOTPOSTS_REQUEST:
+        draft.loadHotPostsLoading = true;
+        draft.loadHotPostsDone = false;
+        draft.loadHotPostsError = null;
+        break;
+      case LOAD_HOTPOSTS_SUCCESS:
+        draft.hotPosts = action.data;
+        draft.loadHotPostsDone = true;
+        draft.loadHotPostsError = null;
+        draft.loadHotPostsLoading = false;
+        break;
+      case LOAD_HOTPOSTS_FAILURE:
+        draft.loadHotPostsDone = false;
+        draft.loadHotPostsError = action.error;
         break;
       case ADD_COMMENT_REQUEST:
         draft.addCommentLoading = true;

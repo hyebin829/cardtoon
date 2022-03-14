@@ -16,6 +16,9 @@ import {
   LOAD_HOMEPOSTS_FAILURE,
   LOAD_HOMEPOSTS_REQUEST,
   LOAD_HOMEPOSTS_SUCCESS,
+  LOAD_HOTPOSTS_FAILURE,
+  LOAD_HOTPOSTS_REQUEST,
+  LOAD_HOTPOSTS_SUCCESS,
   UPLOAD_IMAGES_FAILURE,
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
@@ -50,6 +53,25 @@ function* loadHomePosts(action) {
   } catch (error) {
     yield put({
       type: LOAD_HOMEPOSTS_FAILURE,
+    });
+    console.error(error);
+  }
+}
+
+function loadHotPostsAPI() {
+  return axios.get('/posts/hotcardtoon');
+}
+
+function* loadHotPosts(action) {
+  try {
+    const result = yield call(loadHotPostsAPI, action.data);
+    yield put({
+      type: LOAD_HOTPOSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_HOTPOSTS_FAILURE,
     });
     console.error(error);
   }
@@ -226,6 +248,10 @@ function* watchUnlikePost() {
   yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
 }
 
+function* watchLoadHotPosts() {
+  yield takeLatest(LOAD_HOTPOSTS_REQUEST, loadHotPosts);
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchAddHomePost),
@@ -236,5 +262,6 @@ export default function* postSaga() {
     fork(watchRemoveComment),
     fork(watchLikePost),
     fork(watchUnlikePost),
+    fork(watchLoadHotPosts),
   ]);
 }
