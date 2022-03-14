@@ -6,6 +6,7 @@ import { Divider, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import CommentMoreButton from './CommentMoreButton';
+import CommentForm from './CommentForm';
 
 import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
 
@@ -20,23 +21,29 @@ const CommentList = ({ post }) => {
 
   return (
     <>
-      <Button onClick={onToggleComment}>
-        {post.Comments.length} <InsertCommentOutlinedIcon />
+      <Button onClick={onToggleComment} sx={{ pr: 0, minWidth: '50px' }}>
+        <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
       </Button>
-
+      {post.Comments.length}
       {commentFormOpened ? (
-        <List>
-          {post.Comments.map(comment => (
-            <ListItem alignItems="flex-start" key={comment.id}>
-              <ListItemText
-                primary={comment.User.nickname}
-                secondary={comment.content}
-              />
-              <CommentMoreButton comment={comment} />
-            </ListItem>
-          ))}
-          <Divider variant="middle" component="li" />
-        </List>
+        <>
+          <CommentForm post={post} />
+          <List>
+            {post.Comments.map(comment => (
+              <ListItem
+                alignItems="flex-start"
+                key={comment.id}
+                sx={{ padding: '10px 20px' }}
+              >
+                <ListItemText
+                  primary={comment.User.nickname}
+                  secondary={comment.content}
+                />
+                <CommentMoreButton comment={comment} />
+              </ListItem>
+            ))}
+          </List>
+        </>
       ) : (
         ''
       )}

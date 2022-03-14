@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCallback, useState } from 'react';
 
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ADD_COMMENT_REQUEST } from '../reducers/post';
@@ -41,7 +41,7 @@ const CommentForm = ({ post }) => {
   }, []);
 
   return (
-    <form style={{ margin: '0 15px' }} onSubmit={onSubmitForm}>
+    <form style={{ margin: '5px 15px' }} onSubmit={onSubmitForm}>
       <TextField
         multiline
         fullWidth
@@ -49,7 +49,9 @@ const CommentForm = ({ post }) => {
         value={commentText}
         onChange={onChangeCommentText}
       ></TextField>
-      <Button type="submit">확인</Button>
+      <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
+        <Button type="submit">확인</Button>
+      </Box>
     </form>
   );
 };

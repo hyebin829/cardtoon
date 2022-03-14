@@ -37,13 +37,23 @@ const LikeButton = ({ post }) => {
   const liked = post.Likers.find(v => v.id === id);
 
   return (
-    <Button>
-      {liked ? (
-        <ThumbUpRoundedIcon onClick={onUnLike} />
-      ) : (
-        <ThumbUpOutlinedIcon onClick={onLike} />
-      )}
-    </Button>
+    <>
+      <Button
+        sx={{
+          mt: '10px',
+          display: 'inline-block',
+          paddingLeft: '10px',
+          minWidth: '50px',
+        }}
+      >
+        {liked ? (
+          <ThumbUpRoundedIcon onClick={onUnLike} sx={{ width: '100%' }} />
+        ) : (
+          <ThumbUpOutlinedIcon onClick={onLike} sx={{ width: '100%' }} />
+        )}
+      </Button>
+      {post.Likers.length}
+    </>
   );
 };
 

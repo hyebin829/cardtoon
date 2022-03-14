@@ -32,7 +32,7 @@ const FollowButton = ({ post }) => {
   }
   return (
     <>
-      <Button onClick={onClickButton}>
+      <Button onClick={onClickButton} sx={{ paddingTop: '10px' }}>
         {Followed ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
       </Button>
     </>

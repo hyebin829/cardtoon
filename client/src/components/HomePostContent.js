@@ -57,61 +57,63 @@ const HomePostContent = ({ post }) => {
   return (
     <div>
       <PostImage images={post.Images} />
-      {post.User.id === id ? (
-        <Box>
-          <MoreVertIcon onClick={handleOpenMyPost} />
-          <Menu
-            sx={{ mt: '25px' }}
-            id="menu-appbar"
-            anchorEl={anchorElMyPost}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElMyPost)}
-            onClose={handleCloseMyPost}
-          >
-            <MenuItem onClick={handleCloseMyPost}>
-              <Stack>
-                <Typography textAlign="left">수정</Typography>
-                <Typography textAlign="left" onClick={onRemovePost}>
-                  삭제
-                </Typography>
-              </Stack>
-            </MenuItem>
-          </Menu>
-        </Box>
-      ) : (
-        <Box>
-          <MoreVertIcon onClick={handleOpenPost} />
-          <Menu
-            sx={{ mt: '25px' }}
-            id="menu-appbar"
-            anchorEl={anchorElPost}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElPost)}
-            onClose={handleClosePost}
-          >
-            <MenuItem onClick={handleClosePost}>
-              <Typography>신고</Typography>
-            </MenuItem>
-          </Menu>
-        </Box>
-      )}
       <ContentWrap> {post.content}</ContentWrap>
+      <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mt: '20px' }}>
+        {post.User.id === id ? (
+          <Box>
+            <MoreVertIcon onClick={handleOpenMyPost} />
+            <Menu
+              sx={{ mt: '25px' }}
+              id="menu-appbar"
+              anchorEl={anchorElMyPost}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElMyPost)}
+              onClose={handleCloseMyPost}
+            >
+              <MenuItem onClick={handleCloseMyPost}>
+                <Stack>
+                  <Typography textAlign="left">수정</Typography>
+                  <Typography textAlign="left" onClick={onRemovePost}>
+                    삭제
+                  </Typography>
+                </Stack>
+              </MenuItem>
+            </Menu>
+          </Box>
+        ) : (
+          <Box>
+            <MoreVertIcon onClick={handleOpenPost} />
+            <Menu
+              sx={{ mt: '25px' }}
+              id="menu-appbar"
+              anchorEl={anchorElPost}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElPost)}
+              onClose={handleClosePost}
+            >
+              <MenuItem onClick={handleClosePost}>
+                <Typography>신고</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+        )}
+      </Box>
     </div>
   );
 };

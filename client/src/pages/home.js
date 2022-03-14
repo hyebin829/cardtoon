@@ -13,7 +13,7 @@ import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import { Box } from '@mui/system';
-import { Card, CardHeader, CardContent, Button } from '@mui/material';
+import { Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
@@ -51,6 +51,11 @@ const Home = () => {
   const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
     useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // const [commentFormOpened, setCommentFormOpened] = useState(false);
+
+  // const onToggleComment = useCallback(() => {
+  //   setCommentFormOpened(prev => !prev);
+  // }, []);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -175,9 +180,19 @@ const Home = () => {
         {homePosts.length !== 0 ? (
           homePosts.map((post, i) => (
             <>
-              <Card sx={{ height: '100%', margin: '40px 5px' }}>
+              <Card
+                sx={{ height: '100%', margin: '20px 5px' }}
+                variant="outlined"
+              >
                 <CardHeader
-                  title={post.User.nickname}
+                  title={
+                    <Link
+                      to={`/userprofile/${post.User.id}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {post.User.nickname}
+                    </Link>
+                  }
                   avatar={
                     <Link to={`/userprofile/${post.User.id}`}>
                       {' '}
@@ -197,10 +212,10 @@ const Home = () => {
                     key={post.id}
                   />
                 </CardContent>
+                <Divider variant="middle" />
                 <LikeButton post={post} />
+                <CommentList post={post} />
               </Card>
-              <CommentForm post={post} />
-              <CommentList post={post} />
             </>
           ))
         ) : (

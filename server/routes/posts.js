@@ -64,8 +64,9 @@ router.get('/hotcardtoon', async (req, res, next) => {
       include: [{ model: User, as: 'Likers', attributes: ['id'] }],
     });
     const hotPostLikers = hotPost.map(x => x.dataValues.Likers);
+
     console.log(hotPostLikers);
-    // console.log(hotPost.map(x => x.dataValues.Likers.length));
+
     res.status(200).json(hotPost);
   } catch (error) {
     console.error(error);
