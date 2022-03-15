@@ -14,6 +14,7 @@ import { REMOVE_POST_REQUEST } from '../reducers/post';
 
 const ContentWrap = styled.div`
   word-break: break-word;
+  padding-top: 15px;
 `;
 
 const HomePostContent = ({ post }) => {
@@ -58,7 +59,7 @@ const HomePostContent = ({ post }) => {
     <div>
       <PostImage images={post.Images} />
       <ContentWrap> {post.content}</ContentWrap>
-      <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mt: '20px' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mt: '10px' }}>
         {post.User.id === id ? (
           <Box>
             <MoreVertIcon onClick={handleOpenMyPost} />

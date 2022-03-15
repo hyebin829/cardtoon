@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Avatar, Box, Stack, Divider } from '@mui/material';
 import { useSelector } from 'react-redux';
@@ -79,14 +79,16 @@ const ProfileForm = () => {
       </Stack>
       <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
         {myPosts.map(x => (
-          <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
-            <img
-              src={`http://localhost:3065/${x.Images[0].src}`}
-              // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={x.content}
-              loading="lazy"
-            />
-          </ImageListItem>
+          <Link to={`/userpost/${x.id}`}>
+            <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
+              <img
+                src={`http://localhost:3065/${x.Images[0].src}`}
+                // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={x.content}
+                loading="lazy"
+              />
+            </ImageListItem>
+          </Link>
         ))}
       </ImageList>
     </Box>

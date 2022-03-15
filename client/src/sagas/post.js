@@ -37,6 +37,9 @@ import {
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_SUCCESS,
   UNLIKE_POST_FAILURE,
+  LOAD_USER_POST_REQUEST,
+  LOAD_USER_POST_FAILURE,
+  LOAD_USER_POST_SUCCESS,
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
@@ -217,6 +220,25 @@ function* unlikePost(action) {
   }
 }
 
+function loadUserPostAPI(data) {
+  return axios.get(`/post/${data}`);
+}
+
+function* loadUserPost(action) {
+  try {
+    const result = yield call(loadUserPostAPI, action.data);
+    yield put({
+      type: LOAD_USER_POST_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_USER_POST_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchAddHomePost() {
   yield takeLatest(ADD_HOMEPOST_REQUEST, addHomePost);
 }
@@ -251,6 +273,9 @@ function* watchUnlikePost() {
 function* watchLoadHotPosts() {
   yield takeLatest(LOAD_HOTPOSTS_REQUEST, loadHotPosts);
 }
+function* watchLoadUserPost() {
+  yield takeLatest(LOAD_USER_POST_REQUEST, loadUserPost);
+}
 
 export default function* postSaga() {
   yield all([
@@ -263,5 +288,6 @@ export default function* postSaga() {
     fork(watchLikePost),
     fork(watchUnlikePost),
     fork(watchLoadHotPosts),
+    fork(watchLoadUserPost),
   ]);
 }

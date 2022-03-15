@@ -10,6 +10,7 @@ import ProfilePage from './pages/profile';
 import UploadPost from './pages/uploadpost';
 import EditProfilePage from './pages/editprofile';
 import UserprofilePage from './pages/userprofile';
+import UserpostPage from './pages/userpost';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/editprofile" element={<EditProfilePage />} />
           <Route path="/userprofile/:id" element={<UserprofilePage />} />
+          <Route path="/userpost/:id" element={<UserpostPage />} />
         </Routes>
       </Router>
     </>

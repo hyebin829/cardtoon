@@ -30,6 +30,7 @@ const UserprofilePage = () => {
   const { homePosts } = useSelector(state => state.post);
 
   const userPosts = homePosts.filter(x => x.UserId === +id);
+  console.log(userPosts);
 
   const dispatch = useDispatch();
 
@@ -91,14 +92,16 @@ const UserprofilePage = () => {
       </Stack>
       <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
         {userPosts.map(x => (
-          <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
-            <img
-              src={`http://localhost:3065/${x.Images[0].src}`}
-              // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-              alt={x.content}
-              loading="lazy"
-            />
-          </ImageListItem>
+          <Link to={`/userpost/${x.id}`}>
+            <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
+              <img
+                src={`http://localhost:3065/${x.Images[0].src}`}
+                // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={x.content}
+                loading="lazy"
+              />
+            </ImageListItem>
+          </Link>
         ))}
       </ImageList>
       <MainMenu />

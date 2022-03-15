@@ -182,4 +182,26 @@ router.delete('/:postId/like', isLoggedIn, async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    const post = await Post.findAll({
+      where: { id: req.params.id },
+      include: [
+        { model: User, attributes: ['id', 'nickname', 'profileimagesrc'] },
+        { model: Image },
+        {
+          model: Comment,
+          include: [{ model: User, attributes: ['id', 'nickname'] }],
+        },
+        { model: User, as: 'Likers', attributes: ['id'] },
+      ],
+    });
+    console.log(post);
+    res.status(200).json(post);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 module.exports = router;
