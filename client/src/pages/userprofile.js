@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import MainMenu from '../components/MenuBar';
 import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
 
