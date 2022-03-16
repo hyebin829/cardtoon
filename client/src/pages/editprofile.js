@@ -8,6 +8,7 @@ import { useState } from 'react';
 import {
   CHANGE_NICKNAME_REQUEST,
   UPLOAD_PROFILE_IMAGE_REQUEST,
+  LOAD_USER_INFO_REQUEST,
 } from '../reducers/user';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -22,9 +23,8 @@ const ChangeErrorMessage = styled.div`
 `;
 
 const EditProfilePage = () => {
-  const { user, changeNicknameError, profileImagePath } = useSelector(
-    state => state.user
-  );
+  const { user, changeNicknameError, profileImagePath, changeNicknameDone } =
+    useSelector(state => state.user);
 
   const [nickname, setNickname] = useState(user?.nickname);
 
@@ -33,31 +33,44 @@ const EditProfilePage = () => {
     setNickname(e.target.value);
   }, []);
 
+  useEffect(() => {
+    dispatch({
+      type: LOAD_USER_INFO_REQUEST,
+    });
+  }, [profileImagePath, nickname]);
+
   const onSubmitForm = useCallback(
     e => {
       if (!nickname || !nickname.trim()) {
         e.preventDefault();
         return alert('닉네임을 입력해주세요');
+      } else {
+        e.preventDefault();
+        dispatch({
+          type: CHANGE_NICKNAME_REQUEST,
+          data: nickname,
+        });
       }
-      e.preventDefault();
-      dispatch({
-        type: CHANGE_NICKNAME_REQUEST,
-        data: nickname,
-      });
     },
     [nickname]
   );
 
   const onChangeImages = useCallback(e => {
     console.log(e.target.files);
-    const imageFormData = new FormData();
-    [].forEach.call(e.target.files, f => {
-      imageFormData.append('image', f);
-    });
-    return dispatch({
-      type: UPLOAD_PROFILE_IMAGE_REQUEST,
-      data: imageFormData,
-    });
+    if (e.target.files.length > 1) {
+      alert('변경 실패 : 한 장의 사진만 가능합니다.');
+    } else {
+      const imageFormData = new FormData();
+
+      [].forEach.call(e.target.files, f => {
+        imageFormData.append('image', f);
+      });
+      dispatch({
+        type: UPLOAD_PROFILE_IMAGE_REQUEST,
+        data: imageFormData,
+      });
+      alert('변경되었습니다.');
+    }
   }, []);
 
   return (
@@ -101,11 +114,7 @@ const EditProfilePage = () => {
           onSubmit={onSubmitForm}
           sx={{ marginTop: '10px' }}
         >
-          <Input
-            defaultValue={nickname}
-            onChange={onChangeNickname}
-            // value={nickname ? window.localStorage.getItem('nickname') : ''}
-          />
+          <Input defaultValue={nickname} onChange={onChangeNickname} />
 
           <Button type="submit" variant="contained" sx={{ marginLeft: '5px' }}>
             확인
@@ -113,6 +122,7 @@ const EditProfilePage = () => {
           {changeNicknameError && (
             <ChangeErrorMessage>이미 사용중인 닉네임입니다.</ChangeErrorMessage>
           )}
+          {changeNicknameDone && <div>변경되었습니다</div>}
         </Box>
       </Box>
       <MainMenu />

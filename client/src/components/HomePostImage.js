@@ -16,6 +16,7 @@ const PostImage = ({ images }) => {
           src={`http://localhost:3065/${images[i].src}`}
           height="360px"
           width="100%"
+          key={i}
         />
       ))}
     </Carousel>

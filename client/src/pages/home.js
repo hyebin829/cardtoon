@@ -47,8 +47,14 @@ const EmptyPost = styled.div`
 const Home = () => {
   const dispatch = useDispatch();
   const { user, logOutDone } = useSelector(state => state.user);
-  const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
-    useSelector(state => state.post);
+  const {
+    homePosts,
+    loadHomePostsLoading,
+    hasMorePost,
+    removeCommentLoading,
+    userPost,
+    nickname,
+  } = useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const id = useSelector(state => state.user.user?.id);
@@ -93,6 +99,8 @@ const Home = () => {
     homePosts,
     loader,
     removeCommentLoading,
+    user,
+    nickname,
   ]);
 
   const onLogout = useCallback(() => {
@@ -115,7 +123,7 @@ const Home = () => {
 
   return (
     <>
-      <AppBar position="static" elevation="0">
+      <AppBar position="static" elevation={0}>
         <Toolbar>
           <Typography variant="h6">CARDTOON</Typography>
           <Box sx={{ position: 'absolute', right: 15 }}>
@@ -177,8 +185,10 @@ const Home = () => {
               <Card
                 sx={{ height: '100%', margin: '20px 5px' }}
                 variant="outlined"
+                key={i}
               >
                 <CardHeader
+                  key={i}
                   title={
                     <Link
                       to={`/userprofile/${post.User.id}`}
@@ -207,8 +217,8 @@ const Home = () => {
                   />
                 </CardContent>
                 <Divider variant="middle" />
-                <LikeButton post={post} />
-                <CommentList post={post} />
+                <LikeButton post={post} key={`LikeButton${i}`} />
+                <CommentList post={post} key={`CommentList${i}`} />
               </Card>
             </>
           ))

@@ -23,11 +23,7 @@ const ProfileForm = () => {
   const { user } = useSelector(state => state.user);
   const { homePosts } = useSelector(state => state.post);
 
-  console.log(user.id);
-  console.log(homePosts);
-
   const myPosts = homePosts.filter(x => x.UserId === user.id);
-  console.log(myPosts);
 
   return (
     <Box
@@ -79,7 +75,7 @@ const ProfileForm = () => {
       </Stack>
       <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
         {myPosts.map(x => (
-          <Link to={`/userpost/${x.id}`}>
+          <Link to={`/userpost/${x.id}`} key={x.Images[0].id}>
             <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
               <img
                 src={`http://localhost:3065/${x.Images[0].src}`}

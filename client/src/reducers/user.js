@@ -13,7 +13,6 @@ export const initialState = {
   signUpLoading: false,
   signUpDone: false,
   signUpError: null,
-
   loadUserLoading: false,
   loadUserDone: false,
   loadUserError: null,
@@ -139,6 +138,8 @@ const reducer = (state = initialState, action) =>
         draft.loadUserLoading = false;
         draft.loadUserDone = true;
         draft.signUpDone = false;
+        draft.changeNicknameError = null;
+        draft.changeNicknameDone = false;
         draft.user = action.data;
         break;
       case LOAD_USER_INFO_FAILURE:

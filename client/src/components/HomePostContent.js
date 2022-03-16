@@ -20,17 +20,8 @@ const ContentWrap = styled.div`
 const HomePostContent = ({ post }) => {
   const dispatch = useDispatch();
   const [anchorElMyPost, setAnchorElMyPost] = useState(null);
-  const [anchorElPost, setAnchorElPost] = useState(null);
 
   const id = useSelector(state => state.user.user?.id);
-
-  const handleOpenPost = event => {
-    setAnchorElPost(event.currentTarget);
-  };
-
-  const handleClosePost = () => {
-    setAnchorElPost(null);
-  };
 
   const handleOpenMyPost = event => {
     setAnchorElMyPost(event.currentTarget);
@@ -81,7 +72,6 @@ const HomePostContent = ({ post }) => {
             >
               <MenuItem onClick={handleCloseMyPost}>
                 <Stack>
-                  <Typography textAlign="left">수정</Typography>
                   <Typography textAlign="left" onClick={onRemovePost}>
                     삭제
                   </Typography>
@@ -90,29 +80,7 @@ const HomePostContent = ({ post }) => {
             </Menu>
           </Box>
         ) : (
-          <Box>
-            <MoreVertIcon onClick={handleOpenPost} />
-            <Menu
-              sx={{ mt: '25px' }}
-              id="menu-appbar"
-              anchorEl={anchorElPost}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElPost)}
-              onClose={handleClosePost}
-            >
-              <MenuItem onClick={handleClosePost}>
-                <Typography>신고</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
+          <></>
         )}
       </Box>
     </div>

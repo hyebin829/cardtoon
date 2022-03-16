@@ -17,9 +17,14 @@ import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 
 const App = () => {
-  const { user, profileImagePath, signUpDone, nickname } = useSelector(
-    state => state.user
-  );
+  const {
+    user,
+    profileImagePath,
+    signUpDone,
+    nickname,
+    changeNicknameError,
+    changeNicknameDone,
+  } = useSelector(state => state.user);
   const { addHomePostDone, removePostDone } = useSelector(state => state.post);
   const dispatch = useDispatch();
 
