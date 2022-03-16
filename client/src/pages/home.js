@@ -46,7 +46,7 @@ const EmptyPost = styled.div`
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { user, logOutDone } = useSelector(state => state.user);
+  const { user, logOutDone, logInDone } = useSelector(state => state.user);
   const {
     homePosts,
     loadHomePostsLoading,

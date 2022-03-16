@@ -23,8 +23,13 @@ const ChangeErrorMessage = styled.div`
 `;
 
 const EditProfilePage = () => {
-  const { user, changeNicknameError, profileImagePath, changeNicknameDone } =
-    useSelector(state => state.user);
+  const {
+    user,
+    changeNicknameError,
+    profileImagePath,
+    changeNicknameDone,
+    userProfile,
+  } = useSelector(state => state.user);
 
   const [nickname, setNickname] = useState(user?.nickname);
 
@@ -37,7 +42,7 @@ const EditProfilePage = () => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, [profileImagePath, nickname]);
+  }, [profileImagePath, nickname, userProfile]);
 
   const onSubmitForm = useCallback(
     e => {
@@ -73,7 +78,7 @@ const EditProfilePage = () => {
     }
   }, []);
 
-  return (
+  return user !== null ? (
     <>
       <Box
         sx={{
@@ -114,7 +119,7 @@ const EditProfilePage = () => {
           onSubmit={onSubmitForm}
           sx={{ marginTop: '10px' }}
         >
-          <Input defaultValue={nickname} onChange={onChangeNickname} />
+          <Input defaultValue={user?.nickname} onChange={onChangeNickname} />
 
           <Button type="submit" variant="contained" sx={{ marginLeft: '5px' }}>
             확인
@@ -127,6 +132,8 @@ const EditProfilePage = () => {
       </Box>
       <MainMenu />
     </>
+  ) : (
+    ''
   );
 };
 
