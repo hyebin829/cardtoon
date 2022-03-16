@@ -99,7 +99,6 @@ const Home = () => {
     homePosts,
     loader,
     removeCommentLoading,
-    user,
     nickname,
   ]);
 

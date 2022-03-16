@@ -28,17 +28,17 @@ const enhancer =
     : composeWithDevTools(applyMiddleware(sagaMiddleware, logger));
 
 const store = createStore(rootReducer, enhancer);
-const persistor = persistStore(store);
+// const persistor = persistStore(store);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <ThemeProvider theme={CustomMuiTheme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </PersistGate>
+    {/* <PersistGate loading={null} persistor={persistor}> */}
+    <ThemeProvider theme={CustomMuiTheme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+    {/* </PersistGate> */}
   </Provider>,
   document.querySelector('#root')
 );

@@ -4,15 +4,16 @@ import storageSession from 'redux-persist/lib/storage/session';
 import user from './user';
 import post from './post';
 
-const persistConfig = {
-  key: 'root',
-  storage: storageSession,
-  // whitelist: ['user'],
-};
+// const persistConfig = {
+//   key: 'root',
+//   storage: storageSession,
+//   // whitelist: ['userProfile'],
+//   // blacklist: ['hasMorePost', 'loadHomePostsLoading'],
+// };
 
 const rootReducer = combineReducers({
   user,
   post,
 });
 
-export default persistReducer(persistConfig, rootReducer);
+export default rootReducer;

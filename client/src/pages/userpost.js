@@ -36,7 +36,7 @@ const UserpostPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({
+    return dispatch({
       type: LOAD_USER_POST_REQUEST,
       data: params.id,
     });
@@ -49,8 +49,7 @@ const UserpostPage = () => {
   ]);
   console.log(userPost);
   const oneUserPost = userPost[0];
-
-  return (
+  return userPost.length !== 0 ? (
     <Box sx={{ mb: '65px' }}>
       <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
         <CardHeader
@@ -72,6 +71,8 @@ const UserpostPage = () => {
       </Card>
       <MainMenu />
     </Box>
+  ) : (
+    ''
   );
 };
 
