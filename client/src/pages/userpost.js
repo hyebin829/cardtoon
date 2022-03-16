@@ -19,12 +19,19 @@ import styled from 'styled-components';
 import HomePostContent from '../components/HomePostContent';
 import LikeButton from '../components/LikeButton';
 import CommentList from '../components/CommentList';
+import { Box } from '@mui/system';
 
 const UserpostPage = () => {
   const params = useParams();
   console.log(params);
   const id = params.id;
-  const { userPost } = useSelector(state => state.post);
+  const {
+    userPost,
+    removeCommentLoading,
+    addCommentLoading,
+    likePostLoading,
+    unLikePostLoading,
+  } = useSelector(state => state.post);
 
   const dispatch = useDispatch();
 
@@ -33,13 +40,19 @@ const UserpostPage = () => {
       type: LOAD_USER_POST_REQUEST,
       data: params.id,
     });
-  }, [id]);
+  }, [
+    id,
+    removeCommentLoading,
+    addCommentLoading,
+    likePostLoading,
+    unLikePostLoading,
+  ]);
   console.log(userPost);
   const oneUserPost = userPost[0];
 
   return (
-    <>
-      {/* <Card sx={{ height: '100%', margin: '20px 5px' }} variant="outlined">
+    <Box sx={{ mb: '65px' }}>
+      <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
         <CardHeader
           title={oneUserPost.User.nickname}
           avatar={
@@ -57,8 +70,8 @@ const UserpostPage = () => {
         <LikeButton post={oneUserPost} />
         <CommentList post={oneUserPost} />
       </Card>
-      <MainMenu /> */}
-    </>
+      <MainMenu />
+    </Box>
   );
 };
 

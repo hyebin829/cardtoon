@@ -16,6 +16,7 @@ const CommentMoreButton = ({ comment }) => {
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
+  console.log(comment);
 
   const handleOpenMyCommentMenu = event => {
     setAnchorElMyComment(event.currentTarget);
@@ -39,7 +40,7 @@ const CommentMoreButton = ({ comment }) => {
     }
     dispatch({
       type: REMOVE_COMMENT_REQUEST,
-      data: { commentId: comment.id, postId: comment.Post.id },
+      data: { commentId: comment.id, postId: comment.PostId },
     });
   }, []);
 

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import HomePostContent from '../components/HomePostContent';
-import CommentForm from '../components/CommentForm';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 
@@ -51,11 +50,6 @@ const Home = () => {
   const { homePosts, loadHomePostsLoading, hasMorePost, removeCommentLoading } =
     useSelector(state => state.post);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  // const [commentFormOpened, setCommentFormOpened] = useState(false);
-
-  // const onToggleComment = useCallback(() => {
-  //   setCommentFormOpened(prev => !prev);
-  // }, []);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -174,7 +168,7 @@ const Home = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ marginBottom: '65px' }}>
+      <Box sx={{ mb: '65px' }}>
         <MenuBar />
         {/* 포스트 */}
         {homePosts.length !== 0 ? (
