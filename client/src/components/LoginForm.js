@@ -69,8 +69,6 @@ const LoginForm = () => {
         type: LOG_IN_REQUEST,
         data: { email, password },
       });
-      console.log(email, password);
-      console.log('로그인버튼클릭');
     },
     [email, password]
   );
