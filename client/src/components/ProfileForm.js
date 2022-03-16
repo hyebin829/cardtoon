@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useParams } from 'react-router-dom';
 
 import { Avatar, Box, Stack, Divider } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+
+import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 
 const List = styled.li`
   list-style: none;
@@ -21,9 +23,22 @@ const Nickname = styled.div`
 
 const ProfileForm = () => {
   const { user } = useSelector(state => state.user);
-  const { homePosts } = useSelector(state => state.post);
+  const { myPosts } = useSelector(state => state.post);
+  const dispatch = useDispatch();
 
-  const myPosts = homePosts.filter(x => x.UserId === user.id);
+  const myId = user?.id;
+
+  console.log(myPosts);
+  console.log(typeof myId);
+
+  useEffect(() => {
+    if (myId) {
+      dispatch({
+        type: LOAD_MYPOSTS_REQUEST,
+        myId,
+      });
+    }
+  }, [myId]);
 
   return (
     <Box

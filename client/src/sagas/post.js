@@ -40,6 +40,9 @@ import {
   LOAD_USER_POST_REQUEST,
   LOAD_USER_POST_FAILURE,
   LOAD_USER_POST_SUCCESS,
+  LOAD_MYPOSTS_REQUEST,
+  LOAD_MYPOSTS_SUCCESS,
+  LOAD_MYPOSTS_FAILURE,
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
@@ -56,6 +59,25 @@ function* loadHomePosts(action) {
   } catch (error) {
     yield put({
       type: LOAD_HOMEPOSTS_FAILURE,
+    });
+    console.error(error);
+  }
+}
+
+function loadMyPostsAPI(myId) {
+  return axios.get(`/posts/myposts?myId=${myId}`);
+}
+
+function* loadMyPosts(action) {
+  try {
+    const result = yield call(loadMyPostsAPI, action.myId);
+    yield put({
+      type: LOAD_MYPOSTS_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_MYPOSTS_FAILURE,
     });
     console.error(error);
   }
@@ -247,6 +269,10 @@ function* watchLoadHomePosts() {
   yield takeLatest(LOAD_HOMEPOSTS_REQUEST, loadHomePosts);
 }
 
+function* watchLoadMyPosts() {
+  yield takeLatest(LOAD_MYPOSTS_REQUEST, loadMyPosts);
+}
+
 function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
 }
@@ -281,6 +307,7 @@ export default function* postSaga() {
   yield all([
     fork(watchAddHomePost),
     fork(watchLoadHomePosts),
+    fork(watchLoadMyPosts),
     fork(watchUploadImages),
     fork(watchAddComment),
     fork(watchRemovePost),

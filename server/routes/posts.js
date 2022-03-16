@@ -47,6 +47,39 @@ router.get('/homeposts', async (req, res, next) => {
   }
 });
 
+router.get('/myposts', async (req, res, next) => {
+  try {
+    const myposts = await Post.findAll({
+      where: { UserId: parseInt(req.query.myId, 10) },
+      order: [
+        ['createdAt', 'DESC'],
+        [Comment, 'createdAt', 'ASC'],
+      ],
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'nickname', 'profileimagesrc'],
+        },
+        { model: Image },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'nickname'],
+            },
+          ],
+        },
+        { model: User, as: 'Likers', attributes: ['id'] },
+      ],
+    });
+    res.status(200).json(myposts);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.get('/hotcardtoon', async (req, res, next) => {
   try {
     //like 테이블에서 일주일간의 postid 가져오기

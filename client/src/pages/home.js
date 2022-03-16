@@ -59,8 +59,6 @@ const Home = () => {
 
   const id = useSelector(state => state.user.user?.id);
 
-  console.log(homePosts);
-  console.log(id);
   useEffect(() => {
     if (logOutDone) {
       Navigate('/');

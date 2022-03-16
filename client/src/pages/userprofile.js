@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import MainMenu from '../components/MenuBar';
 import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
+import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 
 import styled from 'styled-components';
 import { Avatar, Box, Stack, Divider } from '@mui/material';
@@ -24,22 +25,27 @@ const Nickname = styled.div`
 const UserprofilePage = () => {
   const params = useParams();
   console.log(params);
-  const id = params.id;
+  const myId = params.id;
 
   const { userProfile } = useSelector(state => state.user);
-  const { homePosts } = useSelector(state => state.post);
-
-  const userPosts = homePosts.filter(x => x.UserId === +id);
-  console.log(userPosts);
-
+  const { myPosts } = useSelector(state => state.post);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (myId) {
+      dispatch({
+        type: LOAD_MYPOSTS_REQUEST,
+        myId,
+      });
+    }
+  }, [myId]);
 
   useEffect(() => {
     dispatch({
       type: LOAD_USER_PROFILE_REQUEST,
       data: params.id,
     });
-  }, [id]);
+  }, [myId]);
 
   return (
     <Box
@@ -91,7 +97,7 @@ const UserprofilePage = () => {
         </List>
       </Stack>
       <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
-        {userPosts.map(x => (
+        {myPosts.map(x => (
           <Link to={`/userpost/${x.id}`}>
             <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
               <img
