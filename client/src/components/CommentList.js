@@ -1,5 +1,5 @@
 import { List, ListItem, ListItemText } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 
 import { Divider, Button } from '@mui/material';
@@ -14,40 +14,45 @@ const CommentList = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
+  const { removeCommentLoading, addCommentLoading } = useSelector(
+    state => state.post
+  );
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev);
   }, []);
 
   return (
-    <>
-      <Button onClick={onToggleComment} sx={{ pr: 0, minWidth: '50px' }}>
-        <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
-      </Button>
-      {post.Comments.length}
-      {commentFormOpened ? (
-        <>
-          <CommentForm post={post} />
-          <List>
-            {post.Comments.map(comment => (
-              <ListItem
-                alignItems="flex-start"
-                key={comment.id}
-                sx={{ padding: '10px 20px' }}
-              >
-                <ListItemText
-                  primary={comment.User.nickname}
-                  secondary={comment.content}
-                />
-                <CommentMoreButton comment={comment} />
-              </ListItem>
-            ))}
-          </List>
-        </>
-      ) : (
-        ''
-      )}
-    </>
+    post.Comments && (
+      <>
+        <Button onClick={onToggleComment} sx={{ pr: 0, minWidth: '50px' }}>
+          <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
+        </Button>
+        {post?.Comments?.length}
+        {commentFormOpened ? (
+          <>
+            <CommentForm post={post} />
+            <List>
+              {post?.Comments?.map(comment => (
+                <ListItem
+                  alignItems="flex-start"
+                  key={comment.id}
+                  sx={{ padding: '10px 20px' }}
+                >
+                  <ListItemText
+                    primary={comment.User.nickname}
+                    secondary={comment.content}
+                  />
+                  <CommentMoreButton comment={comment} />
+                </ListItem>
+              ))}
+            </List>
+          </>
+        ) : (
+          ''
+        )}
+      </>
+    )
   );
 };
 export default CommentList;

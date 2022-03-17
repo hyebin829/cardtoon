@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import MainMenu from '../components/MenuBar';
 
 import { LOAD_USER_POST_REQUEST } from '../reducers/post';
@@ -24,6 +24,8 @@ import { Box } from '@mui/system';
 const UserpostPage = () => {
   const params = useParams();
   console.log(params);
+  const { homePosts } = useSelector(state => state.post);
+  console.log(homePosts);
   const id = params.id;
   const {
     userPost,
@@ -31,8 +33,11 @@ const UserpostPage = () => {
     addCommentLoading,
     likePostLoading,
     unLikePostLoading,
+    removePostLoading,
+    removePostDone,
   } = useSelector(state => state.post);
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,9 +51,16 @@ const UserpostPage = () => {
     addCommentLoading,
     likePostLoading,
     unLikePostLoading,
+    removePostLoading,
+    removePostDone,
   ]);
-  console.log(userPost);
+
+  useEffect(() => {
+    if (removePostLoading) navigate('/profile');
+  }, [removePostLoading]);
+
   const oneUserPost = userPost[0];
+
   return userPost.length !== 0 ? (
     <Box sx={{ mb: '65px' }}>
       <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">

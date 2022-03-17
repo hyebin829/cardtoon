@@ -10,6 +10,7 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import UpdateIcon from '@mui/icons-material/Update';
 import PersonIcon from '@mui/icons-material/Person';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
 const MainMenu = () => {
   return (
@@ -25,8 +26,8 @@ const MainMenu = () => {
     >
       <BottomNavigation showLabels>
         <BottomNavigationAction
-          label="최신카드툰"
-          icon={<UpdateIcon />}
+          label="홈"
+          icon={<HomeRoundedIcon />}
           component={Link}
           to="/"
         />

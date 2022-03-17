@@ -94,12 +94,25 @@ router.get('/hotcardtoon', async (req, res, next) => {
       where: {
         createdAt: { [Op.between]: [sevenDaysAgo, today] },
       },
-      include: [{ model: User, as: 'Likers', attributes: ['id'] }],
+      include: [
+        { model: User, as: 'Likers', attributes: ['id'] },
+        {
+          model: User,
+          attributes: ['id', 'nickname', 'profileimagesrc'],
+        },
+        { model: Image },
+        {
+          model: Comment,
+          include: [
+            {
+              model: User,
+              attributes: ['id', 'nickname'],
+            },
+          ],
+        },
+      ],
     });
     const hotPostLikers = hotPost.map(x => x.dataValues.Likers);
-
-    console.log(hotPostLikers);
-
     res.status(200).json(hotPost);
   } catch (error) {
     console.error(error);

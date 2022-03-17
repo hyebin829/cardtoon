@@ -189,7 +189,7 @@ const Home = () => {
                   title={
                     <Link
                       to={`/userprofile/${post.User.id}`}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: 'none', color: 'black' }}
                     >
                       {post.User.nickname}
                     </Link>

@@ -11,7 +11,7 @@ const FollowButton = ({ post }) => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
 
-  const Followed = user?.Followings.find(v => v.id === post.User.id);
+  const Followed = user?.Followings.find(v => v?.id === post.User.id);
 
   const onClickButton = useCallback(() => {
     if (Followed) {
@@ -27,7 +27,7 @@ const FollowButton = ({ post }) => {
     }
   }, [Followed]);
 
-  if (post.User.id === user.id) {
+  if (post.User.id === user?.id) {
     return null;
   }
   return (

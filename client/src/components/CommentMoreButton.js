@@ -16,7 +16,6 @@ const CommentMoreButton = ({ comment }) => {
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
-  console.log(comment);
 
   const handleOpenMyCommentMenu = event => {
     setAnchorElMyComment(event.currentTarget);

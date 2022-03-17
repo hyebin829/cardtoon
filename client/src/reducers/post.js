@@ -182,7 +182,8 @@ const reducer = (state = initialState, action) =>
         break;
       case ADD_COMMENT_SUCCESS:
         const post = draft.homePosts.find(v => v.id === action.data.PostId);
-        post.Comments.push(action.data);
+        console.log('reducer' + post);
+        post?.Comments.push(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
         console.log(action.data);
@@ -215,9 +216,11 @@ const reducer = (state = initialState, action) =>
         const CommentIdList = draft.homePosts.find(
           v => v.id === action.data.PostId
         );
-        CommentIdList.Comments = CommentIdList.Comments.filter(
-          v => v.id !== action.data.CommentId
-        );
+        if (CommentIdList) {
+          CommentIdList.Comments = CommentIdList.Comments.filter(
+            v => v.id !== action.data.CommentId
+          );
+        }
         break;
       case REMOVE_COMMENT_FAILURE:
         draft.removeCommentLoading = false;
@@ -232,7 +235,7 @@ const reducer = (state = initialState, action) =>
         draft.likePostLoading = false;
         draft.likePostDone = true;
         const post = draft.homePosts.find(v => v.id === action.data.PostId);
-        post.Likers.push({ id: action.data.UserId });
+        post?.Likers.push({ id: action.data.UserId });
         break;
       }
       case LIKE_POST_FAILURE:
@@ -246,7 +249,8 @@ const reducer = (state = initialState, action) =>
         break;
       case UNLIKE_POST_SUCCESS: {
         const post = draft.homePosts.find(v => v.id === action.data.PostId);
-        post.Likers = post.Likers.filter(v => v.id !== action.data.UserId);
+        if (post)
+          post.Likers = post?.Likers.filter(v => v.id !== action.data.UserId);
         draft.unLikePostLoading = false;
         draft.unLikePostDone = true;
         break;
