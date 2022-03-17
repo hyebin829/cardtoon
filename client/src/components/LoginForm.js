@@ -40,7 +40,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, logInDone, logInError } = useSelector(state => state.user);
+  const { logInDone, logInError } = useSelector(state => state.user);
 
   useEffect(() => {
     if (logInDone) {
