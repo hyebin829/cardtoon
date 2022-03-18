@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import TextField from '@mui/material/TextField';
 import { Button, Grid, Stack } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
+import CardtoonAppBar from './CardtoonAppBar';
 
 const Input = styled.input`
   display: none;
@@ -103,6 +104,7 @@ const HomePostForm = () => {
 
   return (
     <>
+      <CardtoonAppBar />
       <form onSubmit={onSubmitForm} encType="multipart/form-data">
         <TextField
           sx={{ padding: 2 }}

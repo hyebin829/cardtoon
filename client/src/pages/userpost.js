@@ -20,6 +20,7 @@ import HomePostContent from '../components/HomePostContent';
 import LikeButton from '../components/LikeButton';
 import CommentList from '../components/CommentList';
 import { Box } from '@mui/system';
+import CardtoonAppBar from '../components/CardtoonAppBar';
 
 const UserpostPage = () => {
   const params = useParams();
@@ -62,27 +63,30 @@ const UserpostPage = () => {
   const oneUserPost = userPost[0];
 
   return userPost.length !== 0 ? (
-    <Box sx={{ mb: '65px' }}>
-      <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
-        <CardHeader
-          title={oneUserPost.User.nickname}
-          avatar={
-            <Avatar
-              sx={{ bgcolor: 'red' }}
-              aria-label="profilepic"
-              src={`http://localhost:3065/${oneUserPost.User.profileimagesrc}`}
-            />
-          }
-        />
-        <CardContent>
-          <HomePostContent post={oneUserPost} />
-        </CardContent>
-        <Divider variant="middle" />
-        <LikeButton post={oneUserPost} />
-        <CommentList post={oneUserPost} />
-      </Card>
-      <MainMenu />
-    </Box>
+    <>
+      <CardtoonAppBar />
+      <Box sx={{ mb: '65px' }}>
+        <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
+          <CardHeader
+            title={oneUserPost.User.nickname}
+            avatar={
+              <Avatar
+                sx={{ bgcolor: 'red' }}
+                aria-label="profilepic"
+                src={`http://localhost:3065/${oneUserPost.User.profileimagesrc}`}
+              />
+            }
+          />
+          <CardContent>
+            <HomePostContent post={oneUserPost} />
+          </CardContent>
+          <Divider variant="middle" />
+          <LikeButton post={oneUserPost} />
+          <CommentList post={oneUserPost} />
+        </Card>
+        <MainMenu />
+      </Box>
+    </>
   ) : (
     ''
   );
