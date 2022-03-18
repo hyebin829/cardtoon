@@ -30,6 +30,8 @@ const SignUpTitle = styled.h2`
 
 const ErrorMessage = styled.div`
   color: #f23054;
+  font-size: 15px;
+  margin-bottom: 10px;
 `;
 
 const SignUpForm = () => {
@@ -48,27 +50,42 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [emailValueLengthError, setEmailValueLengthError] = useState(false);
+  const [nicknameValueLengthError, setNicknameValueLengthError] =
+    useState(false);
+  const [passwordValueLengthError, setPasswordValueLengthError] =
+    useState(false);
+  const [checkBlank, setCheckBlank] = useState(false);
 
-  const inputErrorMessage = useCallback(e => {
-    if (e.target.validity.valueMissing) {
-      e.target.setCustomValidity('필수 입력 칸 입니다.');
-    } else if (e.target.validity.tooShort) {
-      e.target.setCustomValidity('최소 6자리를 입력해주세요.');
-    } else e.target.setCustomValidity('');
-  }, []);
-
-  const onChangeEmail = useCallback(e => {
-    setEmail(e.target.value);
-  }, []);
+  const onChangeEmail = useCallback(
+    e => {
+      setEmail(e.target.value);
+      const regExp = /[^a-zA-Z0-9]/gi;
+      regExp.test(e.target.value) ? setEmailError(true) : setEmailError(false);
+      e.target.value.length < 6 || e.target.value.length > 15
+        ? setEmailValueLengthError(true)
+        : setEmailValueLengthError(false);
+    },
+    [email]
+  );
 
   const onChangeNickname = useCallback(e => {
     setNickname(e.target.value);
+    const regExp = /[ 　]/gi;
+    regExp.test(e.target.value) ? setCheckBlank(true) : setCheckBlank(false);
+    e.target.value.length < 3 || e.target.value.length > 15
+      ? setNicknameValueLengthError(true)
+      : setNicknameValueLengthError(false);
   }, []);
 
   const onChangePassword = useCallback(
     e => {
       setPassword(e.target.value);
       setPasswordError(e.target.value !== passwordCheck);
+      e.target.value.length > 15
+        ? setPasswordValueLengthError(true)
+        : setPasswordValueLengthError(false);
     },
     [passwordCheck]
   );
@@ -101,6 +118,7 @@ const SignUpForm = () => {
     },
     [email, password, nickname, passwordCheck]
   );
+
   useEffect(() => {
     if (signUpDone) {
       alert('가입되었습니다.');
@@ -114,27 +132,40 @@ const SignUpForm = () => {
           <SignUpTitle>회원가입</SignUpTitle>
           <SignUpFormWrap>
             <TextField
-              label="이메일"
+              label="아이디"
               name="user-email"
               value={email}
               onChange={onChangeEmail}
               required
-              onInvalid={inputErrorMessage}
-              type="email"
+              maxLength={15}
+              minLength={6}
               variant="outlined"
               sx={{ mb: 1.5 }}
             />
+            {emailError && <ErrorMessage>영문,숫자만 가능합니다.</ErrorMessage>}
+            {emailValueLengthError && (
+              <ErrorMessage>
+                6글자 이상 15글자 이하로 작성해주세요.
+              </ErrorMessage>
+            )}
             <TextField
               name="user-nickname"
               label="닉네임"
               value={nickname}
               onChange={onChangeNickname}
               required
-              onInvalid={inputErrorMessage}
-              maxLength={20}
+              maxLength={15}
               variant="outlined"
               sx={{ mb: 1.5 }}
             />
+            {nicknameValueLengthError && (
+              <ErrorMessage>
+                2글자 이상 15글자 이하로 작성해주세요.
+              </ErrorMessage>
+            )}
+            {checkBlank && (
+              <ErrorMessage>공백문자는 입력 불가능합니다.</ErrorMessage>
+            )}
             <TextField
               name="user-password"
               label="비밀번호"
@@ -143,10 +174,12 @@ const SignUpForm = () => {
               minLength={6}
               maxLength={15}
               required
-              onInvalid={inputErrorMessage}
               variant="outlined"
               sx={{ mb: 1.5 }}
             />
+            {passwordValueLengthError && (
+              <ErrorMessage>15글자 이하로 작성해주세요.</ErrorMessage>
+            )}
             <TextField
               name="check-user-password"
               label="비밀번호 확인"
@@ -154,7 +187,6 @@ const SignUpForm = () => {
               onChange={onChangePasswordCheck}
               minLength={6}
               maxLength={15}
-              onInvalid={inputErrorMessage}
               required
               variant="outlined"
               sx={{ mb: 1 }}
@@ -165,7 +197,7 @@ const SignUpForm = () => {
             {signUpError && <ErrorMessage>{signUpError}</ErrorMessage>}
           </SignUpFormWrap>
           <SignupButtonWrap sx={{ mt: 1 }}>
-            {passwordError ? (
+            {passwordError || emailError || emailValueLengthError ? (
               <Button disabled>회원가입</Button>
             ) : (
               <Button type="submit" variant="contained">
