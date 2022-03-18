@@ -48,7 +48,7 @@ const HomePostContent = ({ post }) => {
 
   return (
     <div>
-      <PostImage images={post.Images} />
+      <PostImage images={post.Images} key={post.Images.id} />
       <ContentWrap> {post.content}</ContentWrap>
       <Box sx={{ display: 'flex', flexDirection: 'row-reverse', mt: '10px' }}>
         {post.User.id === id ? (

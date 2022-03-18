@@ -55,46 +55,45 @@ const PopularCardtoonPage = () => {
   return (
     <Box sx={{ mb: '65px' }}>
       {hotPostsArr?.map((post, i) => (
-        <>
-          <Card
-            sx={{ height: '100%', margin: '20px 5px' }}
-            variant="outlined"
-            key={i}
-          >
-            <CardHeader
-              key={i}
-              title={
-                <Link
-                  to={`/userprofile/${post.User.id}`}
-                  style={{ textDecoration: 'none', color: 'black' }}
-                >
-                  {post.User.nickname}
-                </Link>
-              }
-              avatar={
-                <Link to={`/userprofile/${post.User.id}`}>
-                  {' '}
-                  <Avatar
-                    sx={{ bgcolor: red[500] }}
-                    aria-label="profilepic"
-                    src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                  />
-                </Link>
-              }
-              action={<FollowButton post={post} />}
+        <Card
+          sx={{ height: '100%', margin: '20px 5px' }}
+          variant="outlined"
+          key={i}
+        >
+          <CardHeader
+            title={
+              <Link
+                to={`/userprofile/${post.User.id}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+                key={i}
+              >
+                {post.User.nickname}
+              </Link>
+            }
+            avatar={
+              <Link to={`/userprofile/${post.User.id}`} key={i}>
+                {' '}
+                <Avatar
+                  sx={{ bgcolor: red[500] }}
+                  aria-label="profilepic"
+                  src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                  key={post.User.id}
+                />
+              </Link>
+            }
+            action={<FollowButton post={post} />}
+          />
+          <CardContent>
+            <HomePostContent
+              sx={{ whiteSpace: 'normal' }}
+              post={post}
+              key={post.id}
             />
-            <CardContent>
-              <HomePostContent
-                sx={{ whiteSpace: 'normal' }}
-                post={post}
-                key={post.id}
-              />
-            </CardContent>
-            <Divider variant="middle" />
-            <LikeButton post={post} key={`LikeButton${i}`} />
-            <CommentList post={post} key={`CommentList${i}`} />
-          </Card>
-        </>
+          </CardContent>
+          <Divider variant="middle" />
+          <LikeButton post={post} />
+          <CommentList post={post} />
+        </Card>
       ))}
       <MenuBar />
     </Box>

@@ -174,56 +174,55 @@ const Home = () => {
         </Toolbar>
       </AppBar>
       <Box sx={{ mb: '65px' }}>
-        <MenuBar />
         {/* 포스트 */}
         {homePosts.length !== 0 ? (
           homePosts.map((post, i) => (
-            <>
-              <Card
-                sx={{ height: '100%', margin: '20px 5px' }}
-                variant="outlined"
-                key={i}
-              >
-                <CardHeader
-                  key={i}
-                  title={
-                    <Link
-                      to={`/userprofile/${post.User.id}`}
-                      style={{ textDecoration: 'none', color: 'black' }}
-                    >
-                      {post.User.nickname}
-                    </Link>
-                  }
-                  avatar={
-                    <Link to={`/userprofile/${post.User.id}`}>
-                      {' '}
-                      <Avatar
-                        sx={{ bgcolor: red[500] }}
-                        aria-label="profilepic"
-                        src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                      />
-                    </Link>
-                  }
-                  action={<FollowButton post={post} />}
+            <Card
+              sx={{ height: '100%', margin: '20px 5px' }}
+              variant="outlined"
+              key={i}
+            >
+              <CardHeader
+                key={post.User.id}
+                title={
+                  <Link
+                    to={`/userprofile/${post.User.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                  >
+                    {post.User.nickname}
+                  </Link>
+                }
+                avatar={
+                  <Link to={`/userprofile/${post.User.id}`} key={post.User.id}>
+                    <Avatar
+                      sx={{ bgcolor: red[500] }}
+                      aria-label="profilepic"
+                      src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                    />
+                  </Link>
+                }
+                action={
+                  <FollowButton post={post} key={`FollowButton${post.id}`} />
+                }
+              />
+              <CardContent key={post.id}>
+                <HomePostContent
+                  sx={{ whiteSpace: 'normal' }}
+                  post={post}
+                  key={post.id}
                 />
-                <CardContent>
-                  <HomePostContent
-                    sx={{ whiteSpace: 'normal' }}
-                    post={post}
-                    key={post.id}
-                  />
-                </CardContent>
-                <Divider variant="middle" />
-                <LikeButton post={post} key={`LikeButton${i}`} />
-                <CommentList post={post} key={`CommentList${i}`} />
-              </Card>
-            </>
+              </CardContent>
+              <Divider variant="middle" />
+              <LikeButton post={post} key={`LikeButton${post.id}`} />
+              <CommentList post={post} key={`CommentList${post.id}`} />
+            </Card>
           ))
         ) : (
           <EmptyPost>작성된 게시글이 없습니다.</EmptyPost>
         )}
         <div ref={hasMorePost && !loadHomePostsLoading ? loader : undefined} />
       </Box>
+      <MenuBar />
     </>
   );
 };

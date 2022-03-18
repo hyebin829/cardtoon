@@ -66,7 +66,6 @@ const CommentMoreButton = ({ comment }) => {
           >
             <MenuItem onClick={handleCloseMyCommentMenu}>
               <Stack>
-                <Typography textAlign="left">수정</Typography>
                 <Typography textAlign="left" onClick={onRemoveComment}>
                   삭제
                 </Typography>
@@ -75,31 +74,7 @@ const CommentMoreButton = ({ comment }) => {
           </Menu>
         </Box>
       ) : (
-        <Box>
-          <MoreVertIcon onClick={handleOpenCommentMenu} />
-          <Menu
-            sx={{ mt: '25px' }}
-            id="menu-appbar"
-            anchorEl={anchorElComment}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={Boolean(anchorElComment)}
-            onClose={handleCloseCommentMenu}
-          >
-            <MenuItem onClick={handleCloseCommentMenu}>
-              <Stack>
-                <Typography textAlign="left">신고</Typography>
-              </Stack>
-            </MenuItem>
-          </Menu>
-        </Box>
+        <></>
       )}
     </>
   );
