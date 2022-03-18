@@ -40,12 +40,30 @@ const App = () => {
         <Routes>
           <Route path="/" element={user ? <Home /> : <LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/popularcardtoon" element={<PopularCardtoonPage />} />
-          <Route path="/uploadpost" element={<UploadPost />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/editprofile" element={<EditProfilePage />} />
-          <Route path="/userprofile/:id" element={<UserprofilePage />} />
-          <Route path="/userpost/:id" element={<UserpostPage />} />
+          <Route
+            path="/popularcardtoon"
+            element={user ? <PopularCardtoonPage /> : <LoginPage />}
+          />
+          <Route
+            path="/uploadpost"
+            element={user ? <UploadPost /> : <LoginPage />}
+          />
+          <Route
+            path="/profile"
+            element={user ? <ProfilePage /> : <LoginPage />}
+          />
+          <Route
+            path="/editprofile"
+            element={user ? <EditProfilePage /> : <LoginPage />}
+          />
+          <Route
+            path="/userprofile/:id"
+            element={user ? <UserprofilePage /> : <LoginPage />}
+          />
+          <Route
+            path="/userpost/:id"
+            element={user ? <UserpostPage /> : <LoginPage />}
+          />
         </Routes>
       </Router>
     </>
