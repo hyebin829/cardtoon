@@ -4,6 +4,7 @@ import React from 'react';
 import { Link, Navigate, Router } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
+import Alert from '@mui/material/Alert';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -27,6 +28,12 @@ const Title = styled.div`
   font-weight: 600;
 `;
 
+const ErrorMessage = styled.div`
+  color: #f23054;
+  font-size: 15px;
+  margin: 5px;
+`;
+
 const LoginFormButton = styled(Button)({
   background: '#F29BAB',
 });
@@ -48,11 +55,7 @@ const LoginForm = () => {
     }
   }, [logInDone]);
 
-  useEffect(() => {
-    if (logInError) {
-      alert(logInError);
-    }
-  }, [logInError]);
+  useEffect(() => {}, [logInError]);
 
   const onChangeEmail = useCallback(e => {
     setEmail(e.target.value);
@@ -94,6 +97,7 @@ const LoginForm = () => {
           onChange={onChangePassword}
           required
         />
+        {logInError && <ErrorMessage>{logInError}</ErrorMessage>}
         <LoginFormButton
           type="submit"
           disableElevation
