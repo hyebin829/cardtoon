@@ -29,13 +29,7 @@ import {
   Stack,
 } from '@mui/material';
 import LikeButton from '../components/LikeButton';
-
-const LogoutButton = styled.button`
-  border: none;
-  background: none;
-  padding: 0;
-  font-size: 15px;
-`;
+import CardtoonAppBar from '../components/CardtoonAppBar';
 
 const EmptyPost = styled.div`
   font-size: 25px;
@@ -55,7 +49,6 @@ const Home = () => {
     userPost,
     nickname,
   } = useSelector(state => state.post);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const id = useSelector(state => state.user.user?.id);
 
@@ -100,79 +93,9 @@ const Home = () => {
     nickname,
   ]);
 
-  const onLogout = useCallback(() => {
-    try {
-      dispatch({
-        type: LOG_OUT_REQUEST,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-  const handleOpenUserMenu = event => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
   return (
     <>
-      <AppBar position="static" elevation={0}>
-        <Toolbar>
-          <Typography variant="h6">CARDTOON</Typography>
-          <Box sx={{ position: 'absolute', right: 15 }}>
-            <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
-              {user?.profileimagesrc === null ? (
-                <AccountCircleIcon sx={{ width: 40, height: 40 }} />
-              ) : (
-                <Avatar
-                  src={`http://localhost:3065/${user?.profileimagesrc}`}
-                  sx={{ width: 40, height: 40 }}
-                />
-              )}
-            </IconButton>
-            <Menu
-              sx={{ mt: '40px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Stack>
-                  <Typography textAlign="left">
-                    <Link
-                      to="/profile"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'black',
-                        fontSize: 15,
-                      }}
-                    >
-                      프로필
-                    </Link>
-                  </Typography>
-                  <Typography textAlign="left">
-                    <LogoutButton onClick={onLogout}>로그아웃</LogoutButton>
-                  </Typography>
-                </Stack>{' '}
-              </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <CardtoonAppBar />
       <Box sx={{ mb: '65px' }}>
         {/* 포스트 */}
         {homePosts.length !== 0 ? (
