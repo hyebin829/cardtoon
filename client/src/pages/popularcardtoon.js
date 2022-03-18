@@ -18,6 +18,7 @@ import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 import LikeButton from '../components/LikeButton';
+import CardtoonAppBar from '../components/CardtoonAppBar';
 
 const PopularCardtoonPage = () => {
   const { hotPosts } = useSelector(state => state.post);
@@ -53,50 +54,53 @@ const PopularCardtoonPage = () => {
   ]);
 
   return (
-    <Box sx={{ mb: '65px' }}>
-      {hotPostsArr?.map((post, i) => (
-        <Card
-          sx={{ height: '100%', margin: '20px 5px' }}
-          variant="outlined"
-          key={i}
-        >
-          <CardHeader
-            title={
-              <Link
-                to={`/userprofile/${post.User.id}`}
-                style={{ textDecoration: 'none', color: 'black' }}
-                key={i}
-              >
-                {post.User.nickname}
-              </Link>
-            }
-            avatar={
-              <Link to={`/userprofile/${post.User.id}`} key={i}>
-                {' '}
-                <Avatar
-                  sx={{ bgcolor: red[500] }}
-                  aria-label="profilepic"
-                  src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                  key={post.User.id}
-                />
-              </Link>
-            }
-            action={<FollowButton post={post} />}
-          />
-          <CardContent>
-            <HomePostContent
-              sx={{ whiteSpace: 'normal' }}
-              post={post}
-              key={post.id}
+    <>
+      <CardtoonAppBar />
+      <Box sx={{ mb: '65px' }}>
+        {hotPostsArr?.map((post, i) => (
+          <Card
+            sx={{ height: '100%', margin: '20px 5px' }}
+            variant="outlined"
+            key={i}
+          >
+            <CardHeader
+              title={
+                <Link
+                  to={`/userprofile/${post.User.id}`}
+                  style={{ textDecoration: 'none', color: 'black' }}
+                  key={i}
+                >
+                  {post.User.nickname}
+                </Link>
+              }
+              avatar={
+                <Link to={`/userprofile/${post.User.id}`} key={i}>
+                  {' '}
+                  <Avatar
+                    sx={{ bgcolor: red[500] }}
+                    aria-label="profilepic"
+                    src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                    key={post.User.id}
+                  />
+                </Link>
+              }
+              action={<FollowButton post={post} />}
             />
-          </CardContent>
-          <Divider variant="middle" />
-          <LikeButton post={post} />
-          <CommentList post={post} />
-        </Card>
-      ))}
-      <MenuBar />
-    </Box>
+            <CardContent>
+              <HomePostContent
+                sx={{ whiteSpace: 'normal' }}
+                post={post}
+                key={post.id}
+              />
+            </CardContent>
+            <Divider variant="middle" />
+            <LikeButton post={post} />
+            <CommentList post={post} />
+          </Card>
+        ))}
+        <MenuBar />
+      </Box>
+    </>
   );
 };
 
