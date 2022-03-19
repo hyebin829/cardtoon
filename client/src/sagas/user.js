@@ -38,6 +38,9 @@ import {
   LOAD_USER_PROFILE_REQUEST,
   LOAD_USER_PROFILE_SUCCESS,
   LOAD_USER_PROFILE_FAILURE,
+  LOAD_FAVORITES_REQUEST,
+  LOAD_FAVORITES_SUCCESS,
+  LOAD_FAVORITES_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -219,6 +222,26 @@ function* unFollow(action) {
   }
 }
 
+function loadFavoritesAPI(userId) {
+  return axios.get(`/user/favorites?userId=${userId}`);
+}
+
+function* loadFavorites(action) {
+  try {
+    const result = yield call(loadFavoritesAPI, action.userId);
+    yield put({
+      type: LOAD_FAVORITES_SUCCESS,
+      data: result.data,
+    });
+  } catch (error) {
+    console.log(error);
+    yield put({
+      type: LOAD_FAVORITES_FAILURE,
+    });
+    console.error(error);
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -255,6 +278,10 @@ function* watchUnFollow() {
   yield takeLatest(UNFOLLOW_REQUEST, unFollow);
 }
 
+function* watchLoadFavorites() {
+  yield takeLatest(LOAD_FAVORITES_REQUEST, loadFavorites);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -266,5 +293,6 @@ export default function* userSaga() {
     fork(watchFollow),
     fork(watchUnFollow),
     fork(watchLoadUserProfile),
+    fork(watchLoadFavorites),
   ]);
 }

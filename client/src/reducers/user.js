@@ -2,6 +2,7 @@ import produce from 'immer';
 
 export const initialState = {
   user: null,
+  userFavorites: null,
   userProfile: null,
   profileImagePath: [],
   logInLoading: false,
@@ -31,6 +32,9 @@ export const initialState = {
   loadUserProfileLoading: false,
   loadUserProfileDone: false,
   loadUserProfileError: null,
+  loadFavoritesLoading: false,
+  loadFavoritesDone: false,
+  loadFavoritesError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -68,6 +72,10 @@ export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 export const LOAD_USER_PROFILE_REQUEST = 'LOAD_USER_PROFILE_REQUEST';
 export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS';
 export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE';
+
+export const LOAD_FAVORITES_REQUEST = 'LOAD_FAVORITES_REQUEST';
+export const LOAD_FAVORITES_SUCCESS = 'LOAD_FAVORITES_SUCCESS';
+export const LOAD_FAVORITES_FAILURE = 'LOAD_FAVORITES_FAILURE';
 
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
@@ -220,6 +228,20 @@ const reducer = (state = initialState, action) =>
       case UNFOLLOW_FAILURE:
         draft.unFollowLoading = false;
         draft.unFollowError = action.error;
+        break;
+      case LOAD_FAVORITES_REQUEST:
+        draft.loadFavoritesLoading = true;
+        draft.loadFavoritesError = null;
+        draft.loadFavoritesDone = false;
+        break;
+      case LOAD_FAVORITES_SUCCESS:
+        draft.userFavorites = action.data;
+        draft.loadFavoritesLoading = false;
+        draft.loadFavoritesDone = true;
+        break;
+      case LOAD_FAVORITES_FAILURE:
+        draft.loadFavoritesLoading = false;
+        draft.loadFavoritesError = action.error;
         break;
       default:
         break;

@@ -14,6 +14,7 @@ import {
   Box,
 } from '@mui/material';
 import { LOG_OUT_REQUEST } from '../reducers/user';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const LogoutButton = styled.button`
   border: none;
@@ -26,6 +27,7 @@ const CardtoonAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user, logOutDone } = useSelector(state => state.user);
   const id = useSelector(state => state.user.user?.id);
+
   useEffect(() => {
     if (logOutDone) {
       Navigate('/');

@@ -8,9 +8,9 @@ import CreateIcon from '@mui/icons-material/Create';
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import UpdateIcon from '@mui/icons-material/Update';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
 const MainMenu = () => {
   return (
@@ -32,13 +32,13 @@ const MainMenu = () => {
           to="/"
         />
         <BottomNavigationAction
-          label="인기카드툰"
+          label="인기툰"
           icon={<LocalFireDepartmentIcon />}
           component={Link}
           to="/popularcardtoon"
         />
         <BottomNavigationAction
-          label="게시글작성"
+          label="글쓰기"
           icon={<CreateIcon />}
           component={Link}
           to="/uploadpost"
@@ -48,6 +48,12 @@ const MainMenu = () => {
           icon={<PersonIcon />}
           component={Link}
           to="/profile"
+        />
+        <BottomNavigationAction
+          label="즐겨찾기"
+          icon={<StarRoundedIcon />}
+          component={Link}
+          to="/favorites"
         />
       </BottomNavigation>
     </Paper>

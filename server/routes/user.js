@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-
+const { QueryTypes } = require('sequelize');
 const multer = require('multer');
 const path = require('path');
 
@@ -71,9 +71,28 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/favorites', async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.query.userId },
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    const favorites = await user.getFollowings({
+      attributes: {
+        exclude: ['password'],
+      },
+    });
+    res.status(200).json(favorites);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.get('/:id', async (req, res, next) => {
   try {
-    console.log(req);
     const userProfileWithoutPassword = await User.findOne({
       where: { id: req.params.id },
       attributes: {

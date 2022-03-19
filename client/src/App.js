@@ -15,6 +15,7 @@ import UserpostPage from './pages/userpost';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LOAD_USER_INFO_REQUEST } from './reducers/user';
+import FavoritesPage from './pages/favorites';
 
 const App = () => {
   const {
@@ -63,6 +64,10 @@ const App = () => {
           <Route
             path="/userpost/:id"
             element={user ? <UserpostPage /> : <LoginPage />}
+          />
+          <Route
+            path="/favorites"
+            element={user ? <FavoritesPage /> : <LoginPage />}
           />
         </Routes>
       </Router>

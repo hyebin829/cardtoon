@@ -40,13 +40,12 @@ const EmptyPost = styled.div`
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { user, logOutDone, logInDone } = useSelector(state => state.user);
+  const { logOutDone, logInDone } = useSelector(state => state.user);
   const {
     homePosts,
     loadHomePostsLoading,
     hasMorePost,
     removeCommentLoading,
-    userPost,
     nickname,
   } = useSelector(state => state.post);
 
@@ -91,6 +90,7 @@ const Home = () => {
     loader,
     removeCommentLoading,
     nickname,
+    logInDone,
   ]);
 
   return (
