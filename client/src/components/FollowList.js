@@ -25,11 +25,8 @@ import { UNFOLLOW_REQUEST } from '../reducers/user';
 import ListButton from './ListButton';
 
 const FollowList = () => {
-  const { user, userFavorites, unFollowLoading } = useSelector(
-    state => state.user
-  );
+  const { user, userFavorites } = useSelector(state => state.user);
 
-  console.log(userFavorites);
   const userId = user?.id;
   const dispatch = useDispatch();
 
@@ -42,16 +39,11 @@ const FollowList = () => {
     }
   }, [userId, user]);
 
-  if (userFavorites) {
-    const favoritelist = [...userFavorites];
-    console.log(favoritelist);
-  }
-
   return (
     <Box>
       {userFavorites
         ? userFavorites.map(x => (
-            <List sx={{ width: '100%' }}>
+            <List sx={{ width: '100%' }} key={x.id}>
               <ListItem secondaryAction={<ListButton userid={x.id} />}>
                 {x.profileimagesrc ? (
                   <Link

@@ -8,26 +8,14 @@ import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 
-import { LOG_OUT_REQUEST } from '../reducers/user';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import { Box } from '@mui/system';
 import { Card, CardHeader, CardContent, Button, Divider } from '@mui/material';
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
 import { red } from '@mui/material/colors';
 
-import {
-  Toolbar,
-  IconButton,
-  AppBar,
-  Avatar,
-  Menu,
-  MenuItem,
-  Typography,
-  Stack,
-} from '@mui/material';
+import { Avatar } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 
@@ -58,6 +46,12 @@ const Home = () => {
   }, [logOutDone]);
 
   const loader = useRef(null);
+
+  useEffect(() => {
+    dispatch({
+      type: LOAD_HOMEPOSTS_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     const options = {
