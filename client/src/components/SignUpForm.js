@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Button, Box, TextField } from '@mui/material';
+import { Button, Box, TextField, Stack } from '@mui/material';
 
 import { SIGN_UP_REQUEST } from '../reducers/user';
 
@@ -131,70 +131,74 @@ const SignUpForm = () => {
         <SignUpWrap>
           <SignUpTitle>회원가입</SignUpTitle>
           <SignUpFormWrap>
-            <TextField
-              label="아이디"
-              name="user-email"
-              value={email}
-              onChange={onChangeEmail}
-              required
-              maxLength={15}
-              minLength={6}
-              variant="outlined"
-              sx={{ mb: 1.5 }}
-            />
-            {emailError && <ErrorMessage>영문,숫자만 가능합니다.</ErrorMessage>}
-            {emailValueLengthError && (
-              <ErrorMessage>
-                6글자 이상 15글자 이하로 작성해주세요.
-              </ErrorMessage>
-            )}
-            <TextField
-              name="user-nickname"
-              label="닉네임"
-              value={nickname}
-              onChange={onChangeNickname}
-              required
-              maxLength={15}
-              variant="outlined"
-              sx={{ mb: 1.5 }}
-            />
-            {nicknameValueLengthError && (
-              <ErrorMessage>
-                2글자 이상 15글자 이하로 작성해주세요.
-              </ErrorMessage>
-            )}
-            {checkBlank && (
-              <ErrorMessage>공백문자는 입력 불가능합니다.</ErrorMessage>
-            )}
-            <TextField
-              name="user-password"
-              label="비밀번호"
-              value={password}
-              onChange={onChangePassword}
-              minLength={6}
-              maxLength={15}
-              required
-              variant="outlined"
-              sx={{ mb: 1.5 }}
-            />
-            {passwordValueLengthError && (
-              <ErrorMessage>15글자 이하로 작성해주세요.</ErrorMessage>
-            )}
-            <TextField
-              name="check-user-password"
-              label="비밀번호 확인"
-              value={passwordCheck}
-              onChange={onChangePasswordCheck}
-              minLength={6}
-              maxLength={15}
-              required
-              variant="outlined"
-              sx={{ mb: 1 }}
-            />
-            {passwordError && (
-              <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
-            )}
-            {signUpError && <ErrorMessage>{signUpError}</ErrorMessage>}
+            <Stack>
+              <TextField
+                label="아이디"
+                name="user-email"
+                value={email}
+                onChange={onChangeEmail}
+                required
+                maxLength={15}
+                minLength={6}
+                variant="outlined"
+                sx={{ mb: 1.5, display: 'inline-block' }}
+              />
+              {emailError && (
+                <ErrorMessage>영문,숫자만 가능합니다.</ErrorMessage>
+              )}
+              {emailValueLengthError && (
+                <ErrorMessage>
+                  6글자 이상 15글자 이하로 작성해주세요.
+                </ErrorMessage>
+              )}
+              <TextField
+                name="user-nickname"
+                label="닉네임"
+                value={nickname}
+                onChange={onChangeNickname}
+                required
+                maxLength={15}
+                variant="outlined"
+                sx={{ mb: 1.5 }}
+              />
+              {nicknameValueLengthError && (
+                <ErrorMessage>
+                  2글자 이상 15글자 이하로 작성해주세요.
+                </ErrorMessage>
+              )}
+              {checkBlank && (
+                <ErrorMessage>공백문자는 입력 불가능합니다.</ErrorMessage>
+              )}
+              <TextField
+                name="user-password"
+                label="비밀번호"
+                value={password}
+                onChange={onChangePassword}
+                minLength={6}
+                maxLength={15}
+                required
+                variant="outlined"
+                sx={{ mb: 1.5 }}
+              />
+              {passwordValueLengthError && (
+                <ErrorMessage>15글자 이하로 작성해주세요.</ErrorMessage>
+              )}
+              <TextField
+                name="check-user-password"
+                label="비밀번호 확인"
+                value={passwordCheck}
+                onChange={onChangePasswordCheck}
+                minLength={6}
+                maxLength={15}
+                required
+                variant="outlined"
+                sx={{ mb: 1 }}
+              />
+              {passwordError && (
+                <ErrorMessage>비밀번호가 일치하지 않습니다</ErrorMessage>
+              )}
+              {signUpError && <ErrorMessage>{signUpError}</ErrorMessage>}
+            </Stack>
           </SignUpFormWrap>
           <SignupButtonWrap sx={{ mt: 1 }}>
             {passwordError || emailError || emailValueLengthError ? (

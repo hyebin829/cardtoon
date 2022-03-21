@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import {
   Toolbar,
   IconButton,
@@ -16,13 +16,12 @@ import {
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const LogoutButton = styled.button`
-  border: none;
-  background: none;
-  padding: 0;
-  font-size: 15px;
-`;
-
+const LogoutButton = styled('button')({
+  border: 'none',
+  background: 'none',
+  padding: 0,
+  fontSize: '15px',
+});
 const CardtoonAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const { user, logOutDone } = useSelector(state => state.user);

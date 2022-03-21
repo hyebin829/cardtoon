@@ -9,32 +9,56 @@ import {
 
 import MainMenu from '../components/MenuBar';
 
-import styled from 'styled-components';
+import { styled } from '@mui/system';
 
 import TextField from '@mui/material/TextField';
-import { Button, Grid, Stack } from '@mui/material';
+import { Button, Grid, Box } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import CardtoonAppBar from './CardtoonAppBar';
 
-const Input = styled.input`
-  display: none;
-`;
+const Input = styled('input')({
+  display: 'none',
+});
 
-const ImagePreview = styled.img`
-  width: 170px;
-  height: 170px;
-  margin: 0 auto;
-  display: block;
-`;
+const ImagePreview = styled('img')(({ theme }) => ({
+  display: 'flex',
+  width: '170px',
+  height: '170px',
+  justifyContent: 'center',
+  display: 'block',
+  [theme.breakpoints.up('tabletM')]: {
+    width: '250px',
+    height: '250px',
+  },
+}));
 
-const ButtonWrap = styled.div`
-  text-align: right;
-  padding: 0 16px;
-`;
+const ButtonWrap = styled('div')({
+  textAlign: 'right',
+  padding: '0 16px',
+  marginBottom: '10px',
+});
 
-const DeleteButtonWrap = styled.div`
-  text-align: right;
-`;
+const DeleteButtonWrap = styled('div')({
+  textAlign: 'right',
+});
+
+const PreviewText = styled('div')({
+  textAlign: 'left',
+  color: '#40101d',
+  fontSize: '15px',
+});
+
+const CardBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('tabletM')]: {
+    padding: '10px 70px',
+  },
+  [theme.breakpoints.up('tabletL')]: {
+    padding: '20px 120px',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    padding: '30px 330px',
+  },
+}));
 
 const HomePostForm = () => {
   const [text, setText] = useState('');
@@ -105,60 +129,66 @@ const HomePostForm = () => {
   return (
     <>
       <CardtoonAppBar />
-      <form onSubmit={onSubmitForm} encType="multipart/form-data">
-        <TextField
-          sx={{ padding: 2 }}
-          rows={4}
-          multiline
-          value={text}
-          onChange={onChangeText}
-          fullWidth
-          inputProps={{
-            maxLength: 1500,
-          }}
-          placeholder="내용을 입력해주세요"
-        />
-        <ButtonWrap>
-          <label>
-            <Input
-              accept="image/*"
-              id="contained-button-file"
-              multiple
-              type="file"
-              name="image"
-              onChange={onChangeImages}
-            />
+      <CardBox>
+        <form onSubmit={onSubmitForm} encType="multipart/form-data">
+          <TextField
+            sx={{ padding: 2 }}
+            rows={5}
+            multiline
+            value={text}
+            onChange={onChangeText}
+            fullWidth
+            inputProps={{
+              maxLength: 1500,
+            }}
+            placeholder="내용을 입력해주세요"
+          />
+          <ButtonWrap>
+            <label>
+              <Input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+                name="image"
+                onChange={onChangeImages}
+              />
 
-            <Button variant="outlined" component="span" sx={{ mr: 1 }}>
-              사진
-            </Button>
-          </label>
-          {imageLengthError ? (
-            <>
-              <Button disabled>게시글 업로드</Button>
-              <div>10장 이하의 사진만 업로드 가능합니다.</div>
-            </>
-          ) : (
-            <Button type="submit" variant="contained">
-              게시글 업로드
-            </Button>
-          )}
-        </ButtonWrap>
-        <Grid container rowSpacing={1} columns={16} sx={{ padding: 2 }}>
-          {imagePaths.map((v, i) => (
-            <Grid xs={8}>
-              <div key={v}>
-                <ImagePreview src={`http://localhost:3065/${v}`} alt={v} />
+              <Button variant="outlined" component="span" sx={{ mr: 1 }}>
+                사진
+              </Button>
+            </label>
+            {imageLengthError ? (
+              <>
+                <Button disabled>게시글 업로드</Button>
+                <div>10장 이하의 사진만 업로드 가능합니다.</div>
+              </>
+            ) : (
+              <Button type="submit" variant="contained">
+                게시글 업로드
+              </Button>
+            )}{' '}
+            <PreviewText>사진 미리보기</PreviewText>
+          </ButtonWrap>
+
+          <Grid container rowSpacing={1} justifyContent="center">
+            {imagePaths.map((v, i) => (
+              <Grid key={i}>
+                <ImagePreview
+                  src={`http://localhost:3065/${v}`}
+                  alt={v}
+                  sx={{ margin: '16px 16px 0 16px' }}
+                />
                 <DeleteButtonWrap>
                   <Button onClick={onRemoveImage(i)} sx={{ padding: 0 }}>
                     <ClearIcon />
                   </Button>
                 </DeleteButtonWrap>
-              </div>
-            </Grid>
-          ))}
-        </Grid>
-      </form>
+              </Grid>
+            ))}
+          </Grid>
+        </form>
+      </CardBox>
       <MainMenu />
     </>
   );

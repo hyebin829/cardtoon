@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import { Link, useParams } from 'react-router-dom';
 
 import { Avatar, Box, Stack, Divider } from '@mui/material';
@@ -11,15 +11,24 @@ import ImageListItem from '@mui/material/ImageListItem';
 
 import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 
-const List = styled.li`
-  list-style: none;
-`;
+const List = styled('li')({
+  listStyle: 'none',
+});
 
-const Nickname = styled.div`
-  margin-top: 10px;
-  font-size: 25px;
-  font-weight: 400;
-`;
+const Nickname = styled('div')({
+  marginTop: '10px',
+  fontSize: '25px',
+  fontWeight: '400',
+});
+
+const ProfileImageList = styled(ImageList)(({ theme }) => ({
+  [theme.breakpoints.up('tabletL')]: {
+    width: '80%',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    width: '60%',
+  },
+}));
 
 const ProfileForm = () => {
   const { user } = useSelector(state => state.user);
@@ -27,9 +36,6 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
 
   const myId = user?.id;
-
-  console.log(myPosts);
-  console.log(typeof myId);
 
   useEffect(() => {
     if (myId) {
@@ -88,7 +94,7 @@ const ProfileForm = () => {
           </Stack>
         </List>
       </Stack>
-      <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
+      <ProfileImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
         {myPosts.map(x => (
           <Link to={`/userpost/${x.id}`} key={x.Images[0].id}>
             <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
@@ -101,7 +107,7 @@ const ProfileForm = () => {
             </ImageListItem>
           </Link>
         ))}
-      </ImageList>
+      </ProfileImageList>
     </Box>
   );
 };

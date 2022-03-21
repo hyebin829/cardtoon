@@ -6,22 +6,31 @@ import MainMenu from '../components/MenuBar';
 import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
 import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import { Avatar, Box, Stack, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 
-const List = styled.li`
-  list-style: none;
-`;
+const List = styled('li')({
+  listStyle: 'none',
+});
 
-const Nickname = styled.div`
-  margin-top: 10px;
-  font-size: 25px;
-  font-weight: 400;
-`;
+const Nickname = styled('div')({
+  marginTop: '10px',
+  fontSize: '25px',
+  fontWeight: '400',
+});
+
+const ProfileImageList = styled(ImageList)(({ theme }) => ({
+  [theme.breakpoints.up('tabletL')]: {
+    width: '80%',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    width: '60%',
+  },
+}));
 
 const UserprofilePage = () => {
   const params = useParams();
@@ -99,7 +108,7 @@ const UserprofilePage = () => {
             </Stack>
           </List>
         </Stack>
-        <ImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
+        <ProfileImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
           {myPosts.map(x => (
             <Link to={`/userpost/${x.id}`}>
               <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
@@ -111,7 +120,7 @@ const UserprofilePage = () => {
               </ImageListItem>
             </Link>
           ))}
-        </ImageList>
+        </ProfileImageList>
         <MainMenu />
       </Box>
     </>

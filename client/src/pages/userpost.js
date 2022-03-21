@@ -1,26 +1,31 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MainMenu from '../components/MenuBar';
+import { styled } from '@mui/material/styles';
 
 import { LOAD_USER_POST_REQUEST } from '../reducers/post';
-import Carousel from 'react-material-ui-carousel';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Button,
-  Divider,
-  Avatar,
-} from '@mui/material';
 
-import styled from 'styled-components';
+import { Card, CardHeader, CardContent, Divider, Avatar } from '@mui/material';
+import { Box } from '@mui/system';
+
 import HomePostContent from '../components/HomePostContent';
 import LikeButton from '../components/LikeButton';
 import CommentList from '../components/CommentList';
-import { Box } from '@mui/system';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+
+const CardBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('tabletM')]: {
+    padding: '10px 70px',
+  },
+  [theme.breakpoints.up('tabletL')]: {
+    padding: '20px 120px',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    padding: '30px 400px',
+  },
+}));
 
 const UserpostPage = () => {
   const params = useParams();
@@ -65,7 +70,7 @@ const UserpostPage = () => {
   return userPost.length !== 0 ? (
     <>
       <CardtoonAppBar />
-      <Box sx={{ mb: '65px' }}>
+      <CardBox sx={{ mb: '65px' }}>
         <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
           <CardHeader
             title={oneUserPost.User.nickname}
@@ -85,7 +90,7 @@ const UserpostPage = () => {
           <CommentList post={oneUserPost} />
         </Card>
         <MainMenu />
-      </Box>
+      </CardBox>
     </>
   ) : (
     ''
