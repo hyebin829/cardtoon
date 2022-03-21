@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostImage from './HomePostImage';
 import { useState, useCallback } from 'react';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
@@ -12,10 +12,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { REMOVE_POST_REQUEST } from '../reducers/post';
 
-const ContentWrap = styled.div`
-  word-break: break-word;
-  padding-top: 15px;
-`;
+const ContentWrap = styled('div')({
+  wordBreak: 'break-word',
+  paddingTop: '15px',
+});
 
 const HomePostContent = ({ post }) => {
   const dispatch = useDispatch();

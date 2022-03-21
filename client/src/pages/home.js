@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 
 import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
@@ -19,12 +19,24 @@ import { Avatar } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 
-const EmptyPost = styled.div`
-  font-size: 25px;
-  margin: 80% 0;
-  text-align: center;
-  color: #40101d;
-`;
+const EmptyPost = styled('div')({
+  fontSize: '25px',
+  margin: '80% 0',
+  textAlign: 'center',
+  color: '#40101d',
+});
+
+const CardBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('tabletM')]: {
+    padding: '10px 70px',
+  },
+  [theme.breakpoints.up('tabletL')]: {
+    padding: '20px 120px',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    padding: '30px 330px',
+  },
+}));
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -90,7 +102,7 @@ const Home = () => {
   return (
     <>
       <CardtoonAppBar />
-      <Box sx={{ mb: '65px' }}>
+      <CardBox sx={{ mb: '65px' }}>
         {/* 포스트 */}
         {homePosts.length !== 0 ? (
           homePosts.map((post, i) => (
@@ -138,7 +150,7 @@ const Home = () => {
           <EmptyPost>작성된 게시글이 없습니다.</EmptyPost>
         )}
         <div ref={hasMorePost && !loadHomePostsLoading ? loader : undefined} />
-      </Box>
+      </CardBox>
       <MenuBar />
     </>
   );

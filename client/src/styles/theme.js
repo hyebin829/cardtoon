@@ -1,16 +1,14 @@
 import { createTheme } from '@mui/material';
 
 const CustomMuiTheme = createTheme({
-  // breakpoints: {
-  //   keys: ['xs', 'sm', 'md', 'lg', 'xl'],
-  //   values: {
-  //     xs: 0,
-  //     sm: 600,
-  //     md: 960,
-  //     lg: 1280,
-  //     xl: 1920,
-  //   },
-  // },
+  breakpoints: {
+    values: {
+      mobile: 450,
+      tabletM: 768,
+      tabletL: 1024,
+      desktop: 1460,
+    },
+  },
   palette: {
     primary: {
       main: '#F23054',

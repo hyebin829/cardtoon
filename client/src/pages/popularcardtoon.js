@@ -4,6 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LOAD_HOTPOSTS_REQUEST } from '../reducers/post';
+import { styled } from '@mui/material/styles';
 import {
   Card,
   CardHeader,
@@ -19,6 +20,18 @@ import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+
+const CardBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up('tabletM')]: {
+    padding: '10px 70px',
+  },
+  [theme.breakpoints.up('tabletL')]: {
+    padding: '20px 120px',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    padding: '30px 400px',
+  },
+}));
 
 const PopularCardtoonPage = () => {
   const { hotPosts } = useSelector(state => state.post);
@@ -37,9 +50,9 @@ const PopularCardtoonPage = () => {
   );
 
   const rank = [...new Set(hasLikers.map(x => x.Likers.length))];
-  const fifthPlace = rank[4];
-  const hotPostsArr = descLikers.filter(x => x.Likers.length >= fifthPlace);
+  const fifthPlace = rank[4] ? rank[4] : rank[rank.length - 1];
 
+  const hotPostsArr = descLikers.filter(x => x.Likers.length >= fifthPlace);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
@@ -56,50 +69,52 @@ const PopularCardtoonPage = () => {
   return (
     <>
       <CardtoonAppBar />
-      <Box sx={{ mb: '65px' }}>
-        {hotPostsArr?.map((post, i) => (
-          <Card
-            sx={{ height: '100%', margin: '20px 5px' }}
-            variant="outlined"
-            key={i}
-          >
-            <CardHeader
-              title={
-                <Link
-                  to={`/userprofile/${post.User.id}`}
-                  style={{ textDecoration: 'none', color: 'black' }}
-                  key={i}
-                >
-                  {post.User.nickname}
-                </Link>
-              }
-              avatar={
-                <Link to={`/userprofile/${post.User.id}`} key={i}>
-                  {' '}
-                  <Avatar
-                    sx={{ bgcolor: red[500] }}
-                    aria-label="profilepic"
-                    src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                    key={post.User.id}
+      <CardBox sx={{ mb: '65px' }}>
+        {hotPosts.length !== 0
+          ? hotPostsArr?.map((post, i) => (
+              <Card
+                sx={{ height: '100%', margin: '20px 5px' }}
+                variant="outlined"
+                key={i}
+              >
+                <CardHeader
+                  title={
+                    <Link
+                      to={`/userprofile/${post.User.id}`}
+                      style={{ textDecoration: 'none', color: 'black' }}
+                      key={i}
+                    >
+                      {post.User.nickname}
+                    </Link>
+                  }
+                  avatar={
+                    <Link to={`/userprofile/${post.User.id}`} key={i}>
+                      {' '}
+                      <Avatar
+                        sx={{ bgcolor: red[500] }}
+                        aria-label="profilepic"
+                        src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                        key={post.User.id}
+                      />
+                    </Link>
+                  }
+                  action={<FollowButton post={post} />}
+                />
+                <CardContent>
+                  <HomePostContent
+                    sx={{ whiteSpace: 'normal' }}
+                    post={post}
+                    key={post.id}
                   />
-                </Link>
-              }
-              action={<FollowButton post={post} />}
-            />
-            <CardContent>
-              <HomePostContent
-                sx={{ whiteSpace: 'normal' }}
-                post={post}
-                key={post.id}
-              />
-            </CardContent>
-            <Divider variant="middle" />
-            <LikeButton post={post} />
-            <CommentList post={post} />
-          </Card>
-        ))}
+                </CardContent>
+                <Divider variant="middle" />
+                <LikeButton post={post} />
+                <CommentList post={post} />
+              </Card>
+            ))
+          : '없음'}
         <MenuBar />
-      </Box>
+      </CardBox>
     </>
   );
 };
