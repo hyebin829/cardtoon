@@ -7,8 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import CommentMoreButton from './CommentMoreButton';
 import CommentForm from './CommentForm';
+import { styled } from '@mui/material/styles';
 
 import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
+
+const CommentCount = styled('div')({
+  display: 'inline-block',
+  verticalAlign: 'middle',
+});
 
 const CommentList = ({ post }) => {
   const dispatch = useDispatch();
@@ -25,10 +31,13 @@ const CommentList = ({ post }) => {
   return (
     post.Comments && (
       <>
-        <Button onClick={onToggleComment} sx={{ pr: 0, minWidth: '50px' }}>
+        <Button
+          onClick={onToggleComment}
+          sx={{ minWidth: '50px', marginTop: '10px', paddingBottom: '11px' }}
+        >
           <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
         </Button>
-        {post?.Comments?.length}
+        <CommentCount>{post?.Comments?.length}</CommentCount>
         {commentFormOpened ? (
           <>
             <CommentForm post={post} />

@@ -6,7 +6,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import { Button } from '@mui/material';
-import useHistory from 'react-router-dom';
+import { styled } from '@mui/material/styles';
+
+const LikeCount = styled('div')({
+  display: 'inline-block',
+  verticalAlign: 'middle',
+});
 
 const LikeButton = ({ post }) => {
   const id = useSelector(state => state.user.user?.id);
@@ -52,7 +57,7 @@ const LikeButton = ({ post }) => {
           <ThumbUpOutlinedIcon onClick={onLike} sx={{ width: '100%' }} />
         )}
       </Button>
-      {post.Likers.length}
+      <LikeCount>{post.Likers.length}</LikeCount>
     </>
   );
 };

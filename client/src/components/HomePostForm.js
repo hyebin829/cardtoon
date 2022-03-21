@@ -143,6 +143,7 @@ const HomePostForm = () => {
             }}
             placeholder="내용을 입력해주세요"
           />
+
           <ButtonWrap>
             <label>
               <Input
@@ -153,7 +154,6 @@ const HomePostForm = () => {
                 name="image"
                 onChange={onChangeImages}
               />
-
               <Button variant="outlined" component="span" sx={{ mr: 1 }}>
                 사진
               </Button>
@@ -167,8 +167,8 @@ const HomePostForm = () => {
               <Button type="submit" variant="contained">
                 게시글 업로드
               </Button>
-            )}{' '}
-            <PreviewText>사진 미리보기</PreviewText>
+            )}
+            <PreviewText>▼ 사진 미리보기</PreviewText>
           </ButtonWrap>
 
           <Grid container rowSpacing={1} justifyContent="center">

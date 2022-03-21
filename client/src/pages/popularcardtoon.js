@@ -20,6 +20,7 @@ import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+import Footer from '../components/Footer';
 
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {
@@ -51,8 +52,8 @@ const PopularCardtoonPage = () => {
 
   const rank = [...new Set(hasLikers.map(x => x.Likers.length))];
   const fifthPlace = rank[4] ? rank[4] : rank[rank.length - 1];
-
   const hotPostsArr = descLikers.filter(x => x.Likers.length >= fifthPlace);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({
@@ -100,6 +101,7 @@ const PopularCardtoonPage = () => {
                   }
                   action={<FollowButton post={post} />}
                 />
+                <Divider variant="middle" />
                 <CardContent>
                   <HomePostContent
                     sx={{ whiteSpace: 'normal' }}
@@ -112,9 +114,10 @@ const PopularCardtoonPage = () => {
                 <CommentList post={post} />
               </Card>
             ))
-          : '없음'}
+          : ''}
         <MenuBar />
       </CardBox>
+      <Footer />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom';
 import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
 import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
@@ -18,6 +19,7 @@ import { red } from '@mui/material/colors';
 import { Avatar } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+import Footer from '../components/Footer';
 
 const EmptyPost = styled('div')({
   fontSize: '25px',
@@ -34,7 +36,7 @@ const CardBox = styled(Box)(({ theme }) => ({
     padding: '20px 120px',
   },
   [theme.breakpoints.up('desktop')]: {
-    padding: '30px 330px',
+    padding: '30px 400px',
   },
 }));
 
@@ -48,8 +50,6 @@ const Home = () => {
     removeCommentLoading,
     nickname,
   } = useSelector(state => state.post);
-
-  const id = useSelector(state => state.user.user?.id);
 
   useEffect(() => {
     if (logOutDone) {
@@ -134,6 +134,7 @@ const Home = () => {
                   <FollowButton post={post} key={`FollowButton${post.id}`} />
                 }
               />
+              <Divider variant="middle" />
               <CardContent key={post.id}>
                 <HomePostContent
                   sx={{ whiteSpace: 'normal' }}
@@ -152,6 +153,7 @@ const Home = () => {
         <div ref={hasMorePost && !loadHomePostsLoading ? loader : undefined} />
       </CardBox>
       <MenuBar />
+      <Footer />
     </>
   );
 };

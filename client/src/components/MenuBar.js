@@ -12,8 +12,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
+
 const MainMenu = () => {
-  return (
+  const theme = useTheme();
+  const tabletLdown = useMediaQuery(theme.breakpoints.down('tabletL'));
+
+  return tabletLdown ? (
     <Paper
       sx={{
         position: 'fixed',
@@ -57,6 +63,8 @@ const MainMenu = () => {
         />
       </BottomNavigation>
     </Paper>
+  ) : (
+    ''
   );
 };
 

@@ -82,6 +82,7 @@ const UserpostPage = () => {
               />
             }
           />
+          <Divider variant="middle" />
           <CardContent>
             <HomePostContent post={oneUserPost} />
           </CardContent>
