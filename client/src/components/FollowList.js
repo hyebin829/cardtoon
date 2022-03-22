@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
@@ -26,11 +28,18 @@ const CardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
+const EmptyUser = styled('div')({
+  fontSize: '20px',
+  textAlign: 'center',
+  margin: '20px 0',
+});
+
 const FollowList = () => {
   const { user, userFavorites } = useSelector(state => state.user);
 
   const userId = user?.id;
   const dispatch = useDispatch();
+  console.log(userFavorites);
 
   useEffect(() => {
     if (userId) {
@@ -43,9 +52,10 @@ const FollowList = () => {
 
   return (
     <CardBox>
-      {userFavorites
-        ? userFavorites.map(x => (
-            <List sx={{ width: '100%' }} key={x.id}>
+      {userFavorites ? (
+        userFavorites.map(x => (
+          <Box key={x.id}>
+            <List sx={{ width: '100%' }}>
               <ListItem secondaryAction={<FollowDeleteButton userid={x.id} />}>
                 {x.profileimagesrc ? (
                   <Link
@@ -76,8 +86,18 @@ const FollowList = () => {
                 </Link>
               </ListItem>
             </List>
-          ))
-        : ''}
+          </Box>
+        ))
+      ) : (
+        <Box sx={{ textAlign: 'center', margin: '50%' }}>
+          <CircularProgress />
+        </Box>
+      )}
+      {userFavorites && userFavorites.length === 0 ? (
+        <EmptyUser>즐겨찾는 유저가 없습니다.</EmptyUser>
+      ) : (
+        ''
+      )}
     </CardBox>
   );
 };

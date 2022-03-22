@@ -12,10 +12,19 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { REMOVE_POST_REQUEST } from '../reducers/post';
 
-const ContentWrap = styled('div')({
+const ContentWrap = styled('div')(({ theme }) => ({
   wordBreak: 'break-word',
-  paddingTop: '15px',
-});
+  padding: '15px 10px 0 10px',
+  [theme.breakpoints.up('tabletM')]: {
+    padding: '15px 20px 0 20px',
+  },
+  [theme.breakpoints.up('tabletL')]: {
+    padding: '15px 20px 0 20px',
+  },
+  [theme.breakpoints.up('desktop')]: {
+    padding: '15px 20px 0 20px',
+  },
+}));
 
 const HomePostContent = ({ post }) => {
   const dispatch = useDispatch();

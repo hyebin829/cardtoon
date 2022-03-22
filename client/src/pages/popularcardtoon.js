@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LOAD_HOTPOSTS_REQUEST } from '../reducers/post';
 import { styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
   Card,
   CardHeader,
@@ -14,7 +16,12 @@ import {
   Avatar,
   Box,
 } from '@mui/material';
+
+import CircularProgress from '@mui/material/CircularProgress';
+import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
+import Fab from '@mui/material/Fab';
 import { red } from '@mui/material/colors';
+
 import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
@@ -36,6 +43,9 @@ const CardBox = styled(Box)(({ theme }) => ({
 
 const PopularCardtoonPage = () => {
   const { hotPosts } = useSelector(state => state.post);
+
+  const theme = useTheme();
+  const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
 
   const hasLikers = hotPosts.filter(x => x.Likers.length > 0);
   const {
@@ -67,56 +77,82 @@ const PopularCardtoonPage = () => {
     removePostLoading,
   ]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <>
       <CardtoonAppBar />
       <CardBox sx={{ mb: '65px' }}>
-        {hotPosts.length !== 0
-          ? hotPostsArr?.map((post, i) => (
-              <Card
-                sx={{ height: '100%', margin: '20px 5px' }}
-                variant="outlined"
-                key={i}
-              >
-                <CardHeader
-                  title={
-                    <Link
-                      to={`/userprofile/${post.User.id}`}
-                      style={{ textDecoration: 'none', color: 'black' }}
-                      key={i}
-                    >
-                      {post.User.nickname}
-                    </Link>
-                  }
-                  avatar={
-                    <Link to={`/userprofile/${post.User.id}`} key={i}>
-                      {' '}
-                      <Avatar
-                        sx={{ bgcolor: red[500] }}
-                        aria-label="profilepic"
-                        src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                        key={post.User.id}
-                      />
-                    </Link>
-                  }
-                  action={<FollowButton post={post} />}
+        {hotPosts.length !== 0 ? (
+          hotPostsArr?.map((post, i) => (
+            <Card
+              sx={{ height: '100%', margin: '20px 5px' }}
+              variant="outlined"
+              key={i}
+            >
+              <CardHeader
+                title={
+                  <Link
+                    to={`/userprofile/${post.User.id}`}
+                    style={{ textDecoration: 'none', color: 'black' }}
+                    key={i}
+                  >
+                    {post.User.nickname}
+                  </Link>
+                }
+                avatar={
+                  <Link to={`/userprofile/${post.User.id}`} key={i}>
+                    {' '}
+                    <Avatar
+                      sx={{ bgcolor: red[500] }}
+                      aria-label="profilepic"
+                      src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                      key={post.User.id}
+                    />
+                  </Link>
+                }
+                action={<FollowButton post={post} />}
+              />
+              <Divider variant="middle" />
+              <CardContent>
+                <HomePostContent
+                  sx={{ whiteSpace: 'normal' }}
+                  post={post}
+                  key={post.id}
                 />
-                <Divider variant="middle" />
-                <CardContent>
-                  <HomePostContent
-                    sx={{ whiteSpace: 'normal' }}
-                    post={post}
-                    key={post.id}
-                  />
-                </CardContent>
-                <Divider variant="middle" />
-                <LikeButton post={post} />
-                <CommentList post={post} />
-              </Card>
-            ))
-          : ''}
+              </CardContent>
+              <Divider variant="middle" />
+              <LikeButton post={post} />
+              <CommentList post={post} />
+            </Card>
+          ))
+        ) : (
+          <Box sx={{ textAlign: 'center', margin: '50%' }}>
+            <CircularProgress />
+          </Box>
+        )}
         <MenuBar />
       </CardBox>
+      {tabletLUp ? (
+        <Fab
+          color="secondary"
+          sx={{ position: 'fixed', zIndex: '100', bottom: 20, right: 20 }}
+          onClick={scrollToTop}
+          size="medium"
+        >
+          <KeyboardArrowUpRoundedIcon
+            fontSize="large"
+            sx={{ color: 'white' }}
+          />
+        </Fab>
+      ) : (
+        ''
+      )}
       <Footer />
     </>
   );

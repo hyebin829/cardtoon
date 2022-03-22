@@ -17,24 +17,6 @@ import {
 } from '@mui/material';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import MenuIcon from '@mui/icons-material/Menu';
-
-import Drawer from '@mui/material/Drawer';
-
-import List from '@mui/material/List';
-
-import Divider from '@mui/material/Divider';
-
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import PersonIcon from '@mui/icons-material/Person';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import CreateIcon from '@mui/icons-material/Create';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const LogoutButton = styled('button')({
   border: 'none',
@@ -134,7 +116,7 @@ const CardtoonAppBar = () => {
               )}
             </IconButton>
             <Menu
-              sx={{ mt: '40px' }}
+              sx={{ mt: '40px', zIndex: '10' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
