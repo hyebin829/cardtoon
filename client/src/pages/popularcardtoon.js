@@ -91,7 +91,7 @@ const PopularCardtoonPage = () => {
         {hotPosts.length !== 0 ? (
           hotPostsArr?.map((post, i) => (
             <Card
-              sx={{ height: '100%', margin: '20px 5px' }}
+              sx={{ height: '100%', margin: '20px 5px', padding: '10px' }}
               variant="outlined"
               key={i}
             >

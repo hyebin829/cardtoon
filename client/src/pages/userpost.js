@@ -71,7 +71,10 @@ const UserpostPage = () => {
     <>
       <CardtoonAppBar />
       <CardBox sx={{ mb: '65px' }}>
-        <Card sx={{ height: '100%', margin: '5px' }} variant="outlined">
+        <Card
+          sx={{ height: '100%', margin: '5px', padding: '10px' }}
+          variant="outlined"
+        >
           <CardHeader
             title={oneUserPost.User.nickname}
             avatar={
