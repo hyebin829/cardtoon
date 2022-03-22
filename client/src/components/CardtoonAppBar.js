@@ -112,6 +112,7 @@ const CardtoonAppBar = () => {
                 <Avatar
                   src={`http://localhost:3065/${user?.profileimagesrc}`}
                   sx={{ width: 40, height: 40 }}
+                  draggable={false}
                 />
               )}
             </IconButton>

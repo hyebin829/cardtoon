@@ -116,6 +116,7 @@ const UserprofilePage = () => {
                   src={`http://localhost:3065/${x.Images[0].src}`}
                   alt={x.content}
                   loading="lazy"
+                  draggable={false}
                 />
               </ImageListItem>
             </Link>

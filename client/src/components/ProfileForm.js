@@ -103,6 +103,7 @@ const ProfileForm = () => {
                 // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                 alt={x.content}
                 loading="lazy"
+                draggable={false}
               />
             </ImageListItem>
           </Link>

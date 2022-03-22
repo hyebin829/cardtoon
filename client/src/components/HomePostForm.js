@@ -48,6 +48,12 @@ const PreviewText = styled('div')({
   fontSize: '15px',
 });
 
+const Text = styled('div')({
+  fontSize: '15px',
+  marginTop: '5px',
+  color: 'grey',
+});
+
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {
     padding: '10px 70px',
@@ -168,6 +174,7 @@ const HomePostForm = () => {
                 게시글 업로드
               </Button>
             )}
+            <Text>1:1 비율의 사진을 권장합니다.</Text>
             <PreviewText>▼ 사진 미리보기</PreviewText>
           </ButtonWrap>
 
@@ -178,6 +185,7 @@ const HomePostForm = () => {
                   src={`http://localhost:3065/${v}`}
                   alt={v}
                   sx={{ margin: '16px 16px 0 16px' }}
+                  draggable={false}
                 />
                 <DeleteButtonWrap>
                   <Button onClick={onRemoveImage(i)} sx={{ padding: 0 }}>

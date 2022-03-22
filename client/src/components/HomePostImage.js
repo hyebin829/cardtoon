@@ -36,9 +36,14 @@ const PostImage = ({ images }) => {
       prev={() => {}}
       cycleNavigation={false}
       animation="slide"
+      swipe={true}
     >
       {images.map((v, i) => (
-        <CardImg src={`http://localhost:3065/${images[i].src}`} key={i} />
+        <CardImg
+          src={`http://localhost:3065/${images[i].src}`}
+          key={i}
+          draggable={false}
+        />
       ))}
     </CardCarousel>
   );
