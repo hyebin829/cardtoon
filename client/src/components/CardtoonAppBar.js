@@ -48,7 +48,6 @@ const CardtoonAppBar = () => {
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
 
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [open, setOpen] = useState(false);
   const { user, logOutDone } = useSelector(state => state.user);
   const id = useSelector(state => state.user.user?.id);
 
@@ -77,33 +76,52 @@ const CardtoonAppBar = () => {
     }
   });
 
-  const DrawerHeader = styled('div')({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: '55px',
-  });
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   return (
     <Box>
       <AppBar position="static" elevation={0}>
         <Toolbar>
+          <Link
+            to="/"
+            style={{
+              textDecoration: 'none',
+              color: 'white',
+              marginRight: '10px',
+            }}
+          >
+            <Typography variant="h6">CARDTOON</Typography>
+          </Link>
           {tabletLUp ? (
-            <IconButton>
-              <MenuIcon onClick={handleDrawerOpen} sx={{ color: 'white' }} />
-            </IconButton>
+            <Box>
+              <Stack direction="row" spacing={2}>
+                <Link
+                  to="/popularcardtoon"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  인기툰
+                </Link>
+                <Link
+                  to="/uploadpost"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  글쓰기
+                </Link>
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  프로필
+                </Link>
+                <Link
+                  to="/favorites"
+                  style={{ textDecoration: 'none', color: 'white' }}
+                >
+                  즐겨찾기
+                </Link>
+              </Stack>
+            </Box>
           ) : (
             ''
           )}
-          <Typography variant="h6">CARDTOON</Typography>
           <Box sx={{ position: 'absolute', right: 15 }}>
             <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
               {user?.profileimagesrc === null ? (
@@ -148,87 +166,12 @@ const CardtoonAppBar = () => {
                   <Typography textAlign="left">
                     <LogoutButton onClick={onLogout}>로그아웃</LogoutButton>
                   </Typography>
-                </Stack>{' '}
+                </Stack>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </AppBar>
-      <Drawer
-        sx={{
-          width: '200px',
-          fontSize: '15px',
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: '200px',
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <Link to="/" style={{ textDecoration: 'none', color: 'black' }}>
-            <ListItem>
-              <ListItemIcon>
-                <HomeRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary={'홈'} />
-            </ListItem>
-          </Link>
-          <Link
-            to="/popularcardtoon"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <LocalFireDepartmentIcon />
-              </ListItemIcon>
-              <ListItemText primary={'인기툰'} />
-            </ListItem>
-          </Link>
-          <Link
-            to="/uploadpost"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <CreateIcon />
-              </ListItemIcon>
-              <ListItemText primary={'글쓰기'} />
-            </ListItem>
-          </Link>
-          <Link
-            to="/profile"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary={'프로필'} />
-            </ListItem>
-          </Link>
-          <Link
-            to="/favorites"
-            style={{ textDecoration: 'none', color: 'black' }}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <StarRoundedIcon />
-              </ListItemIcon>
-              <ListItemText primary={'즐겨찾기'} />
-            </ListItem>
-          </Link>
-        </List>
-      </Drawer>
     </Box>
   );
 };

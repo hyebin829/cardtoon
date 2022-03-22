@@ -12,6 +12,7 @@ import {
 } from '../reducers/user';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CardtoonAppBar from '../components/CardtoonAppBar';
 
 const ImageInput = styled.input`
   display: none;
@@ -80,6 +81,7 @@ const EditProfilePage = () => {
 
   return user !== null ? (
     <>
+      <CardtoonAppBar />
       <Box
         sx={{
           display: 'flex',
