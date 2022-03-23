@@ -1,16 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
-import { Link, Navigate, Router } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
-import Alert from '@mui/material/Alert';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-
-import { color } from '../styles/theme';
 
 const LoginFormWrap = styled.div`
   height: 100vh;
@@ -19,13 +16,6 @@ const LoginFormWrap = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-`;
-
-const Title = styled.div`
-  display: block;
-  font-size: 30px;
-  color: #f23054;
-  font-weight: 600;
 `;
 
 const ErrorMessage = styled.div`
@@ -40,6 +30,11 @@ const LoginFormButton = styled(Button)({
 
 const InputText = styled(TextField)({
   color: '#F2F2F2',
+});
+
+const KakaoImage = styled('img')({
+  width: '80px',
+  marginTop: '10px',
 });
 
 const LoginForm = () => {
@@ -115,6 +110,9 @@ const LoginForm = () => {
             회원가입하기
           </LoginFormButton>
         </Link>
+        <a href="http://localhost:3065/user/kakao/login/callback">
+          <KakaoImage src="/img/kakao_login_medium.png" />
+        </a>
       </LoginFormWrap>
     </Box>
   );

@@ -161,6 +161,33 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
   })(req, res, next);
 });
 
+router.get('/kakao/login', passport.authenticate('kakao'));
+
+router.get(
+  '/kakao/login/callback',
+  passport.authenticate('kakao', {
+    failureMessage: true,
+    successRedirect: 'http://localhost:8080/',
+    failureRedirect: 'http://localhost:8080/',
+  })
+);
+// await console.log(res);
+// const userInfoWithoutPassword = await User.findOne({
+//   where: { email: req.user.email },
+//   attributes: {
+//     exclude: ['password'],
+//   },
+//   include: [
+//     {
+//       model: Post,
+//     },
+//     { model: User, as: 'Followings' },
+//     { model: User, as: 'Followers' },
+//   ],
+// });
+// console.log(userInfoWithoutPassword);
+// return res.status(200).json(userInfoWithoutPassword);
+
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
     const exUser = await User.findOne({
