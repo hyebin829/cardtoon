@@ -79,7 +79,7 @@ const LoginForm = () => {
   return (
     <Box component="form" onSubmit={onSubmitForm}>
       <LoginFormWrap>
-        <Title>CARDTOON</Title>
+        <img src="img/cardtoon.png" />
         <InputText
           label="email"
           type="text"

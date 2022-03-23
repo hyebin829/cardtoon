@@ -27,6 +27,11 @@ const IconMenuButton = styled(Button)({
   justifyContent: 'flex-start',
 });
 
+const TitleImage = styled('img')({
+  width: '180px',
+  height: '100%',
+});
+
 const CardtoonAppBar = () => {
   const theme = useTheme();
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
@@ -72,7 +77,7 @@ const CardtoonAppBar = () => {
               marginRight: '10px',
             }}
           >
-            <Typography variant="h6">CARDTOON</Typography>
+            <TitleImage src="/img/cardtoontitle.png" alt="cardtoon title" />
           </Link>
           {tabletLUp ? (
             <Box>
