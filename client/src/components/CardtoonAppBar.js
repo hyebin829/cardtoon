@@ -14,15 +14,17 @@ import {
   Typography,
   Stack,
   Box,
+  Button,
 } from '@mui/material';
 import { LOG_OUT_REQUEST } from '../reducers/user';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const LogoutButton = styled('button')({
+const IconMenuButton = styled(Button)({
   border: 'none',
   background: 'none',
   padding: 0,
   fontSize: '15px',
+  justifyContent: 'flex-start',
 });
 
 const CardtoonAppBar = () => {
@@ -112,12 +114,11 @@ const CardtoonAppBar = () => {
                 <Avatar
                   src={`http://localhost:3065/${user?.profileimagesrc}`}
                   sx={{ width: 40, height: 40 }}
-                  draggable={false}
                 />
               )}
             </IconButton>
             <Menu
-              sx={{ mt: '40px', zIndex: '10' }}
+              sx={{ mt: '38px', zIndex: '10' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -132,25 +133,22 @@ const CardtoonAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={handleCloseUserMenu}>
-                <Stack>
-                  <Typography textAlign="left">
-                    <Link
-                      to="/profile"
-                      style={{
-                        textDecoration: 'none',
-                        color: 'black',
-                        fontSize: 15,
-                      }}
-                    >
-                      프로필
-                    </Link>
-                  </Typography>
-                  <Typography textAlign="left">
-                    <LogoutButton onClick={onLogout}>로그아웃</LogoutButton>
-                  </Typography>
-                </Stack>
-              </MenuItem>
+              <Stack>
+                <MenuItem>
+                  <Link
+                    to="/profile"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    <IconMenuButton>프로필</IconMenuButton>
+                  </Link>
+                </MenuItem>
+                <MenuItem>
+                  <IconMenuButton onClick={onLogout}>로그아웃</IconMenuButton>
+                </MenuItem>
+              </Stack>
             </Menu>
           </Box>
         </Toolbar>

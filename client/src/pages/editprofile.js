@@ -18,7 +18,7 @@ const ImageInput = styled.input`
   display: none;
 `;
 
-const ChangeErrorMessage = styled.div`
+const ErrorMessage = styled.div`
   color: #f23054;
   margin-top: 2px;
 `;
@@ -33,10 +33,18 @@ const EditProfilePage = () => {
   } = useSelector(state => state.user);
 
   const [nickname, setNickname] = useState(user?.nickname);
+  const [nicknameValueLengthError, setNicknameValueLengthError] =
+    useState(false);
+  const [checkBlank, setCheckBlank] = useState(false);
 
   const dispatch = useDispatch();
   const onChangeNickname = useCallback(e => {
     setNickname(e.target.value);
+    const regExp = /[ 　]/gi;
+    regExp.test(e.target.value) ? setCheckBlank(true) : setCheckBlank(false);
+    e.target.value.length < 3 || e.target.value.length > 15
+      ? setNicknameValueLengthError(true)
+      : setNicknameValueLengthError(false);
   }, []);
 
   useEffect(() => {
@@ -123,13 +131,27 @@ const EditProfilePage = () => {
         >
           <Input defaultValue={user?.nickname} onChange={onChangeNickname} />
 
-          <Button type="submit" variant="contained" sx={{ marginLeft: '5px' }}>
-            확인
-          </Button>
+          {nicknameValueLengthError || checkBlank ? (
+            <Button disabled>확인</Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ marginLeft: '5px' }}
+            >
+              확인
+            </Button>
+          )}
           {changeNicknameError && (
-            <ChangeErrorMessage>이미 사용중인 닉네임입니다.</ChangeErrorMessage>
+            <ErrorMessage>이미 사용중인 닉네임입니다.</ErrorMessage>
           )}
           {changeNicknameDone && <div>변경되었습니다</div>}
+          {nicknameValueLengthError && (
+            <ErrorMessage>2글자 이상 15글자 이하로 작성해주세요.</ErrorMessage>
+          )}
+          {checkBlank && (
+            <ErrorMessage>공백문자는 입력 불가능합니다.</ErrorMessage>
+          )}
         </Box>
       </Box>
       <MainMenu />

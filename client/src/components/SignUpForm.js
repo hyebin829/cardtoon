@@ -201,7 +201,11 @@ const SignUpForm = () => {
             </Stack>
           </SignUpFormWrap>
           <SignupButtonWrap sx={{ mt: 1 }}>
-            {passwordError || emailError || emailValueLengthError ? (
+            {passwordError ||
+            emailError ||
+            emailValueLengthError ||
+            nicknameValueLengthError ||
+            checkBlank ? (
               <Button disabled>회원가입</Button>
             ) : (
               <Button type="submit" variant="contained">
