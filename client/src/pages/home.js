@@ -49,7 +49,7 @@ const CardBox = styled(Box)(({ theme }) => ({
     padding: '20px 120px',
   },
   [theme.breakpoints.up('desktop')]: {
-    padding: '30px 400px',
+    padding: '30px 300px',
   },
 }));
 

@@ -2,6 +2,8 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const CardCarousel = styled(Carousel)({
   width: '100%',
@@ -11,8 +13,8 @@ const CardCarousel = styled(Carousel)({
 
 const CardImg = styled('img')(({ theme }) => ({
   [theme.breakpoints.down('mobile')]: {
-    width: '350px',
-    height: '350px',
+    width: '330px',
+    height: '330px',
   },
   [theme.breakpoints.up('mobile')]: {
     width: '450px',
@@ -29,6 +31,9 @@ const CardImg = styled('img')(({ theme }) => ({
 }));
 
 const PostImage = ({ images }) => {
+  const theme = useTheme();
+  const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
+
   return (
     <CardCarousel
       autoPlay={false}
@@ -37,6 +42,16 @@ const PostImage = ({ images }) => {
       cycleNavigation={false}
       animation="slide"
       swipe={true}
+      navButtonsAlwaysVisible={tabletLUp ? true : false}
+      navButtonsProps={{
+        style: {
+          width: '30px',
+          height: '30px',
+          color: 'black',
+          backgroundColor: 'white',
+        },
+      }}
+      // sx={{ margin: '0 30px' }}
     >
       {images.map((v, i) => (
         <CardImg

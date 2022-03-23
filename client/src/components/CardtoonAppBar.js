@@ -30,6 +30,7 @@ const IconMenuButton = styled(Button)({
 const TitleImage = styled('img')({
   width: '180px',
   height: '100%',
+  marginTop: '10px',
 });
 
 const CardtoonAppBar = () => {
