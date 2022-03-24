@@ -18,14 +18,8 @@ import { LOAD_USER_INFO_REQUEST } from './reducers/user';
 import FavoritesPage from './pages/favorites';
 
 const App = () => {
-  const {
-    user,
-    profileImagePath,
-    signUpDone,
-    nickname,
-    changeNicknameError,
-    changeNicknameDone,
-  } = useSelector(state => state.user);
+  const { user, profileImagePath, signUpDone, nickname, deleteAccountDone } =
+    useSelector(state => state.user);
   const { addHomePostDone, removePostDone } = useSelector(state => state.post);
   const dispatch = useDispatch();
 
@@ -33,7 +27,14 @@ const App = () => {
     dispatch({
       type: LOAD_USER_INFO_REQUEST,
     });
-  }, [profileImagePath, signUpDone, addHomePostDone, removePostDone, nickname]);
+  }, [
+    profileImagePath,
+    signUpDone,
+    addHomePostDone,
+    removePostDone,
+    nickname,
+    deleteAccountDone,
+  ]);
 
   return (
     <>

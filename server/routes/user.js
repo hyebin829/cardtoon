@@ -5,8 +5,9 @@ const passport = require('passport');
 const { QueryTypes } = require('sequelize');
 const multer = require('multer');
 const path = require('path');
+const axios = require('axios');
 
-const { User, Post, Image } = require('../models');
+const { User, Post, Image, Comment } = require('../models');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 const upload = multer({
@@ -171,22 +172,6 @@ router.get(
     failureRedirect: 'http://localhost:8080/',
   })
 );
-// await console.log(res);
-// const userInfoWithoutPassword = await User.findOne({
-//   where: { email: req.user.email },
-//   attributes: {
-//     exclude: ['password'],
-//   },
-//   include: [
-//     {
-//       model: Post,
-//     },
-//     { model: User, as: 'Followings' },
-//     { model: User, as: 'Followers' },
-//   ],
-// });
-// console.log(userInfoWithoutPassword);
-// return res.status(200).json(userInfoWithoutPassword);
 
 router.post('/', isNotLoggedIn, async (req, res, next) => {
   try {
@@ -219,10 +204,28 @@ router.post('/', isNotLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post('/logout', isLoggedIn, (req, res) => {
+router.post('/logout', isLoggedIn, async (req, res) => {
+  if (req.user.accessToken && req.user.refreshToken) {
+    try {
+      const LOGOUT_REDIRECT_URI = 'http://localhost:3065/user/kakao/logout';
+      const REST_API_KEY = process.env.KAKAO_KEY;
+      const logout = await axios({
+        method: 'GET',
+        url: `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   req.logout();
   req.session.destroy();
   res.send('logoutDone');
+});
+
+router.get('/kakao/logout', async (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.redirect('http://localhost:8080');
 });
 
 router.patch('/nickname', isLoggedIn, async (req, res, next) => {
@@ -272,6 +275,47 @@ router.delete('/:userId/follow', isLoggedIn, async (req, res, next) => {
     }
     await user.removeFollowers(req.user.id);
     res.status(200).json({ UserId: parseInt(req.params.userId, 10) });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.delete('/account', isLoggedIn, async (req, res, next) => {
+  try {
+    const user = await User.findOne({ where: { id: req.user.id } });
+    const ACCESS_TOKEN = req.user.accessToken;
+    if (user.password === 'kakaologin') {
+      const deleteaccount = await axios({
+        method: 'POST',
+        url: 'https://kapi.kakao.com/v1/user/unlink',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${ACCESS_TOKEN}`,
+        },
+      });
+    }
+    if (!user) {
+      res.status(403).send('존재하지 않는 사용자입니다.');
+    }
+    await Post.destroy({
+      where: { UserId: req.user.id },
+    });
+    await Comment.destroy({
+      where: {
+        UserId: req.user.id,
+      },
+    });
+
+    await user.removeFollowers(req.user.id);
+    await user.removeFollowings(req.user.id);
+
+    await User.destroy({
+      where: { id: req.user.id },
+    });
+    req.logout();
+    req.session.destroy();
+    res.send('deleteAccountDone');
   } catch (error) {
     console.error(error);
     next(error);

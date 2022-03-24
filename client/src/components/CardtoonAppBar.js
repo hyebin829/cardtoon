@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+
 import {
   Toolbar,
   IconButton,
@@ -35,7 +36,9 @@ const TitleImage = styled('img')({
 
 const CardtoonAppBar = () => {
   const theme = useTheme();
+
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
+  const navigate = useNavigate();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user, logOutDone } = useSelector(state => state.user);
@@ -61,6 +64,7 @@ const CardtoonAppBar = () => {
       dispatch({
         type: LOG_OUT_REQUEST,
       });
+      navigate('/');
     } catch (error) {
       console.error(error);
     }

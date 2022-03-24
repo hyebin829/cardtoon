@@ -11,20 +11,30 @@ module.exports = () => {
       },
 
       async (accessToken, refreshToken, profile, done) => {
-        console.log('kakao profile', profile);
+        console.log('kakao profile', profile, accessToken, refreshToken);
         try {
           const exUser = await User.findOne({
             where: { email: profile.id },
           });
           if (exUser) {
-            done(null, exUser);
+            const userWithToken = {
+              id: exUser.id,
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+            };
+            done(null, userWithToken);
           } else {
             const newUser = await User.create({
               email: profile.id,
               nickname: `유저${profile.id}`,
               password: 'kakaologin',
             });
-            done(null, newUser);
+            const newUserwithToken = {
+              id: newUser.id,
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+            };
+            done(null, newUserwithToken);
           }
         } catch (error) {
           console.error(error);

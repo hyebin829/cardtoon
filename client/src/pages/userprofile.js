@@ -40,6 +40,7 @@ const UserprofilePage = () => {
   const { userProfile } = useSelector(state => state.user);
   const { myPosts } = useSelector(state => state.post);
   const dispatch = useDispatch();
+  console.log(myPosts);
 
   useEffect(() => {
     if (myId) {
@@ -113,7 +114,9 @@ const UserprofilePage = () => {
             <Link to={`/userpost/${x.id}`}>
               <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
                 <img
-                  src={`http://localhost:3065/${x.Images[0].src}`}
+                  src={`http://localhost:3065/${
+                    x.Images[x.Images.length - 1].src
+                  }`}
                   alt={x.content}
                   loading="lazy"
                   draggable={false}

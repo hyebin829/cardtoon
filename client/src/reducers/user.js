@@ -35,6 +35,9 @@ export const initialState = {
   loadFavoritesLoading: false,
   loadFavoritesDone: false,
   loadFavoritesError: null,
+  deleteAccountLoading: false,
+  deleteAccountDone: false,
+  deleteAccountError: null,
 };
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
@@ -76,6 +79,10 @@ export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE';
 export const LOAD_FAVORITES_REQUEST = 'LOAD_FAVORITES_REQUEST';
 export const LOAD_FAVORITES_SUCCESS = 'LOAD_FAVORITES_SUCCESS';
 export const LOAD_FAVORITES_FAILURE = 'LOAD_FAVORITES_FAILURE';
+
+export const DELETE_ACCOUNT_REQUEST = 'DELETE_ACCOUNT_REQUEST';
+export const DELETE_ACCOUNT_SUCCESS = 'DELETE_ACCOUNT_SUCCESS';
+export const DELETE_ACCOUNT_FAILURE = 'DELETE_ACCOUNT_FAILURE';
 
 export const loginRequestAction = data => ({
   type: LOG_IN_REQUEST,
@@ -148,6 +155,7 @@ const reducer = (state = initialState, action) =>
         draft.signUpDone = false;
         draft.changeNicknameError = null;
         draft.changeNicknameDone = false;
+        draft.deleteAccountDone = false;
         draft.user = action.data;
         break;
       case LOAD_USER_INFO_FAILURE:
@@ -244,6 +252,23 @@ const reducer = (state = initialState, action) =>
         draft.loadFavoritesError = action.error;
         break;
       default:
+        break;
+      case DELETE_ACCOUNT_REQUEST:
+        draft.deleteAccountLoading = true;
+        draft.deleteAccountDone = false;
+        draft.deleteAccountError = null;
+        draft.loadUserDone = false;
+        break;
+      case DELETE_ACCOUNT_SUCCESS:
+        draft.deleteAccountLoading = false;
+        draft.deleteAccountDone = true;
+        draft.deleteAccountError = null;
+        draft.logInDone = false;
+        draft.user = null;
+        break;
+      case DELETE_ACCOUNT_FAILURE:
+        draft.deleteAccountLoading = false;
+        draft.deleteAccountError = action.error;
         break;
     }
   });

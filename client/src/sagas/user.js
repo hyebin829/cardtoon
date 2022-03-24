@@ -41,6 +41,9 @@ import {
   LOAD_FAVORITES_REQUEST,
   LOAD_FAVORITES_SUCCESS,
   LOAD_FAVORITES_FAILURE,
+  DELETE_ACCOUNT_REQUEST,
+  DELETE_ACCOUNT_SUCCESS,
+  DELETE_ACCOUNT_FAILURE,
 } from '../reducers/user';
 
 function logInAPI(data) {
@@ -242,6 +245,25 @@ function* loadFavorites(action) {
   }
 }
 
+function deleteAccountAPI(data) {
+  return axios.delete('/user/account', data);
+}
+
+function* deleteAccount(action) {
+  try {
+    yield call(deleteAccountAPI, action.data);
+    yield put({
+      type: DELETE_ACCOUNT_SUCCESS,
+    });
+  } catch (error) {
+    console.error(error);
+    yield put({
+      type: DELETE_ACCOUNT_FAILURE,
+      error: error.response.data,
+    });
+  }
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -282,6 +304,10 @@ function* watchLoadFavorites() {
   yield takeLatest(LOAD_FAVORITES_REQUEST, loadFavorites);
 }
 
+function* watchdeleteAccount() {
+  yield takeLatest(DELETE_ACCOUNT_REQUEST, deleteAccount);
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -294,5 +320,6 @@ export default function* userSaga() {
     fork(watchUnFollow),
     fork(watchLoadUserProfile),
     fork(watchLoadFavorites),
+    fork(watchdeleteAccount),
   ]);
 }

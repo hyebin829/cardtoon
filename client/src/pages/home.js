@@ -55,7 +55,9 @@ const CardBox = styled(Box)(({ theme }) => ({
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { logOutDone, logInDone } = useSelector(state => state.user);
+  const { logOutDone, logInDone, deleteAccountDone } = useSelector(
+    state => state.user
+  );
   const {
     homePosts,
     loadHomePostsLoading,
@@ -80,7 +82,7 @@ const Home = () => {
     dispatch({
       type: LOAD_HOMEPOSTS_REQUEST,
     });
-  }, []);
+  }, [deleteAccountDone]);
 
   const scrollToTop = () => {
     window.scrollTo({

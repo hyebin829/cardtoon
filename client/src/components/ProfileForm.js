@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import { Link, useParams } from 'react-router-dom';
 
-import { Avatar, Box, Stack, Divider } from '@mui/material';
+import { Avatar, Box, Stack, Divider, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 
 import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
+import { DELETE_ACCOUNT_REQUEST } from '../reducers/user';
 
 const List = styled('li')({
   listStyle: 'none',
@@ -30,10 +32,15 @@ const ProfileImageList = styled(ImageList)(({ theme }) => ({
   },
 }));
 
+const ButtonText = styled('div')({
+  color: 'grey',
+});
+
 const ProfileForm = () => {
-  const { user } = useSelector(state => state.user);
+  const { user, deleteAccountDone } = useSelector(state => state.user);
   const { myPosts } = useSelector(state => state.post);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const myId = user?.id;
 
@@ -45,6 +52,17 @@ const ProfileForm = () => {
       });
     }
   }, [myId]);
+
+  const onDeleteAccount = () => {
+    if (window.confirm('탈퇴하시겠습니까?')) {
+      dispatch({
+        type: DELETE_ACCOUNT_REQUEST,
+        data: myId,
+      });
+      alert('탈퇴완료되었습니다.');
+      navigate('/');
+    }
+  };
 
   return (
     <Box
@@ -69,6 +87,9 @@ const ProfileForm = () => {
       <Link to="/editprofile" style={{ textDecoration: 'none' }}>
         수정
       </Link>
+      <Button onClick={onDeleteAccount}>
+        <ButtonText>회원탈퇴</ButtonText>
+      </Button>
       <Stack
         direction="row"
         spacing={2}
@@ -99,8 +120,9 @@ const ProfileForm = () => {
           <Link to={`/userpost/${x.id}`} key={x.Images[0].id}>
             <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
               <img
-                src={`http://localhost:3065/${x.Images[0].src}`}
-                // srcSet={`${x.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                src={`http://localhost:3065/${
+                  x.Images[x.Images.length - 1].src
+                }`}
                 alt={x.content}
                 loading="lazy"
                 draggable={false}
