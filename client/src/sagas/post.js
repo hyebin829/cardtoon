@@ -57,10 +57,11 @@ function* loadHomePosts(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_HOMEPOSTS_FAILURE,
+      error: error.response.data,
     });
-    console.error(error);
   }
 }
 
@@ -76,10 +77,11 @@ function* loadMyPosts(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_MYPOSTS_FAILURE,
+      error: error.response.data,
     });
-    console.error(error);
   }
 }
 
@@ -95,10 +97,11 @@ function* loadHotPosts(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_HOTPOSTS_FAILURE,
+      error: error.response.data,
     });
-    console.error(error);
   }
 }
 
@@ -254,6 +257,7 @@ function* loadUserPost(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_USER_POST_FAILURE,
       error: error.response.data,

@@ -18,14 +18,7 @@ import FollowButton from '../components/FollowButton';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import { Box } from '@mui/system';
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  Button,
-  Divider,
-  IconButton,
-} from '@mui/material';
+import { Card, CardHeader, CardContent, Divider } from '@mui/material';
 
 import { red } from '@mui/material/colors';
 
@@ -33,13 +26,6 @@ import { Avatar } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 import Footer from '../components/Footer';
-
-const EmptyPost = styled('div')({
-  fontSize: '25px',
-  margin: '80% 0',
-  textAlign: 'center',
-  color: '#40101d',
-});
 
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {

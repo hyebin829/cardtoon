@@ -1,8 +1,8 @@
 import { List, ListItem, ListItemText } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 
-import { Divider, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import CommentMoreButton from './CommentMoreButton';
@@ -20,9 +20,6 @@ const CommentList = ({ post }) => {
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
-  const { removeCommentLoading, addCommentLoading } = useSelector(
-    state => state.post
-  );
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev);

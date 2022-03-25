@@ -119,7 +119,6 @@ const reducer = (state = initialState, action) =>
         draft.addHomePostError = null;
         break;
       case ADD_HOMEPOST_SUCCESS:
-        console.log(action.data);
         draft.imagePaths = [];
         draft.homePosts.unshift(action.data);
         draft.addHomePostLoading = false;
@@ -182,11 +181,9 @@ const reducer = (state = initialState, action) =>
         break;
       case ADD_COMMENT_SUCCESS:
         const post = draft.homePosts.find(v => v.id === action.data.PostId);
-        console.log('reducer' + post);
         post?.Comments.push(action.data);
         draft.addCommentLoading = false;
         draft.addCommentDone = true;
-        console.log(action.data);
         break;
       case REMOVE_POST_REQUEST:
         draft.removePostLoading = true;

@@ -4,7 +4,7 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FOLLOW_REQUEST, UNFOLLOW_REQUEST } from '../reducers/user';
+import { UNFOLLOW_REQUEST } from '../reducers/user';
 import { Button } from '@mui/material';
 
 const FollowDeleteButton = ({ userid }) => {

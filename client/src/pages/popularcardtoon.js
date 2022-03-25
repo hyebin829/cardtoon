@@ -1,6 +1,6 @@
 import React from 'react';
 import MenuBar from '../components/MenuBar';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { LOAD_HOTPOSTS_REQUEST } from '../reducers/post';
@@ -11,7 +11,6 @@ import {
   Card,
   CardHeader,
   CardContent,
-  Button,
   Divider,
   Avatar,
   Box,

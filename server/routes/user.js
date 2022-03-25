@@ -29,7 +29,6 @@ router.patch(
   isLoggedIn,
   upload.single('image'),
   async (req, res) => {
-    console.log(req.file.filename);
     try {
       await User.update(
         {

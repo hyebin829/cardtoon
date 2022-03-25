@@ -39,7 +39,6 @@ router.get('/homeposts', async (req, res, next) => {
         { model: User, as: 'Likers', attributes: ['id'] },
       ],
     });
-    console.log(req.query.lastId);
     res.status(200).json(homeposts);
   } catch (error) {
     console.error(error);
@@ -82,7 +81,6 @@ router.get('/myposts', async (req, res, next) => {
 
 router.get('/hotcardtoon', async (req, res, next) => {
   try {
-    //like 테이블에서 일주일간의 postid 가져오기
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -112,7 +110,6 @@ router.get('/hotcardtoon', async (req, res, next) => {
         },
       ],
     });
-    const hotPostLikers = hotPost.map(x => x.dataValues.Likers);
     res.status(200).json(hotPost);
   } catch (error) {
     console.error(error);

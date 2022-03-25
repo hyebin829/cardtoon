@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from 'react-material-ui-carousel';
-import { useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -51,7 +50,6 @@ const PostImage = ({ images }) => {
           backgroundColor: 'white',
         },
       }}
-      // sx={{ margin: '0 30px' }}
     >
       {images.map((v, i) => (
         <CardImg

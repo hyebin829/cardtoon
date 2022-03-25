@@ -1,16 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Router, Route, Routes, Link } from 'react-router-dom';
 
-import { AppBar, BottomNavigationAction, Paper } from '@mui/material';
-import { MenuItem } from '@mui/material';
-import CreateIcon from '@mui/icons-material/Create';
+import { Link } from 'react-router-dom';
+
+import { BottomNavigationAction, Paper } from '@mui/material';
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import CreateIcon from '@mui/icons-material/Create';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';

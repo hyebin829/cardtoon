@@ -83,7 +83,6 @@ router.post('/homepost', isLoggedIn, upload.none(), async (req, res) => {
 });
 
 router.post('/images', isLoggedIn, upload.array('image'), (req, res) => {
-  console.log(req.files);
   res.json(req.files.map(v => v.filename));
 });
 
@@ -196,7 +195,6 @@ router.get('/:id', async (req, res, next) => {
         { model: User, as: 'Likers', attributes: ['id'] },
       ],
     });
-    console.log(post);
     res.status(200).json(post);
   } catch (error) {
     console.error(error);

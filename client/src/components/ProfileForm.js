@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Avatar, Box, Stack, Divider, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,7 +37,7 @@ const ButtonText = styled('div')({
 });
 
 const ProfileForm = () => {
-  const { user, deleteAccountDone } = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
   const { myPosts } = useSelector(state => state.post);
   const dispatch = useDispatch();
   const navigate = useNavigate();

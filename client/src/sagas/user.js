@@ -1,14 +1,5 @@
 import axios from 'axios';
-import {
-  all,
-  delay,
-  fork,
-  put,
-  takeLatest,
-  call,
-  putResolve,
-  take,
-} from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 
 import {
   LOG_IN_REQUEST,
@@ -78,7 +69,6 @@ function* logOut() {
     });
   } catch (error) {
     console.error(error);
-
     yield put({
       type: LOG_OUT_FAILURE,
       error: error.response.data,
@@ -119,6 +109,7 @@ function* loadUser(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_USER_INFO_FAILURE,
       error: error.response.data,
@@ -138,6 +129,7 @@ function* loadUserProfile(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: LOAD_USER_PROFILE_FAILURE,
       error: error.response.data,
@@ -157,6 +149,7 @@ function* changeNickname(action) {
       data: result.data,
     });
   } catch (error) {
+    console.error(error);
     yield put({
       type: CHANGE_NICKNAME_FAILURE,
       error: error.response.data,
@@ -175,7 +168,6 @@ function* uploadProfileImage(action) {
       type: UPLOAD_PROFILE_IMAGE_SUCCESS,
       data: result.data,
     });
-    console.log(result.data);
   } catch (error) {
     console.error(error);
     yield put({
@@ -241,7 +233,6 @@ function* loadFavorites(action) {
     yield put({
       type: LOAD_FAVORITES_FAILURE,
     });
-    console.error(error);
   }
 }
 

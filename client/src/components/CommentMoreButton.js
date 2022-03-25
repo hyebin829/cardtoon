@@ -1,10 +1,9 @@
-import { List, ListItem, ListItemText } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box } from '@mui/system';
-import { Menu, MenuItem, Divider, Stack, Typography } from '@mui/material';
+import { Menu, MenuItem, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
@@ -12,7 +11,6 @@ import { REMOVE_COMMENT_REQUEST } from '../reducers/post';
 
 const CommentMoreButton = ({ comment }) => {
   const [anchorElMyComment, setAnchorElMyComment] = useState(null);
-  const [anchorElComment, setAnchorElComment] = useState(null);
 
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
@@ -23,14 +21,6 @@ const CommentMoreButton = ({ comment }) => {
 
   const handleCloseMyCommentMenu = () => {
     setAnchorElMyComment(null);
-  };
-
-  const handleOpenCommentMenu = event => {
-    setAnchorElComment(event.currentTarget);
-  };
-
-  const handleCloseCommentMenu = () => {
-    setAnchorElComment(null);
   };
 
   const onRemoveComment = useCallback(() => {

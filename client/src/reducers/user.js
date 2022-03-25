@@ -97,13 +97,11 @@ const reducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case LOG_IN_REQUEST:
-        console.log('loginreducerreq');
         draft.logInLoading = true;
         draft.logInError = null;
         draft.logInDone = false;
         break;
       case LOG_IN_SUCCESS:
-        console.log('loginreducersuccess');
         draft.logInLoading = false;
         draft.logInError = null;
         draft.logInDone = true;
@@ -166,13 +164,11 @@ const reducer = (state = initialState, action) =>
         draft.loadUserProfileLoading = true;
         draft.loadUserProfileDone = false;
         draft.loadUserProfileError = null;
-        console.log('loaduserprofilereducer');
         break;
       case LOAD_USER_PROFILE_SUCCESS:
         draft.loadUserProfileLoading = false;
         draft.loadUserProfileDone = true;
         draft.userProfile = action.data;
-        console.log(action.data);
         break;
       case LOAD_USER_PROFILE_FAILURE:
         draft.loadUserProfileLoading = false;

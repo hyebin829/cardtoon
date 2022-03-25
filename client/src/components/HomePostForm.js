@@ -126,7 +126,6 @@ const HomePostForm = () => {
       type: REMOVE_IMAGE,
       data: index,
     });
-    console.log(imagePaths);
     imagePaths.length - 1 > 10
       ? setImageLengthError(true)
       : setImageLengthError(false);

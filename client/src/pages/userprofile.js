@@ -34,13 +34,11 @@ const ProfileImageList = styled(ImageList)(({ theme }) => ({
 
 const UserprofilePage = () => {
   const params = useParams();
-  console.log(params);
   const myId = params.id;
 
   const { userProfile } = useSelector(state => state.user);
   const { myPosts } = useSelector(state => state.post);
   const dispatch = useDispatch();
-  console.log(myPosts);
 
   useEffect(() => {
     if (myId) {

@@ -70,7 +70,6 @@ const EditProfilePage = () => {
   );
 
   const onChangeImages = useCallback(e => {
-    console.log(e.target.files);
     if (e.target.files.length > 1) {
       alert('변경 실패 : 한 장의 사진만 가능합니다.');
     } else {
