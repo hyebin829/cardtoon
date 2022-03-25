@@ -284,7 +284,7 @@ router.delete('/account', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     const ACCESS_TOKEN = req.user.accessToken;
-    if (user.password === 'kakaologin') {
+    if (user.format === 'kakaologin') {
       const deleteaccount = await axios({
         method: 'POST',
         url: 'https://kapi.kakao.com/v1/user/unlink',

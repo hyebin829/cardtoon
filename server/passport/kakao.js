@@ -24,10 +24,15 @@ module.exports = () => {
             };
             done(null, userWithToken);
           } else {
+            let today = new Date();
+            let hours = today.getHours();
+            let seconds = today.getSeconds();
+            let milliseconds = today.getMilliseconds();
             const newUser = await User.create({
               email: profile.id,
-              nickname: `유저${profile.id}`,
-              password: 'kakaologin',
+              nickname: `유저${hours}${seconds}${milliseconds}`,
+              format: 'kakaologin',
+              password: profile.id,
             });
             const newUserwithToken = {
               id: newUser.id,
