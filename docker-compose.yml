@@ -2,10 +2,10 @@ version: '3'
 services:
   db:
     image: mysql:8.0.20
-    container_name: mysql_container_twitch
+    container_name: mysql_container_cardtoon
     restart: always
     ports:
-      - 3308:3306
+      - 3309:3306
     environment:
       MYSQL_DATABASE: 'petcommunity'
       MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
@@ -16,3 +16,15 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     volumes:
       - /var/lib/docker/volumes/dockerdata/_data
+  front:
+    build:
+      context: ./client
+    ports:
+      - 3001:3001
+  server:
+    build:
+      context: ./server
+    ports:
+      - 3065:3065
+    depends_on:
+      - db

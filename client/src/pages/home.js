@@ -50,6 +50,7 @@ const Home = () => {
     hasMorePost,
     removeCommentLoading,
     nickname,
+    loadHomePostsDone,
   } = useSelector(state => state.post);
   const theme = useTheme();
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
@@ -70,6 +71,13 @@ const Home = () => {
       behavior: 'smooth',
     });
   };
+
+  useEffect(() => {
+    if (homePosts) return;
+    dispatch({
+      type: LOAD_HOMEPOSTS_REQUEST,
+    });
+  }, []);
 
   useEffect(() => {
     const options = {
