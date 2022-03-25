@@ -84,7 +84,7 @@ const ProfileForm = () => {
       <Nickname>
         {user?.nickname === null ? '닉네임을 설정해주세요' : user?.nickname}
       </Nickname>
-      <Link to="/editprofile" style={{ textDecoration: 'none' }}>
+      <Link to="/editprofile" style={{ textDecoration: 'none', color: 'grey' }}>
         수정
       </Link>
       <Button onClick={onDeleteAccount}>
