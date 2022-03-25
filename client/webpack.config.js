@@ -65,7 +65,7 @@ module.exports = {
     new CleanWebpackPlugin(),
   ],
   devServer: {
-    port: 8080,
+    port: 3001,
     historyApiFallback: true,
   },
 };

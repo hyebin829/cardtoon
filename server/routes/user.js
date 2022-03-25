@@ -167,8 +167,8 @@ router.get(
   '/kakao/login/callback',
   passport.authenticate('kakao', {
     failureMessage: true,
-    successRedirect: 'http://localhost:8080/',
-    failureRedirect: 'http://localhost:8080/',
+    successRedirect: 'http://localhost:3001/',
+    failureRedirect: 'http://localhost:3001/',
   })
 );
 
@@ -224,7 +224,7 @@ router.post('/logout', isLoggedIn, async (req, res) => {
 router.get('/kakao/logout', async (req, res) => {
   req.logout();
   req.session.destroy();
-  res.redirect('http://localhost:8080');
+  res.redirect('http://localhost:3001');
 });
 
 router.patch('/nickname', isLoggedIn, async (req, res, next) => {

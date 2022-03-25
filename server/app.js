@@ -23,7 +23,7 @@ db.sequelize
 
 app.use(
   cors({
-    origin: 'http://localhost:8080',
+    origin: 'http://localhost:3001',
     credentials: true, //다른 도메인에 쿠키를 전달할 수 있다.
   })
 );
