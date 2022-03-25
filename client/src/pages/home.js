@@ -64,12 +64,6 @@ const Home = () => {
 
   console.log(homePosts);
 
-  useEffect(() => {
-    dispatch({
-      type: LOAD_HOMEPOSTS_REQUEST,
-    });
-  }, [deleteAccountDone]);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

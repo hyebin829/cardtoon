@@ -76,7 +76,7 @@ const LoginForm = () => {
       <LoginFormWrap>
         <img src="/img/cardtoon.png" />
         <InputText
-          label="email"
+          label="id"
           type="text"
           name="user-email"
           value={email}
