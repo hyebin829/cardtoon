@@ -54,7 +54,7 @@ const PostImage = ({ images }) => {
       {images.map((v, i) => (
         <CardImg
           src={`http://localhost:3065/${images[i].src}`}
-          key={i}
+          key={`imagenum${i}`}
           draggable={false}
         />
       ))}

@@ -43,7 +43,7 @@ const CommentList = ({ post }) => {
                 <ListItem
                   alignItems="flex-start"
                   sx={{ padding: '10px 20px' }}
-                  key={comment.id}
+                  key={`comment${comment.id}`}
                 >
                   <ListItemText
                     primary={comment.User.nickname}

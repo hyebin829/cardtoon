@@ -99,19 +99,18 @@ const PopularCardtoonPage = () => {
                   <Link
                     to={`/userprofile/${post.User.id}`}
                     style={{ textDecoration: 'none', color: 'black' }}
-                    key={i}
+                    key={`user${i}`}
                   >
                     {post.User.nickname}
                   </Link>
                 }
                 avatar={
-                  <Link to={`/userprofile/${post.User.id}`} key={i}>
+                  <Link to={`/userprofile/${post.User.id}`}>
                     {' '}
                     <Avatar
                       sx={{ bgcolor: red[500] }}
                       aria-label="profilepic"
                       src={`http://localhost:3065/${post.User.profileimagesrc}`}
-                      key={post.User.id}
                     />
                   </Link>
                 }
@@ -122,7 +121,7 @@ const PopularCardtoonPage = () => {
                 <HomePostContent
                   sx={{ whiteSpace: 'normal' }}
                   post={post}
-                  key={post.id}
+                  key={`post${post.id}`}
                 />
               </CardContent>
               <Divider variant="middle" />

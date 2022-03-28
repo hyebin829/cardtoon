@@ -41,16 +41,13 @@ const CardBox = styled(Box)(({ theme }) => ({
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { logOutDone, logInDone, deleteAccountDone } = useSelector(
-    state => state.user
-  );
+  const { logOutDone, logInDone } = useSelector(state => state.user);
   const {
     homePosts,
     loadHomePostsLoading,
     hasMorePost,
     removeCommentLoading,
     nickname,
-    loadHomePostsDone,
   } = useSelector(state => state.post);
   const theme = useTheme();
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
@@ -73,7 +70,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (homePosts) return;
+    if (homePosts.length > 0) return;
     dispatch({
       type: LOAD_HOMEPOSTS_REQUEST,
     });
@@ -126,7 +123,7 @@ const Home = () => {
                 key={i}
               >
                 <CardHeader
-                  key={post.User.id}
+                  key={`user${post.User.id}`}
                   title={
                     <Link
                       to={`/userprofile/${post.User.id}`}
@@ -136,10 +133,7 @@ const Home = () => {
                     </Link>
                   }
                   avatar={
-                    <Link
-                      to={`/userprofile/${post.User.id}`}
-                      key={post.User.id}
-                    >
+                    <Link to={`/userprofile/${post.User.id}`}>
                       <Avatar
                         sx={{ bgcolor: red[500] }}
                         aria-label="profilepic"
@@ -152,12 +146,8 @@ const Home = () => {
                   }
                 />
                 <Divider variant="middle" />
-                <CardContent key={post.id}>
-                  <HomePostContent
-                    sx={{ whiteSpace: 'normal' }}
-                    post={post}
-                    key={post.id}
-                  />
+                <CardContent key={`post${post.id}`}>
+                  <HomePostContent sx={{ whiteSpace: 'normal' }} post={post} />
                 </CardContent>
                 <Divider variant="middle" />
                 <LikeButton post={post} key={`LikeButton${post.id}`} />
