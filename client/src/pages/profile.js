@@ -1,19 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
 import ProfileForm from '../components/ProfileForm';
-import { useDispatch } from 'react-redux';
-import { useCallback } from 'react';
 import MainMenu from '../components/MenuBar';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+import Footer from '../components/Footer';
 
-const ProfilePage = () => {
+function ProfilePage() {
   return (
     <>
       <CardtoonAppBar />
       <ProfileForm />
       <MainMenu />
+      <Footer />
     </>
   );
-};
+}
 
 export default ProfilePage;

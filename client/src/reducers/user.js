@@ -247,8 +247,6 @@ const reducer = (state = initialState, action) =>
         draft.loadFavoritesLoading = false;
         draft.loadFavoritesError = action.error;
         break;
-      default:
-        break;
       case DELETE_ACCOUNT_REQUEST:
         draft.deleteAccountLoading = true;
         draft.deleteAccountDone = false;
@@ -265,6 +263,8 @@ const reducer = (state = initialState, action) =>
       case DELETE_ACCOUNT_FAILURE:
         draft.deleteAccountLoading = false;
         draft.deleteAccountError = action.error;
+        break;
+      default:
         break;
     }
   });

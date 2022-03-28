@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { styled } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { styled } from '@mui/system';
 
 import {
   Toolbar,
@@ -12,13 +12,12 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Typography,
   Stack,
   Box,
   Button,
 } from '@mui/material';
-import { LOG_OUT_REQUEST } from '../reducers/user';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { LOG_OUT_REQUEST } from '../reducers/user';
 
 const IconMenuButton = styled(Button)({
   border: 'none',
@@ -34,7 +33,7 @@ const TitleImage = styled('img')({
   marginTop: '10px',
 });
 
-const CardtoonAppBar = () => {
+function CardtoonAppBar() {
   const theme = useTheme();
 
   const tabletLUp = useMediaQuery(theme.breakpoints.up('tabletL'));
@@ -42,7 +41,6 @@ const CardtoonAppBar = () => {
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const { user, logOutDone } = useSelector(state => state.user);
-  const id = useSelector(state => state.user.user?.id);
 
   useEffect(() => {
     if (logOutDone) {
@@ -68,7 +66,7 @@ const CardtoonAppBar = () => {
     } catch (error) {
       console.error(error);
     }
-  });
+  }, [dispatch, navigate]);
 
   return (
     <Box>
@@ -165,6 +163,6 @@ const CardtoonAppBar = () => {
       </AppBar>
     </Box>
   );
-};
+}
 
 export default CardtoonAppBar;

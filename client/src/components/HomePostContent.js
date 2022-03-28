@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PostImage from './HomePostImage';
-import { useState, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/system';
-import { Menu, MenuItem, Stack } from '@mui/material';
+import { Box, Menu, MenuItem, Stack, Typography } from '@mui/material';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 

@@ -1,17 +1,17 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import MainMenu from '../components/MenuBar';
-import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
-import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 
 import { styled } from '@mui/material/styles';
 import { Avatar, Box, Stack, Divider } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
+import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
 import CardtoonAppBar from '../components/CardtoonAppBar';
+import MainMenu from '../components/MenuBar';
+import Footer from '../components/Footer';
 
 const List = styled('li')({
   listStyle: 'none',
@@ -32,7 +32,7 @@ const ProfileImageList = styled(ImageList)(({ theme }) => ({
   },
 }));
 
-const UserprofilePage = () => {
+function UserprofilePage() {
   const params = useParams();
   const myId = params.id;
 
@@ -109,7 +109,7 @@ const UserprofilePage = () => {
         </Stack>
         <ProfileImageList cols={3} sx={{ mb: '70px', padding: '10px' }}>
           {myPosts.map(x => (
-            <Link to={`/userpost/${x.id}`}>
+            <Link to={`/userpost/${x.id}`} key={`post${x.id}`}>
               <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
                 <img
                   src={`http://localhost:3065/${
@@ -124,9 +124,10 @@ const UserprofilePage = () => {
           ))}
         </ProfileImageList>
         <MainMenu />
+        <Footer />
       </Box>
     </>
   );
-};
+}
 
 export default UserprofilePage;

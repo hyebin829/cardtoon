@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import MainMenu from '../components/MenuBar';
 import styled from 'styled-components';
 import { Input, Box, Button, Avatar } from '@mui/material';
-import { useState } from 'react';
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {
   CHANGE_NICKNAME_REQUEST,
   UPLOAD_PROFILE_IMAGE_REQUEST,
   LOAD_USER_INFO_REQUEST,
 } from '../reducers/user';
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MainMenu from '../components/MenuBar';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 
 const ImageInput = styled.input`
@@ -23,7 +23,7 @@ const ErrorMessage = styled.div`
   margin-top: 2px;
 `;
 
-const EditProfilePage = () => {
+function EditProfilePage() {
   const {
     user,
     changeNicknameError,
@@ -58,13 +58,12 @@ const EditProfilePage = () => {
       if (!nickname || !nickname.trim()) {
         e.preventDefault();
         return alert('닉네임을 입력해주세요');
-      } else {
-        e.preventDefault();
-        dispatch({
-          type: CHANGE_NICKNAME_REQUEST,
-          data: nickname,
-        });
       }
+      e.preventDefault();
+      dispatch({
+        type: CHANGE_NICKNAME_REQUEST,
+        data: nickname,
+      });
     },
     [nickname]
   );
@@ -158,6 +157,6 @@ const EditProfilePage = () => {
   ) : (
     ''
   );
-};
+}
 
 export default EditProfilePage;

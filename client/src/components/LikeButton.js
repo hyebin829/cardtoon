@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbUpRoundedIcon from '@mui/icons-material/ThumbUpRounded';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback } from 'react';
 import { LIKE_POST_REQUEST, UNLIKE_POST_REQUEST } from '../reducers/post';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';

@@ -1,14 +1,18 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import MainMenu from '../components/MenuBar';
 import { styled } from '@mui/material/styles';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Divider,
+  Avatar,
+  Box,
+} from '@mui/material';
+import MainMenu from '../components/MenuBar';
 
 import { LOAD_USER_POST_REQUEST } from '../reducers/post';
-
-import { Card, CardHeader, CardContent, Divider, Avatar } from '@mui/material';
-import { Box } from '@mui/system';
 
 import HomePostContent from '../components/HomePostContent';
 import LikeButton from '../components/LikeButton';
@@ -27,12 +31,9 @@ const CardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const UserpostPage = () => {
+function UserpostPage() {
   const params = useParams();
-  console.log(params);
-  const { homePosts } = useSelector(state => state.post);
-  console.log(homePosts);
-  const id = params.id;
+  const { id } = params;
   const {
     userPost,
     removeCommentLoading,
@@ -46,20 +47,22 @@ const UserpostPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return dispatch({
-      type: LOAD_USER_POST_REQUEST,
-      data: params.id,
-    });
-  }, [
-    id,
-    removeCommentLoading,
-    addCommentLoading,
-    likePostLoading,
-    unLikePostLoading,
-    removePostLoading,
-    removePostDone,
-  ]);
+  useEffect(
+    () =>
+      dispatch({
+        type: LOAD_USER_POST_REQUEST,
+        data: params.id,
+      }),
+    [
+      id,
+      removeCommentLoading,
+      addCommentLoading,
+      likePostLoading,
+      unLikePostLoading,
+      removePostLoading,
+      removePostDone,
+    ]
+  );
 
   useEffect(() => {
     if (removePostLoading) navigate('/profile');
@@ -99,6 +102,6 @@ const UserpostPage = () => {
   ) : (
     ''
   );
-};
+}
 
 export default UserpostPage;

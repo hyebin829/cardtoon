@@ -1,15 +1,14 @@
 import React, { useCallback } from 'react';
 
+import { Button } from '@mui/material';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { UNFOLLOW_REQUEST } from '../reducers/user';
-import { Button } from '@mui/material';
 
-const FollowDeleteButton = ({ userid }) => {
+function FollowDeleteButton({ userid }) {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.user);
 
   const onClickButton = useCallback(() => {
     dispatch({
@@ -19,12 +18,10 @@ const FollowDeleteButton = ({ userid }) => {
   }, [userid]);
 
   return (
-    <>
-      <Button onClick={onClickButton} sx={{ paddingTop: '10px' }}>
-        <DeleteRoundedIcon />
-      </Button>
-    </>
+    <Button onClick={onClickButton} sx={{ paddingTop: '10px' }}>
+      <DeleteRoundedIcon />
+    </Button>
   );
-};
+}
 
 export default FollowDeleteButton;

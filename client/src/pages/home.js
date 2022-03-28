@@ -1,15 +1,23 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import MenuBar from '../components/MenuBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import CircularProgress from '@mui/material/CircularProgress';
-
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
-import Fab from '@mui/material/Fab';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Divider,
+  Box,
+  Avatar,
+  Fab,
+  CircularProgress,
+} from '@mui/material';
+import { red } from '@mui/material/colors';
+import MenuBar from '../components/MenuBar';
 
 import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
@@ -17,12 +25,6 @@ import FollowButton from '../components/FollowButton';
 
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
-import { Box } from '@mui/system';
-import { Card, CardHeader, CardContent, Divider } from '@mui/material';
-
-import { red } from '@mui/material/colors';
-
-import { Avatar } from '@mui/material';
 import LikeButton from '../components/LikeButton';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 import Footer from '../components/Footer';
@@ -39,7 +41,7 @@ const CardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Home = () => {
+function Home() {
   const dispatch = useDispatch();
   const { logOutDone, logInDone } = useSelector(state => state.user);
   const {
@@ -184,6 +186,6 @@ const Home = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default Home;

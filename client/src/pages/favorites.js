@@ -2,6 +2,7 @@ import React from 'react';
 import CardtoonAppBar from '../components/CardtoonAppBar';
 import FollowList from '../components/FollowList';
 import MainMenu from '../components/MenuBar';
+import Footer from '../components/Footer';
 
 const FavoritesPage = () => {
   return (
@@ -9,6 +10,7 @@ const FavoritesPage = () => {
       <CardtoonAppBar />
       <FollowList />
       <MainMenu />
+      <Footer />
     </>
   );
 };

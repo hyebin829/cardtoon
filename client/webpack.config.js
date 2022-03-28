@@ -30,7 +30,7 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: true, //코드 최적화 옵션
+              minimize: true, // 코드 최적화 옵션
             },
           },
         ],
@@ -43,8 +43,8 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/, // .png 확장자로 마치는 모든 파일
         loader: 'file-loader', // 파일 로더를 적용한다
         options: {
-          name: '[name].[ext]?[hash]', //파일명 형식
-          publicPath: './dist', //아웃풋 경로
+          name: '[name].[ext]?[hash]', // 파일명 형식
+          publicPath: './dist', // 아웃풋 경로
         },
       },
       {
@@ -53,7 +53,7 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]',
           publicPath: './dist',
-          limit: 5000, //5kb 미만 파일만 data url로 처리
+          limit: 5000, // 5kb 미만 파일만 data url로 처리
         },
       },
     ],

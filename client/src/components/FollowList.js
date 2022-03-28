@@ -1,18 +1,19 @@
-import React, { useEffect, useCallback } from 'react';
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
+import React, { useEffect } from 'react';
 
-import CircularProgress from '@mui/material/CircularProgress';
-
-import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar,
+  CircularProgress,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { LOAD_FAVORITES_REQUEST } from '../reducers/user';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { LOAD_FAVORITES_REQUEST } from '../reducers/user';
 
 import FollowDeleteButton from './FollowDeleteButton';
 
@@ -39,7 +40,6 @@ const FollowList = () => {
 
   const userId = user?.id;
   const dispatch = useDispatch();
-  console.log(userFavorites);
 
   useEffect(() => {
     if (userId) {

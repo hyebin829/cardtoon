@@ -1,19 +1,16 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { styled } from '@mui/material/styles';
+import { Button, Grid, Box, TextField } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
+import MainMenu from './MenuBar';
 import {
   ADD_HOMEPOST_REQUEST,
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from '../reducers/post';
-
-import MainMenu from '../components/MenuBar';
-
-import { styled } from '@mui/system';
-
-import TextField from '@mui/material/TextField';
-import { Button, Grid, Box } from '@mui/material';
-import ClearIcon from '@mui/icons-material/Clear';
 import CardtoonAppBar from './CardtoonAppBar';
 
 const Input = styled('input')({
@@ -25,7 +22,6 @@ const ImagePreview = styled('img')(({ theme }) => ({
   width: '170px',
   height: '170px',
   justifyContent: 'center',
-  display: 'block',
   [theme.breakpoints.up('tabletM')]: {
     width: '250px',
     height: '250px',
@@ -66,7 +62,7 @@ const CardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const HomePostForm = () => {
+function HomePostForm() {
   const [text, setText] = useState('');
   const [imageLengthError, setImageLengthError] = useState(false);
   const dispatch = useDispatch();
@@ -199,6 +195,6 @@ const HomePostForm = () => {
       <MainMenu />
     </>
   );
-};
+}
 
 export default HomePostForm;

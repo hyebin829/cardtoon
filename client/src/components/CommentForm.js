@@ -1,18 +1,14 @@
-import React from 'react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import { TextField, Button, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ADD_COMMENT_REQUEST } from '../reducers/post';
-import { useEffect } from 'react';
 
-const CommentForm = ({ post }) => {
+function CommentForm({ post }) {
   const dispatch = useDispatch();
   const id = useSelector(state => state.user.user?.id);
-  const { addCommentDone, addCommentLoading } = useSelector(
-    state => state.post
-  );
+  const { addCommentDone } = useSelector(state => state.post);
   const [commentText, setCommentText] = useState('');
 
   useEffect(() => {
@@ -48,12 +44,12 @@ const CommentForm = ({ post }) => {
         maxRows={2}
         value={commentText}
         onChange={onChangeCommentText}
-      ></TextField>
+      />
       <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
         <Button type="submit">확인</Button>
       </Box>
     </form>
   );
-};
+}
 
 export default CommentForm;

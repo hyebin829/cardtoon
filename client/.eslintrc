@@ -17,7 +17,9 @@
     "eslint:recommended",
     "eslint-config-prettier",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:react/jsx-runtime",
+    "standard"
   ],
   "plugins": ["import", "react-hooks", "prettier"],
   "rules": {

@@ -2,9 +2,8 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { BottomNavigationAction, Paper } from '@mui/material';
+import { BottomNavigationAction, BottomNavigation, Paper } from '@mui/material';
 
-import BottomNavigation from '@mui/material/BottomNavigation';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';

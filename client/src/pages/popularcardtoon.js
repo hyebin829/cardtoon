@@ -1,11 +1,8 @@
-import React from 'react';
-import MenuBar from '../components/MenuBar';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { LOAD_HOTPOSTS_REQUEST } from '../reducers/post';
-import { styled } from '@mui/material/styles';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, styled } from '@mui/material/styles';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {
   Card,
@@ -14,13 +11,15 @@ import {
   Divider,
   Avatar,
   Box,
+  Fab,
 } from '@mui/material';
 
 import CircularProgress from '@mui/material/CircularProgress';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
-import Fab from '@mui/material/Fab';
 import { red } from '@mui/material/colors';
+import { LOAD_HOTPOSTS_REQUEST } from '../reducers/post';
 
+import MenuBar from '../components/MenuBar';
 import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
@@ -40,7 +39,20 @@ const CardBox = styled(Box)(({ theme }) => ({
   },
 }));
 
-const PopularCardtoonPage = () => {
+const Maintext = styled('div')(({ theme }) => ({
+  [theme.breakpoints.down('mobile')]: {
+    fontSize: '16px',
+    textAlign: 'center',
+    margin: '25px 0 0 0',
+  },
+  [theme.breakpoints.up('mobile')]: {
+    fontSize: '18px',
+    textAlign: 'center',
+    margin: '40px 0 0 0',
+  },
+}));
+
+function PopularCardtoonPage() {
   const { hotPosts } = useSelector(state => state.post);
 
   const theme = useTheme();
@@ -86,6 +98,10 @@ const PopularCardtoonPage = () => {
   return (
     <>
       <CardtoonAppBar />
+      <Maintext>
+        🔥최근 일주일간 작성된 게시글 중 <br />
+        '좋아요👍'를 많이 받은 게시글 1위-5위입니다.🔥
+      </Maintext>
       <CardBox sx={{ mb: '65px' }}>
         {hotPosts.length !== 0 ? (
           hotPostsArr?.map((post, i) => (
@@ -154,6 +170,6 @@ const PopularCardtoonPage = () => {
       <Footer />
     </>
   );
-};
+}
 
 export default PopularCardtoonPage;

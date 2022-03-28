@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { Box } from '@mui/system';
-import { styled } from '@mui/material/styles';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, styled } from '@mui/material/styles';
 
 const FooterBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {

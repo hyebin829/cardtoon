@@ -1,14 +1,5 @@
 import axios from 'axios';
-import {
-  all,
-  delay,
-  fork,
-  put,
-  takeLatest,
-  call,
-  putResolve,
-  take,
-} from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
 import {
   ADD_HOMEPOST_FAILURE,
   ADD_HOMEPOST_REQUEST,

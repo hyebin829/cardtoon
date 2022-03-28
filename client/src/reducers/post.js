@@ -256,8 +256,6 @@ const reducer = (state = initialState, action) =>
         draft.unLikePostLoading = false;
         draft.unLikePostError = action.error;
         break;
-      default:
-        break;
       case LOAD_USER_POST_REQUEST:
         draft.loadUserPostLoading = true;
         draft.loadUserPostDone = false;
@@ -272,6 +270,8 @@ const reducer = (state = initialState, action) =>
       case LOAD_USER_POST_FAILURE:
         draft.loadUserPostDone = false;
         draft.loadUserPostError = action.error;
+        break;
+      default:
         break;
     }
   });
