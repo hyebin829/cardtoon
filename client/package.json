@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --progress",
+    "start": "webpack serve --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "lint": "eslint ."
   },
   "keywords": [],
@@ -63,6 +64,7 @@
     "prettier": "^2.4.1",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-merge": "^5.8.0"
   }
 }

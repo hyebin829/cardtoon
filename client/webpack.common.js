@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-  mode: 'development',
   entry: {
     main: './src/index.js',
   },
@@ -61,11 +61,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
+      title: 'production',
     }),
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
-  devServer: {
-    port: 3001,
-    historyApiFallback: true,
-  },
 };

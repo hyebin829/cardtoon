@@ -1,11 +1,8 @@
-import React from 'react';
-import { useState } from 'react';
-
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Box } from '@mui/system';
-import { Menu, MenuItem, Stack, Typography } from '@mui/material';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useCallback } from 'react';
+
+import { Menu, MenuItem, Stack, Typography, Box } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { REMOVE_COMMENT_REQUEST } from '../reducers/post';
 
