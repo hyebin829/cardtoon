@@ -194,8 +194,7 @@ const reducer = (state = initialState, action) =>
         draft.removePostLoading = false;
         draft.removePostDone = true;
         draft.homePosts = draft.homePosts.filter(
-          v => v.id !== action.data.PostId,
-          console.log(action.data)
+          v => v.id !== action.data.PostId
         );
         break;
       case REMOVE_POST_FAILURE:

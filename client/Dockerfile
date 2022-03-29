@@ -1,8 +1,13 @@
-FROM node:16.14.0
+FROM nginx
 
 RUN mkdir /client
 WORKDIR /client
-COPY . .
-RUN npm i
-ENTRYPOINT [ "npm" ]
-CMD ["run", "start"]
+RUN mkdir ./dist
+ADD ./dist ./dist
+
+RUN rm -rf /etc/nginx/conf.d
+COPY ./nginx /etc/nginx
+
+
+EXPOSE 80
+CMD ["nginx","-g","daemon off;"]

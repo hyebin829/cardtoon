@@ -79,7 +79,10 @@ function CardtoonAppBar() {
               marginRight: '10px',
             }}
           >
-            <TitleImage src="/img/cardtoontitle.png" alt="cardtoon title" />
+            <TitleImage
+              src={require('../Assets/Images/cardtoontitle.png')}
+              alt="cardtoon title"
+            />
           </Link>
           {tabletLUp ? (
             <Box>

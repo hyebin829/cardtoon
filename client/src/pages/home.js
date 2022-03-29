@@ -62,8 +62,6 @@ function Home() {
 
   const loader = useRef(null);
 
-  console.log(homePosts);
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,

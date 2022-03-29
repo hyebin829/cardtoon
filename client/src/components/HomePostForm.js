@@ -101,8 +101,6 @@ function HomePostForm() {
   }, []);
 
   const onChangeImages = useCallback(e => {
-    console.log(e.target.files);
-
     const imageFormData = new FormData();
     [].forEach.call(e.target.files, f => {
       imageFormData.append('image', f);
@@ -110,7 +108,7 @@ function HomePostForm() {
     e.target.files.length > 10
       ? setImageLengthError(true)
       : setImageLengthError(false);
-    console.log(imageLengthError);
+
     return dispatch({
       type: UPLOAD_IMAGES_REQUEST,
       data: imageFormData,

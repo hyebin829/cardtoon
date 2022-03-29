@@ -25,7 +25,6 @@ const LikeButton = ({ post }) => {
       type: LIKE_POST_REQUEST,
       data: post.id,
     });
-    console.log(post.id);
   }, [id, homePosts]);
 
   const onUnLike = useCallback(() => {

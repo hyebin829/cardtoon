@@ -71,7 +71,10 @@ const LoginForm = () => {
   return (
     <Box component="form" onSubmit={onSubmitForm}>
       <LoginFormWrap>
-        <img src="/img/cardtoon.png" />
+        <img
+          src={require('../Assets/Images/cardtoon.png')}
+          alt="cardtoon logo"
+        />
         <InputText
           label="id"
           type="text"
@@ -108,7 +111,10 @@ const LoginForm = () => {
           </LoginFormButton>
         </Link>
         <a href="http://localhost:3065/user/kakao/login/callback">
-          <KakaoImage src="/img/kakao_login_medium.png" />
+          <KakaoImage
+            src={require('../Assets/Images/kakao_login_medium.png')}
+            alt="kakao login"
+          />
         </a>
       </LoginFormWrap>
     </Box>
