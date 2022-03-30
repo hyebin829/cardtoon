@@ -38,7 +38,7 @@ import {
 } from '../reducers/user';
 
 function logInAPI(data) {
-  return axios.post('/user/login', data);
+  return axios.post('/api/user/login', data);
 }
 
 function* logIn(action) {
@@ -58,7 +58,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post('/user/logout');
+  return axios.post('/api/user/logout');
 }
 
 function* logOut() {
@@ -77,7 +77,7 @@ function* logOut() {
 }
 
 function signUpAPI(data) {
-  return axios.post('/user', data);
+  return axios.post('/api/user', data);
 }
 
 function* signUp(action) {
@@ -96,7 +96,7 @@ function* signUp(action) {
 }
 
 function loadUserAPI() {
-  return axios.get('/user');
+  return axios.get('/api/user');
 }
 
 function* loadUser(action) {
@@ -116,7 +116,7 @@ function* loadUser(action) {
 }
 
 function loadUserProfileAPI(data) {
-  return axios.get(`/user/${data}`);
+  return axios.get(`/api/user/${data}`);
 }
 
 function* loadUserProfile(action) {
@@ -136,7 +136,7 @@ function* loadUserProfile(action) {
 }
 
 function changeNicknameAPI(data) {
-  return axios.patch('/user/nickname', { nickname: data });
+  return axios.patch('/api/user/nickname', { nickname: data });
 }
 
 function* changeNickname(action) {
@@ -156,7 +156,7 @@ function* changeNickname(action) {
 }
 
 function uploadProfileImageAPI(data) {
-  return axios.patch('/user/profileimage', data);
+  return axios.patch('/api/user/profileimage', data);
 }
 
 function* uploadProfileImage(action) {
@@ -176,7 +176,7 @@ function* uploadProfileImage(action) {
 }
 
 function followAPI(data) {
-  return axios.patch(`/user/${data}/follow`, data);
+  return axios.patch(`/api/user/${data}/follow`, data);
 }
 
 function* follow(action) {
@@ -196,7 +196,7 @@ function* follow(action) {
 }
 
 function unFollowAPI(data) {
-  return axios.delete(`/user/${data}/follow`, data);
+  return axios.delete(`/api/user/${data}/follow`, data);
 }
 
 function* unFollow(action) {
@@ -216,7 +216,7 @@ function* unFollow(action) {
 }
 
 function loadFavoritesAPI(userId) {
-  return axios.get(`/user/favorites?userId=${userId}`);
+  return axios.get(`/api/user/favorites?userId=${userId}`);
 }
 
 function* loadFavorites(action) {
@@ -235,7 +235,7 @@ function* loadFavorites(action) {
 }
 
 function deleteAccountAPI(data) {
-  return axios.delete('/user/account', data);
+  return axios.delete('/api/user/account', data);
 }
 
 function* deleteAccount(action) {

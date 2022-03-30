@@ -84,7 +84,7 @@ function UserpostPage() {
               <Avatar
                 sx={{ bgcolor: 'red' }}
                 aria-label="profilepic"
-                src={`http://localhost:3065/${oneUserPost.User.profileimagesrc}`}
+                src={`/api/${oneUserPost.User.profileimagesrc}`}
               />
             }
           />

@@ -23,13 +23,13 @@ db.sequelize
 
 app.use(
   cors({
-    origin: 'http://localhost:3001',
+    origin: 'http://front',
     credentials: true, //다른 도메인에 쿠키를 전달할 수 있다.
   })
 );
 passportConfig();
 
-app.use('/', express.static(path.join(__dirname, 'uploads')));
+app.use('/api', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -42,9 +42,9 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/user', userRouter);
-app.use('/post', postRouter);
-app.use('/posts', postsRouter);
+app.use('/api/user', userRouter);
+app.use('/api/post', postRouter);
+app.use('/api/posts', postsRouter);
 app.get('/', (req, res) => {
   res.send('hello');
 });

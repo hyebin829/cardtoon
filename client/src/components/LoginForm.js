@@ -110,12 +110,12 @@ const LoginForm = () => {
             회원가입하기
           </LoginFormButton>
         </Link>
-        <a href="http://localhost:3065/user/kakao/login/callback">
+        {/* <a href="http://localhost:3065/api/user/kakao/login/callback">
           <KakaoImage
             src={require('../Assets/Images/kakao_login_medium.png')}
             alt="kakao login"
           />
-        </a>
+        </a> */}
       </LoginFormWrap>
     </Box>
   );

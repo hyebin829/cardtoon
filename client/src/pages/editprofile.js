@@ -100,7 +100,7 @@ function EditProfilePage() {
           <AccountCircleIcon sx={{ width: 130, height: 130 }} />
         ) : (
           <Avatar
-            src={`http://localhost:3065/${user?.profileimagesrc}`}
+            src={`/api/${user?.profileimagesrc}`}
             sx={{ width: 130, height: 130 }}
           />
         )}

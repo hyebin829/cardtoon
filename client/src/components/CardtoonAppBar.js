@@ -122,7 +122,7 @@ function CardtoonAppBar() {
                 <AccountCircleIcon sx={{ width: 40, height: 40 }} />
               ) : (
                 <Avatar
-                  src={`http://localhost:3065/${user?.profileimagesrc}`}
+                  src={`/api/${user?.profileimagesrc}`}
                   sx={{ width: 40, height: 40 }}
                 />
               )}

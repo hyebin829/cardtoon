@@ -71,7 +71,7 @@ function UserprofilePage() {
           <AccountCircleIcon sx={{ width: 130, height: 130 }} />
         ) : (
           <Avatar
-            src={`http://localhost:3065/${userProfile?.profileimagesrc}`}
+            src={`/api/${userProfile?.profileimagesrc}`}
             sx={{ width: 130, height: 130 }}
           />
         )}
@@ -112,9 +112,7 @@ function UserprofilePage() {
             <Link to={`/userpost/${x.id}`} key={`post${x.id}`}>
               <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
                 <img
-                  src={`http://localhost:3065/${
-                    x.Images[x.Images.length - 1].src
-                  }`}
+                  src={`/api/${x.Images[x.Images.length - 1].src}`}
                   alt={x.content}
                   loading="lazy"
                   draggable={false}

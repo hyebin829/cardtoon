@@ -37,7 +37,7 @@ import {
 } from '../reducers/post';
 
 function loadHomePostsAPI(lastId) {
-  return axios.get(`/posts/homeposts?lastId=${lastId || 0}`);
+  return axios.get(`/api/posts/homeposts?lastId=${lastId || 0}`);
 }
 
 function* loadHomePosts(action) {
@@ -57,7 +57,7 @@ function* loadHomePosts(action) {
 }
 
 function loadMyPostsAPI(myId) {
-  return axios.get(`/posts/myposts?myId=${myId}`);
+  return axios.get(`/api/posts/myposts?myId=${myId}`);
 }
 
 function* loadMyPosts(action) {
@@ -77,7 +77,7 @@ function* loadMyPosts(action) {
 }
 
 function loadHotPostsAPI() {
-  return axios.get('/posts/hotcardtoon');
+  return axios.get('/api/posts/hotcardtoon');
 }
 
 function* loadHotPosts(action) {
@@ -97,7 +97,7 @@ function* loadHotPosts(action) {
 }
 
 function addHomePostAPI(data) {
-  return axios.post('/post/homepost', data);
+  return axios.post('/api/post/homepost', data);
 }
 
 function* addHomePost(action) {
@@ -117,7 +117,7 @@ function* addHomePost(action) {
 }
 
 function uploadImagesAPI(data) {
-  return axios.post('/post/images', data);
+  return axios.post('/api/post/images', data);
 }
 
 function* uploadImages(action) {
@@ -137,7 +137,7 @@ function* uploadImages(action) {
 }
 
 function addCommentAPI(data) {
-  return axios.post(`/post/${data.postId}/comment`, data);
+  return axios.post(`/api/post/${data.postId}/comment`, data);
 }
 
 function* addComment(action) {
@@ -157,7 +157,7 @@ function* addComment(action) {
 }
 
 function removePostAPI(data) {
-  return axios.delete(`/post/${data}`);
+  return axios.delete(`/api/post/${data}`);
 }
 
 function* removePost(action) {
@@ -177,7 +177,7 @@ function* removePost(action) {
 }
 
 function removeCommentAPI(data) {
-  return axios.delete(`/post/${data.postId}/comment/${data.commentId}`);
+  return axios.delete(`/api/post/${data.postId}/comment/${data.commentId}`);
 }
 
 function* removeComment(action) {
@@ -197,7 +197,7 @@ function* removeComment(action) {
 }
 
 function likePostAPI(data) {
-  return axios.patch(`/post/${data}/like`);
+  return axios.patch(`/api/post/${data}/like`);
 }
 
 function* likePost(action) {
@@ -217,7 +217,7 @@ function* likePost(action) {
 }
 
 function unlikePostAPI(data) {
-  return axios.delete(`/post/${data}/like`);
+  return axios.delete(`/api/post/${data}/like`);
 }
 
 function* unlikePost(action) {
@@ -237,7 +237,7 @@ function* unlikePost(action) {
 }
 
 function loadUserPostAPI(data) {
-  return axios.get(`/post/${data}`);
+  return axios.get(`/api/post/${data}`);
 }
 
 function* loadUserPost(action) {

@@ -137,7 +137,7 @@ function Home() {
                       <Avatar
                         sx={{ bgcolor: red[500] }}
                         aria-label="profilepic"
-                        src={`http://localhost:3065/${post.User.profileimagesrc}`}
+                        src={`/api/${post.User.profileimagesrc}`}
                       />
                     </Link>
                   }

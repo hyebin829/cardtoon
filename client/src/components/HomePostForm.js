@@ -175,7 +175,7 @@ function HomePostForm() {
             {imagePaths.map((v, i) => (
               <Grid key={i}>
                 <ImagePreview
-                  src={`http://localhost:3065/${v}`}
+                  src={`/api/${v}`}
                   alt={v}
                   sx={{ margin: '16px 16px 0 16px' }}
                   draggable={false}
