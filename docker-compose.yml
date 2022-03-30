@@ -20,7 +20,9 @@ services:
     build:
       context: ./client
     ports:
-      - 3001:80
+      - 80:80
+    volumes:
+      - ./client/nginx/nginx.conf:/etc/nginx/nginx.conf
   server:
     build:
       context: ./server
