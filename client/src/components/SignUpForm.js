@@ -178,6 +178,7 @@ const SignUpForm = () => {
                 required
                 variant="outlined"
                 sx={{ mb: 1.5 }}
+                type="password"
               />
               {passwordValueLengthError && (
                 <ErrorMessage>15글자 이하로 작성해주세요.</ErrorMessage>
@@ -189,6 +190,7 @@ const SignUpForm = () => {
                 onChange={onChangePasswordCheck}
                 minLength={6}
                 maxLength={15}
+                type="password"
                 required
                 variant="outlined"
                 sx={{ mb: 1 }}

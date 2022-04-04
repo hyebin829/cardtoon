@@ -63,7 +63,7 @@ const FollowList = () => {
                     style={{ textDecoration: 'none', color: 'black' }}
                   >
                     <Avatar
-                      src={`http://localhost:3065/${x.profileimagesrc}`}
+                      src={`/api/${x.profileimagesrc}`}
                       sx={{ width: 50, height: 50 }}
                     />
                   </Link>
