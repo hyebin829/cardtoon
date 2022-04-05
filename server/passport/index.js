@@ -30,5 +30,5 @@ module.exports = () => {
   });
 
   local();
-  kakao();
+  // kakao();
 };

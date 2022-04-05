@@ -112,7 +112,7 @@ function UserprofilePage() {
             <Link to={`/userpost/${x.id}`} key={`post${x.id}`}>
               <ImageListItem key={x.Images[0].id} sx={{ padding: '2px' }}>
                 <img
-                  src={`/api/${x.Images[x.Images.length - 1].src}`}
+                  src={`/api/${x.Images[0].src}`}
                   alt={x.content}
                   loading="lazy"
                   draggable={false}
