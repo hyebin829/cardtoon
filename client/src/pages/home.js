@@ -172,6 +172,7 @@ function Home() {
           sx={{ position: 'fixed', zIndex: '100', bottom: 20, right: 20 }}
           onClick={scrollToTop}
           size="medium"
+          aria-label="scroll to top"
         >
           <KeyboardArrowUpRoundedIcon
             fontSize="large"
