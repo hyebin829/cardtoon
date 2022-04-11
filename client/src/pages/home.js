@@ -136,8 +136,9 @@ function Home() {
                     <Link to={`/userprofile/${post.User.id}`}>
                       <Avatar
                         sx={{ bgcolor: red[500] }}
-                        aria-label="profilepic"
+                        aria-label="profile image"
                         src={`/api/${post.User.profileimagesrc}`}
+                        alt="profile image"
                       />
                     </Link>
                   }

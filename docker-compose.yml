@@ -26,8 +26,6 @@ services:
   server:
     build:
       context: ./server
-    # ports:
-    #   - 3065:3065
     expose:
       - 3065
     depends_on:

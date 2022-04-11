@@ -60,6 +60,7 @@ const ProfileForm = () => {
         data: myId,
       });
       alert('탈퇴완료되었습니다.');
+      window.location.reload();
       navigate('/');
     }
   };
@@ -79,6 +80,7 @@ const ProfileForm = () => {
         <Avatar
           src={`/api/${user?.profileimagesrc}`}
           sx={{ width: 130, height: 130 }}
+          alt="profile image"
         />
       )}
       <Nickname>

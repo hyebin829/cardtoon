@@ -83,8 +83,9 @@ function UserpostPage() {
             avatar={
               <Avatar
                 sx={{ bgcolor: 'red' }}
-                aria-label="profilepic"
+                aria-label="profile image"
                 src={`/api/${oneUserPost.User.profileimagesrc}`}
+                alt="profile image"
               />
             }
           />

@@ -48,6 +48,7 @@ const LikeButton = ({ post }) => {
           paddingLeft: '10px',
           minWidth: '50px',
         }}
+        aria-label="like button"
       >
         {liked ? (
           <ThumbUpRoundedIcon onClick={onUnLike} sx={{ width: '100%' }} />

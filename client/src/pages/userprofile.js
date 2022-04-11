@@ -73,6 +73,7 @@ function UserprofilePage() {
           <Avatar
             src={`/api/${userProfile?.profileimagesrc}`}
             sx={{ width: 130, height: 130 }}
+            alt="profile image"
           />
         )}
 

@@ -26,6 +26,7 @@ const CommentList = ({ post }) => {
         <Button
           onClick={onToggleComment}
           sx={{ minWidth: '50px', marginTop: '10px', paddingBottom: '11px' }}
+          aria-label="commentlist button"
         >
           <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
         </Button>

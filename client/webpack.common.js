@@ -30,7 +30,7 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: true, // 코드 최적화 옵션
+              minimize: true, 
             },
           },
         ],

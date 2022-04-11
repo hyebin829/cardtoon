@@ -56,6 +56,7 @@ const PostImage = ({ images }) => {
           src={`/api/${images[i].src}`}
           key={`imagenum${i}`}
           draggable={false}
+          alt="post image"
         />
       ))}
     </CardCarousel>

@@ -56,7 +56,14 @@ const FollowList = () => {
         userFavorites.map(x => (
           <Box key={x.id}>
             <List sx={{ width: '100%' }}>
-              <ListItem secondaryAction={<FollowDeleteButton userid={x.id} />}>
+              <ListItem
+                secondaryAction={
+                  <FollowDeleteButton
+                    userid={x.id}
+                    aria-label="delete button"
+                  />
+                }
+              >
                 {x.profileimagesrc ? (
                   <Link
                     to={`/userprofile/${x.id}`}
@@ -65,6 +72,7 @@ const FollowList = () => {
                     <Avatar
                       src={`/api/${x.profileimagesrc}`}
                       sx={{ width: 50, height: 50 }}
+                      alt="profile image"
                     />
                   </Link>
                 ) : (

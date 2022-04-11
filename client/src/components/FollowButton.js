@@ -32,7 +32,11 @@ const FollowButton = ({ post }) => {
   }
   return (
     <>
-      <Button onClick={onClickButton} sx={{ paddingTop: '10px' }}>
+      <Button
+        onClick={onClickButton}
+        sx={{ paddingTop: '10px' }}
+        aria-label="follow button"
+      >
         {Followed ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
       </Button>
     </>

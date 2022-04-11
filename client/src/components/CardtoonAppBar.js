@@ -117,13 +117,18 @@ function CardtoonAppBar() {
             ''
           )}
           <Box sx={{ position: 'absolute', right: 15 }}>
-            <IconButton sx={{ p: 0 }} onClick={handleOpenUserMenu}>
+            <IconButton
+              sx={{ p: 0 }}
+              onClick={handleOpenUserMenu}
+              aria-label="profilepic"
+            >
               {user?.profileimagesrc === null ? (
                 <AccountCircleIcon sx={{ width: 40, height: 40 }} />
               ) : (
                 <Avatar
                   src={`/api/${user?.profileimagesrc}`}
                   sx={{ width: 40, height: 40 }}
+                  alt="profile picture"
                 />
               )}
             </IconButton>
