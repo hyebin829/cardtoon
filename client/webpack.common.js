@@ -30,7 +30,7 @@ module.exports = {
           {
             loader: 'html-loader',
             options: {
-              minimize: true, 
+              minimize: true,
             },
           },
         ],
@@ -38,6 +38,19 @@ module.exports = {
       {
         test: /\.(css|jsx)$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+            },
+          },
+          'sass-loader',
+        ],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
