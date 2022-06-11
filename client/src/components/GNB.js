@@ -16,7 +16,7 @@ const GNB = () => {
       <ul>
         <li>
           <NavLink
-            to="popularcardtoon"
+            to="/popularcardtoon"
             className={({ isActive }) => cx({ [styles.isActive]: isActive })}
           >
             <span>
@@ -27,7 +27,7 @@ const GNB = () => {
         </li>
         <li>
           <NavLink
-            to="uploadpost"
+            to="/uploadpost"
             className={({ isActive }) => cx({ [styles.isActive]: isActive })}
           >
             <span>
@@ -38,7 +38,7 @@ const GNB = () => {
         </li>
         <li>
           <NavLink
-            to="profile"
+            to="/profile"
             className={({ isActive }) => cx({ [styles.isActive]: isActive })}
           >
             <span>
@@ -49,7 +49,7 @@ const GNB = () => {
         </li>
         <li>
           <NavLink
-            to="favorites"
+            to="/favorites"
             className={({ isActive }) => cx({ [styles.isActive]: isActive })}
           >
             <span>
