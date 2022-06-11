@@ -11,7 +11,8 @@ import {
   UPLOAD_IMAGES_REQUEST,
   REMOVE_IMAGE,
 } from '../reducers/post';
-import CardtoonAppBar from './CardtoonAppBar';
+
+import Header from './Header';
 
 const Input = styled('input')({
   display: 'none',
@@ -127,7 +128,7 @@ function HomePostForm() {
 
   return (
     <>
-      <CardtoonAppBar />
+      <Header />
       <CardBox>
         <form onSubmit={onSubmitForm} encType="multipart/form-data">
           <TextField

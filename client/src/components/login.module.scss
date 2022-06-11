@@ -1,0 +1,33 @@
+@use '/src/styles/constants/colors';
+
+.loginFormWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+
+  input {
+    border: 1px solid colors.$FONT;
+    border-radius: 5px;
+  }
+
+  .errorMessage {
+    margin: 5px;
+    font-style: 15px;
+    color: colors.$POINT;
+  }
+
+  .buttonWrapper {
+    .loginButton {
+      color: colors.$FONT;
+      background-color: colors.$SUB_POINT;
+    }
+
+    .signUpButton {
+      color: colors.$FONT;
+      background-color: colors.$SUB_POINT;
+    }
+  }
+}

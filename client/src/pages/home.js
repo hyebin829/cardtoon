@@ -26,8 +26,8 @@ import FollowButton from '../components/FollowButton';
 import { LOAD_HOMEPOSTS_REQUEST } from '../reducers/post';
 
 import LikeButton from '../components/LikeButton';
-import CardtoonAppBar from '../components/CardtoonAppBar';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {
@@ -112,7 +112,7 @@ function Home() {
 
   return (
     <>
-      <CardtoonAppBar />
+      <Header />
       <CardBox sx={{ mb: '65px' }}>
         {/* 포스트 */}
         {homePosts

@@ -12,7 +12,8 @@ import {
 } from '../reducers/user';
 
 import MainMenu from '../components/MenuBar';
-import CardtoonAppBar from '../components/CardtoonAppBar';
+
+import Header from '../components/Header';
 
 const ImageInput = styled.input`
   display: none;
@@ -87,7 +88,7 @@ function EditProfilePage() {
 
   return user !== null ? (
     <>
-      <CardtoonAppBar />
+      <Header />
       <Box
         sx={{
           display: 'flex',

@@ -1,13 +1,13 @@
 import React from 'react';
 import ProfileForm from '../components/ProfileForm';
 import MainMenu from '../components/MenuBar';
-import CardtoonAppBar from '../components/CardtoonAppBar';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function ProfilePage() {
   return (
     <>
-      <CardtoonAppBar />
+      <Header />
       <ProfileForm />
       <MainMenu />
       <Footer />

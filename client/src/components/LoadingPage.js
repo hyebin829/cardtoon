@@ -1,5 +1,4 @@
 import React from 'react';
-import CardtoonAppBar from './CardtoonAppBar';
 import Footer from '../components/Footer';
 import { CircularProgress, Box } from '@mui/material';
 

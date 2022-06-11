@@ -24,8 +24,8 @@ import HomePostContent from '../components/HomePostContent';
 import CommentList from '../components/CommentList';
 import FollowButton from '../components/FollowButton';
 import LikeButton from '../components/LikeButton';
-import CardtoonAppBar from '../components/CardtoonAppBar';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {
@@ -97,7 +97,7 @@ function PopularCardtoonPage() {
 
   return (
     <>
-      <CardtoonAppBar />
+      <Header />
       <Maintext>
         🔥최근 일주일간 작성된 게시글 중 <br />
         '좋아요👍'를 많이 받은 게시글 1위-5위입니다.🔥

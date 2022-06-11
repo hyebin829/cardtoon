@@ -9,9 +9,9 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { LOAD_USER_PROFILE_REQUEST } from '../reducers/user';
 import { LOAD_MYPOSTS_REQUEST } from '../reducers/post';
-import CardtoonAppBar from '../components/CardtoonAppBar';
 import MainMenu from '../components/MenuBar';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const List = styled('li')({
   listStyle: 'none',
@@ -58,7 +58,7 @@ function UserprofilePage() {
 
   return (
     <>
-      <CardtoonAppBar />
+      <Header />
       <Box
         sx={{
           display: 'flex',

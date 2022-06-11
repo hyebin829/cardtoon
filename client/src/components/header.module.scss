@@ -1,0 +1,24 @@
+@use '/src/styles/constants/colors';
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 70px;
+  background-color: colors.$POINT;
+
+  .titleImage {
+    width: 160px;
+    height: 45px;
+    margin: 10px 0 0 5px;
+  }
+
+  .iconMenuButton {
+    justify-content: flex-start;
+    padding: 0;
+    font-size: 15px;
+    background: none;
+    border: none;
+  }
+}

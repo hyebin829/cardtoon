@@ -17,7 +17,7 @@ import { LOAD_USER_POST_REQUEST } from '../reducers/post';
 import HomePostContent from '../components/HomePostContent';
 import LikeButton from '../components/LikeButton';
 import CommentList from '../components/CommentList';
-import CardtoonAppBar from '../components/CardtoonAppBar';
+import Header from '../components/Header';
 
 const CardBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.up('tabletM')]: {
@@ -72,7 +72,7 @@ function UserpostPage() {
 
   return userPost.length !== 0 ? (
     <>
-      <CardtoonAppBar />
+      <Header />
       <CardBox sx={{ mb: '65px' }}>
         <Card
           sx={{ height: '100%', margin: '5px', padding: '10px' }}

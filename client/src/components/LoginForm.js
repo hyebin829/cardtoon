@@ -1,38 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
+
 import { Link, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { LOG_IN_REQUEST } from '../reducers/user';
 
-import { Button, Box, TextField } from '@mui/material';
-
-const LoginFormWrap = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-`;
-
-const ErrorMessage = styled.div`
-  color: #f23054;
-  font-size: 15px;
-  margin: 5px;
-`;
-
-const LoginFormButton = styled(Button)({
-  background: '#F29BAB',
-});
-
-const InputText = styled(TextField)({
-  color: '#F2F2F2',
-});
-
-const KakaoImage = styled('img')({
-  width: '80px',
-  marginTop: '10px',
-});
+import styles from './login.module.scss';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -69,22 +41,18 @@ const LoginForm = () => {
   );
 
   return (
-    <Box component="form" onSubmit={onSubmitForm}>
-      <LoginFormWrap>
-        <img
-          src={require('../Assets/Images/cardtoon.png')}
-          alt="cardtoon logo"
-        />
-        <InputText
+    <div className={styles.loginFormWrap}>
+      <img src={require('../Assets/Images/cardtoon.png')} alt="cardtoon logo" />
+      <form onSubmit={onSubmitForm}>
+        <input
           label="id"
           type="text"
           name="user-email"
           value={email}
           onChange={onChangeEmail}
           required
-          sx={{ margin: 1 }}
         />
-        <InputText
+        <input
           label="password"
           type="password"
           name="user-password"
@@ -92,32 +60,19 @@ const LoginForm = () => {
           onChange={onChangePassword}
           required
         />
-        {logInError && <ErrorMessage>{logInError}</ErrorMessage>}
-        <LoginFormButton
-          type="submit"
-          disableElevation
-          variant="contained"
-          sx={{ mt: 1 }}
-        >
-          로그인
-        </LoginFormButton>
-        <Link to="/signup" style={{ textDecoration: 'none' }}>
-          <LoginFormButton
-            variant="contained"
-            disableElevation
-            sx={{ mt: 0.2 }}
-          >
-            회원가입하기
-          </LoginFormButton>
-        </Link>
-        {/* <a href="http://localhost:3065/api/user/kakao/login/callback">
-          <KakaoImage
-            src={require('../Assets/Images/kakao_login_medium.png')}
-            alt="kakao login"
-          />
-        </a> */}
-      </LoginFormWrap>
-    </Box>
+        {logInError && <div className={styles.errorMessage}>{logInError}</div>}
+        <div className={styles.buttonWrapper}>
+          <button className={styles.loginButton} type="submit">
+            로그인
+          </button>
+          <Link to="/signup">
+            <button className={styles.signUpButton} type="button">
+              회원가입하기
+            </button>
+          </Link>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -4,14 +4,9 @@ import React, { useState, useCallback } from 'react';
 import { Button } from '@mui/material';
 import CommentMoreButton from './CommentMoreButton';
 import CommentForm from './CommentForm';
-import { styled } from '@mui/material/styles';
 
 import InsertCommentOutlinedIcon from '@mui/icons-material/InsertCommentOutlined';
-
-const CommentCount = styled('div')({
-  display: 'inline-block',
-  verticalAlign: 'middle',
-});
+import styles from './commentList.module.scss';
 
 const CommentList = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false);
@@ -30,7 +25,7 @@ const CommentList = ({ post }) => {
         >
           <InsertCommentOutlinedIcon sx={{ width: '100%' }} />
         </Button>
-        <CommentCount>{post?.Comments?.length}</CommentCount>
+        <div className={styles.commentCount}>{post?.Comments?.length}</div>
         {commentFormOpened ? (
           <>
             <CommentForm post={post} />
