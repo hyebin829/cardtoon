@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import logger from 'redux-logger';
@@ -15,7 +15,6 @@ import './styles/index.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 
-// 배포 단계에서는 logger 사용하지 않음
 const enhancer =
   process.env.NODE_ENV === 'production'
     ? compose(applyMiddleware(sagaMiddleware))
@@ -25,9 +24,10 @@ const store = createStore(rootReducer, enhancer);
 
 sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.querySelector('#root')
+  </Provider>
 );
