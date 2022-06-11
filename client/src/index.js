@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 
 import logger from 'redux-logger';
@@ -11,7 +10,8 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import rootReducer from './reducers';
 import App from './App';
-import CustomMuiTheme from './styles/theme';
+
+import './styles/index.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -27,10 +27,7 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={CustomMuiTheme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <App />
   </Provider>,
   document.querySelector('#root')
 );
